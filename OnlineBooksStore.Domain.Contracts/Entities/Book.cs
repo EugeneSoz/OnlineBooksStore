@@ -87,27 +87,27 @@ namespace OnlineBooksStore.Domain.Contracts.Entities
         /// <value>
         /// The category identifier.
         /// </value>
-        //public long? CategoryID { get; set; }
+        public long? CategoryID { get; set; }
         /// <summary>
         /// Gets or sets the publisher identifier.
         /// </summary>
         /// <value>
         /// The publisher identifier.
         /// </value>
-        //public long? PublisherID { get; set; }
+        public long? PublisherID { get; set; }
         /// <summary>
         /// Gets or sets the category.
         /// </summary>
         /// <value>
         /// The category.
         /// </value>
-        public string Category { get; set; }
+        public Category Category { get; set; }
         /// <summary>
         /// Gets or sets the publisher.
         /// </summary>
         /// <value>
         /// The publisher.
         /// </value>
-        public string Publisher { get; set; }
+        public Publisher Publisher { get; set; }
     }
 }

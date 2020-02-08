@@ -11,35 +11,42 @@ namespace OnlineBooksStore.App.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IRepository repository;
+        private readonly IRepository _repository;
 
-        public HomeController(IRepository repo)
+        public HomeController(IRepository repository)
         {
-            repository = repo;
+            _repository = repository;
         }
 
         public IActionResult Index()
         {
-            return View(repository.Books);
+            return View(_repository.Books);
         }
 
         [HttpPost]
         public IActionResult AddBook(Book book)
         {
-            repository.AddBook(book);
+            _repository.AddBook(book);
             
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult UpdateBook(long key)
         {
-            return View(repository.GetBook(key));
+            return View(key == 0 ? new Book() : _repository.GetBook(key));
         }
 
         [HttpPost]
         public IActionResult UpdateBook(Book book)
         {
-            repository.UpdateBook(book);
+            if (book.Id == 0)
+            {
+                _repository.AddBook(book);
+            }
+            else
+            {
+                _repository.UpdateBook(book);
+            }
 
             return RedirectToAction(nameof(Index));
         }
@@ -48,13 +55,13 @@ namespace OnlineBooksStore.App.MVC.Controllers
         {
             ViewBag.UpdateAll = true;
 
-            return View(nameof(Index), repository.Books);
+            return View(nameof(Index), _repository.Books);
         }
 
         [HttpPost]
         public IActionResult UpdateAll(Book[] books)
         {
-            repository.UpdateAll(books);
+            _repository.UpdateAll(books);
 
             return RedirectToAction(nameof(Index));
         }
@@ -62,7 +69,7 @@ namespace OnlineBooksStore.App.MVC.Controllers
         [HttpPost]
         public IActionResult Delete(Book book)
         {
-            repository.Delete(book);
+            _repository.Delete(book);
 
             return RedirectToAction(nameof(Index));
         }

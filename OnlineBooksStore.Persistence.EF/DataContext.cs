@@ -8,5 +8,7 @@ namespace OnlineBooksStore.Persistence.EF
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         public DbSet<Book> Books { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Publisher> Publishers { get; set; }
     }
 }
