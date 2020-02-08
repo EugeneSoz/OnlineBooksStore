@@ -7,8 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OnlineBooksStore.Domain.Contracts.Repositories;
+using OnlineBooksStore.Persistence.EF;
 
 namespace OnlineBooksStore.App.MVC
 {
@@ -25,6 +28,9 @@ namespace OnlineBooksStore.App.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddTransient<IRepository, DataRepository>();
+            var configString = Configuration["ConnectionStrings:DefaultConnection"];
+            services.AddDbContext<DataContext>(options => options.UseSqlServer(configString, b => b.MigrationsAssembly("OnlineBooksStore.App.MVC")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
