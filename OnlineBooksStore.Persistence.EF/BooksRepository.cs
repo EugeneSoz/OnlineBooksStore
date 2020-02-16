@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OnlineBooksStore.Persistence.EF
 {
-    public class BookRepository : IBookRepository
+    public class BooksRepository : IBooksRepository
     {
         private readonly DataContext _context;
 
-        public BookRepository(DataContext context)
+        public BooksRepository(DataContext context)
         {
             _context = context;
         }
@@ -35,8 +35,8 @@ namespace OnlineBooksStore.Persistence.EF
         {
             var savedBook = _context.Books.Find(book.Id);
             savedBook.Title = book.Title;
-            savedBook.CategoryID = book.CategoryID;
-            savedBook.PublisherID = book.PublisherID;
+            savedBook.CategoryId = book.CategoryId;
+            savedBook.PublisherId = book.PublisherId;
             savedBook.PurchasePrice = book.PurchasePrice;
             savedBook.RetailPrice = book.RetailPrice;
 

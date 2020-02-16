@@ -7,19 +7,19 @@ namespace OnlineBooksStore.App.MVC.Controllers
 {
     public class PublishersController : Controller
     {
-        private readonly IPublisherRepository _publisherRepository;
+        private readonly IPublishersRepository _publishersRepository;
 
-        public PublishersController(IPublisherRepository publisherRepository)
+        public PublishersController(IPublishersRepository publishersRepository)
         {
-            _publisherRepository = publisherRepository ?? throw new ArgumentNullException(nameof(publisherRepository));
+            _publishersRepository = publishersRepository ?? throw new ArgumentNullException(nameof(publishersRepository));
         }
 
-        public IActionResult Index() => View(_publisherRepository.Publishers);
+        public IActionResult Index() => View(_publishersRepository.Publishers);
 
         [HttpPost]
         public IActionResult AddPublisher(Publisher publisher)
         {
-            _publisherRepository.AddPublisher(publisher);
+            _publishersRepository.AddPublisher(publisher);
 
             return RedirectToAction(nameof(Index));
         }
@@ -27,13 +27,13 @@ namespace OnlineBooksStore.App.MVC.Controllers
         public IActionResult EditPublisher(long id)
         {
             ViewBag.EditId = id;
-            return View("Index", _publisherRepository.Publishers);
+            return View("Index", _publishersRepository.Publishers);
         }
 
         [HttpPost]
         public IActionResult UpdatePublisher(Publisher publisher)
         {
-            _publisherRepository.UpdatePublisher(publisher);
+            _publishersRepository.UpdatePublisher(publisher);
 
             return RedirectToAction(nameof(Index));
         }
@@ -41,7 +41,7 @@ namespace OnlineBooksStore.App.MVC.Controllers
         [HttpPost]
         public IActionResult DeletePublisher(Publisher publisher)
         {
-            _publisherRepository.DeletePublisher(publisher);
+            _publishersRepository.DeletePublisher(publisher);
 
             return RedirectToAction(nameof(Index));
         }

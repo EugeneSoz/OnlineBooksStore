@@ -5,7 +5,7 @@ using OnlineBooksStore.Domain.Contracts.Entities;
 
 namespace OnlineBooksStore.Domain.Contracts.Repositories
 {
-    public interface ICategoryRepository
+    public interface ICategoriesRepository
     {
         IEnumerable<Category> Categories { get; }
         void AddCategory(Category category);

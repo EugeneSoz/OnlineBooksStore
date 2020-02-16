@@ -3,7 +3,7 @@ using OnlineBooksStore.Domain.Contracts.Entities;
 
 namespace OnlineBooksStore.Domain.Contracts.Repositories
 {
-    public interface IPublisherRepository
+    public interface IPublishersRepository
     {
         IEnumerable<Publisher> Publishers { get; }
         void AddPublisher(Publisher publisher);

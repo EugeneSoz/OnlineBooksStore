@@ -10,19 +10,19 @@ namespace OnlineBooksStore.App.MVC.Controllers
 {
     public class CategoriesController : Controller
     {
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoriesRepository _categoriesRepository;
 
-        public CategoriesController(ICategoryRepository categoryRepository)
+        public CategoriesController(ICategoriesRepository categoriesRepository)
         {
-            _categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
+            _categoriesRepository = categoriesRepository ?? throw new ArgumentNullException(nameof(categoriesRepository));
         }
 
-        public IActionResult Index() => View(_categoryRepository.Categories);
+        public IActionResult Index() => View(_categoriesRepository.Categories);
 
         [HttpPost]
         public IActionResult AddCategory(Category category)
         {
-            _categoryRepository.AddCategory(category);
+            _categoriesRepository.AddCategory(category);
 
             return RedirectToAction(nameof(Index));
         }
@@ -30,20 +30,20 @@ namespace OnlineBooksStore.App.MVC.Controllers
         public IActionResult EditCategory(long id)
         {
             ViewBag.EditId = id;
-            return View("Index", _categoryRepository.Categories);
+            return View("Index", _categoriesRepository.Categories);
         }
 
         [HttpPost]
         public IActionResult UpdateCategory(Category category)
         {
-            _categoryRepository.UpdateCategory(category);
+            _categoriesRepository.UpdateCategory(category);
             return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
         public IActionResult DeleteCategory(Category category)
         {
-            _categoryRepository.DeleteCategory(category);
+            _categoriesRepository.DeleteCategory(category);
             return RedirectToAction(nameof(Index));
         }
     }

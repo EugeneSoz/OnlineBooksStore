@@ -11,39 +11,39 @@ namespace OnlineBooksStore.App.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IBookRepository _bookRepository;
-        private readonly ICategoryRepository _categoryRepository;
-        private readonly IPublisherRepository _publisherRepository;
+        private readonly IBooksRepository _booksRepository;
+        private readonly ICategoriesRepository _categoriesRepository;
+        private readonly IPublishersRepository _publishersRepository;
 
         public HomeController(
-            IBookRepository bookRepository, 
-            ICategoryRepository categoryRepository, 
-            IPublisherRepository publisherRepository)
+            IBooksRepository booksRepository, 
+            ICategoriesRepository categoriesRepository, 
+            IPublishersRepository publishersRepository)
         {
-            _bookRepository = bookRepository ?? throw new ArgumentNullException(nameof(bookRepository));
-            _categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
-            _publisherRepository = publisherRepository ?? throw new ArgumentNullException(nameof(publisherRepository));
+            _booksRepository = booksRepository ?? throw new ArgumentNullException(nameof(booksRepository));
+            _categoriesRepository = categoriesRepository ?? throw new ArgumentNullException(nameof(categoriesRepository));
+            _publishersRepository = publishersRepository ?? throw new ArgumentNullException(nameof(publishersRepository));
         }
 
         public IActionResult Index()
         {
-            return View(_bookRepository.Books);
+            return View(_booksRepository.Books);
         }
 
         [HttpPost]
         public IActionResult AddBook(Book book)
         {
-            _bookRepository.AddBook(book);
+            _booksRepository.AddBook(book);
             
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult UpdateBook(long key)
         {
-            ViewBag.Categories = _categoryRepository.Categories;
-            ViewBag.Publishers = _publisherRepository.Publishers;
+            ViewBag.Categories = _categoriesRepository.Categories;
+            ViewBag.Publishers = _publishersRepository.Publishers;
 
-            return View(key == 0 ? new Book() : _bookRepository.GetBook(key));
+            return View(key == 0 ? new Book() : _booksRepository.GetBook(key));
         }
 
         [HttpPost]
@@ -51,11 +51,11 @@ namespace OnlineBooksStore.App.MVC.Controllers
         {
             if (book.Id == 0)
             {
-                _bookRepository.AddBook(book);
+                _booksRepository.AddBook(book);
             }
             else
             {
-                _bookRepository.UpdateBook(book);
+                _booksRepository.UpdateBook(book);
             }
 
             return RedirectToAction(nameof(Index));
@@ -65,13 +65,13 @@ namespace OnlineBooksStore.App.MVC.Controllers
         {
             ViewBag.UpdateAll = true;
 
-            return View(nameof(Index), _bookRepository.Books);
+            return View(nameof(Index), _booksRepository.Books);
         }
 
         [HttpPost]
         public IActionResult UpdateAll(Book[] books)
         {
-            _bookRepository.UpdateAll(books);
+            _booksRepository.UpdateAll(books);
 
             return RedirectToAction(nameof(Index));
         }
@@ -79,7 +79,7 @@ namespace OnlineBooksStore.App.MVC.Controllers
         [HttpPost]
         public IActionResult Delete(Book book)
         {
-            _bookRepository.Delete(book);
+            _booksRepository.Delete(book);
 
             return RedirectToAction(nameof(Index));
         }

@@ -10,8 +10,8 @@ using OnlineBooksStore.Persistence.EF;
 namespace OnlineBooksStore.App.MVC.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200215151459_CategoriesAndPublishers")]
-    partial class CategoriesAndPublishers
+    [Migration("20200216110552_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,7 +31,7 @@ namespace OnlineBooksStore.App.MVC.Migrations
 
                     b.Property<string>("BookCover");
 
-                    b.Property<long?>("CategoryID");
+                    b.Property<long?>("CategoryId");
 
                     b.Property<string>("Description");
 
@@ -39,7 +39,7 @@ namespace OnlineBooksStore.App.MVC.Migrations
 
                     b.Property<int>("PageCount");
 
-                    b.Property<long?>("PublisherID");
+                    b.Property<long?>("PublisherId");
 
                     b.Property<decimal>("PurchasePrice");
 
@@ -51,9 +51,9 @@ namespace OnlineBooksStore.App.MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryID");
+                    b.HasIndex("CategoryId");
 
-                    b.HasIndex("PublisherID");
+                    b.HasIndex("PublisherId");
 
                     b.ToTable("Books");
                 });
@@ -68,7 +68,7 @@ namespace OnlineBooksStore.App.MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Publishers");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("OnlineBooksStore.Domain.Contracts.Entities.Publisher", b =>
@@ -90,11 +90,11 @@ namespace OnlineBooksStore.App.MVC.Migrations
                 {
                     b.HasOne("OnlineBooksStore.Domain.Contracts.Entities.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryID");
+                        .HasForeignKey("CategoryId");
 
                     b.HasOne("OnlineBooksStore.Domain.Contracts.Entities.Publisher", "Publisher")
                         .WithMany()
-                        .HasForeignKey("PublisherID");
+                        .HasForeignKey("PublisherId");
                 });
 #pragma warning restore 612, 618
         }
