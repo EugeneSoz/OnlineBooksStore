@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OnlineBooksStore.Domain.Contracts.Entities;
+using OnlineBooksStore.Domain.Contracts.Models.Pages;
 using OnlineBooksStore.Domain.Contracts.Repositories;
 
 namespace OnlineBooksStore.Persistence.EF
@@ -15,6 +16,11 @@ namespace OnlineBooksStore.Persistence.EF
         }
 
         public IEnumerable<Category> Categories => _context.Categories;
+
+        public PagedList<Category> GetCategories(QueryOptions options)
+        {
+            return new PagedList<Category>(_context.Categories, options);
+        }
 
         public void AddCategory(Category category)
         {

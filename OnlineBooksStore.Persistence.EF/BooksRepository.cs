@@ -3,6 +3,7 @@ using OnlineBooksStore.Domain.Contracts.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using OnlineBooksStore.Domain.Contracts.Models.Pages;
 
 namespace OnlineBooksStore.Persistence.EF
 {
@@ -19,6 +20,14 @@ namespace OnlineBooksStore.Persistence.EF
             .Include(b => b.Category)
             .Include(b => b.Publisher);
 
+        public PagedList<Book> GetBooks(QueryOptions options)
+        {
+            var query = _context.Books
+                .Include(b => b.Category)
+                .Include(b => b.Publisher);
+
+            return new PagedList<Book>(query, options);
+        }
         public Book GetBook(long key)
         {
             return _context.Books.Include(b => b.Category)

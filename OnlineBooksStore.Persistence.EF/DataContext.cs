@@ -12,5 +12,14 @@ namespace OnlineBooksStore.Persistence.EF
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Book>().HasIndex(p => p.Title);
+            modelBuilder.Entity<Book>().HasIndex(p => p.PurchasePrice);
+            modelBuilder.Entity<Book>().HasIndex(p => p.RetailPrice);
+            modelBuilder.Entity<Category>().HasIndex(p => p.NameEng);
+            modelBuilder.Entity<Publisher>().HasIndex(p => p.Name);
+        }
     }
 }

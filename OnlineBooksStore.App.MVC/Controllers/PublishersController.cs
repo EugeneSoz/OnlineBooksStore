@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using OnlineBooksStore.Domain.Contracts.Entities;
+using OnlineBooksStore.Domain.Contracts.Models.Pages;
 using OnlineBooksStore.Domain.Contracts.Repositories;
 
 namespace OnlineBooksStore.App.MVC.Controllers
@@ -14,7 +15,7 @@ namespace OnlineBooksStore.App.MVC.Controllers
             _publishersRepository = publishersRepository ?? throw new ArgumentNullException(nameof(publishersRepository));
         }
 
-        public IActionResult Index() => View(_publishersRepository.Publishers);
+        public IActionResult Index(QueryOptions options) => View(_publishersRepository.GetPublishers(options));
 
         [HttpPost]
         public IActionResult AddPublisher(Publisher publisher)

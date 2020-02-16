@@ -8,8 +8,4 @@
     <None Remove=".editorconfig" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>

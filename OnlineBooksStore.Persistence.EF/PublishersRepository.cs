@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OnlineBooksStore.Domain.Contracts.Entities;
+using OnlineBooksStore.Domain.Contracts.Models.Pages;
 using OnlineBooksStore.Domain.Contracts.Repositories;
 
 namespace OnlineBooksStore.Persistence.EF
@@ -15,6 +16,11 @@ namespace OnlineBooksStore.Persistence.EF
         }
 
         public IEnumerable<Publisher> Publishers => _context.Publishers;
+
+        public PagedList<Publisher> GetPublishers(QueryOptions options)
+        {
+            return new PagedList<Publisher>(_context.Publishers, options);
+        }
 
         public void AddPublisher(Publisher publisher)
         {
