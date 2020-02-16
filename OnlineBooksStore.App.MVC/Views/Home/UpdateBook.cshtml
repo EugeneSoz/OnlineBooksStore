@@ -12,11 +12,29 @@
     </div>
     <div class="form-group">
         <label asp-for="Category"></label>
-        <input asp-for="Category" class="form-control" />
+        <select class="form-control" asp-for="CategoryID">
+            @if (Model.Id == 0)
+            {
+                <option disabled selected>Choose Category</option>
+            }
+            @foreach (var category in ViewBag.Categories)
+            {
+                <option selected=@(Model.Category?.Id == category.Id) value="@category.Id">@category.NameEng</option>
+            }
+        </select>
     </div>
     <div class="form-group">
         <label asp-for="Publisher"></label>
-        <input asp-for="Publisher" class="form-control" />
+        <select class="form-control" asp-for="PublisherID">
+            @if (Model.Id == 0)
+            {
+                <option disabled selected>Choose Publisher</option>
+            }
+            @foreach (var publishers in ViewBag.Publishers)
+            {
+                <option selected=@(Model.Publisher?.Id == publishers.Id) value="@publishers.Id">@publishers.Name</option>
+            }
+        </select>
     </div>
     <div class="form-group">
         <label asp-for="PurchasePrice"></label>

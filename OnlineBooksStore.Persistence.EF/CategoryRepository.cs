@@ -23,7 +23,7 @@ namespace OnlineBooksStore.Persistence.EF
 
         public void UpdateCategory(Category category)
         {
-            _context.Categories.Add(category);
+            _context.Categories.Update(category);
             _context.SaveChanges();
         }
 

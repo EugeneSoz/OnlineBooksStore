@@ -12,10 +12,17 @@ namespace OnlineBooksStore.App.MVC.Controllers
     public class HomeController : Controller
     {
         private readonly IBookRepository _bookRepository;
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly IPublisherRepository _publisherRepository;
 
-        public HomeController(IBookRepository bookRepository)
+        public HomeController(
+            IBookRepository bookRepository, 
+            ICategoryRepository categoryRepository, 
+            IPublisherRepository publisherRepository)
         {
             _bookRepository = bookRepository ?? throw new ArgumentNullException(nameof(bookRepository));
+            _categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
+            _publisherRepository = publisherRepository ?? throw new ArgumentNullException(nameof(publisherRepository));
         }
 
         public IActionResult Index()
@@ -33,6 +40,9 @@ namespace OnlineBooksStore.App.MVC.Controllers
 
         public IActionResult UpdateBook(long key)
         {
+            ViewBag.Categories = _categoryRepository.Categories;
+            ViewBag.Publishers = _publisherRepository.Publishers;
+
             return View(key == 0 ? new Book() : _bookRepository.GetBook(key));
         }
 

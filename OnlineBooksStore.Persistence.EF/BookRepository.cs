@@ -2,6 +2,7 @@
 using OnlineBooksStore.Domain.Contracts.Repositories;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace OnlineBooksStore.Persistence.EF
 {
@@ -13,9 +14,16 @@ namespace OnlineBooksStore.Persistence.EF
         {
             _context = context;
         }
-        public IEnumerable<Book> Books => _context.Books.ToArray();
 
-        public Book GetBook(long key) => _context.Books.Find(key);
+        public IEnumerable<Book> Books => _context.Books
+            .Include(b => b.Category)
+            .Include(b => b.Publisher);
+
+        public Book GetBook(long key)
+        {
+            return _context.Books.Include(b => b.Category)
+                .Include(b => b.Publisher).First(b => b.Id == key);
+        }
 
         public void AddBook(Book book)
         {
@@ -25,10 +33,10 @@ namespace OnlineBooksStore.Persistence.EF
 
         public void UpdateBook(Book book)
         {
-            var savedBook = GetBook(book.Id);
+            var savedBook = _context.Books.Find(book.Id);
             savedBook.Title = book.Title;
-            savedBook.Category = book.Category;
-            savedBook.Publisher = book.Publisher;
+            savedBook.CategoryID = book.CategoryID;
+            savedBook.PublisherID = book.PublisherID;
             savedBook.PurchasePrice = book.PurchasePrice;
             savedBook.RetailPrice = book.RetailPrice;
 
