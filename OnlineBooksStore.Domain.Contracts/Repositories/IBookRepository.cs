@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OnlineBooksStore.Domain.Contracts.Repositories
 {
-    public interface IRepository
+    public interface IBookRepository
     {
         IEnumerable<Book> Books { get; }
         Book GetBook(long key);

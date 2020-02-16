@@ -28,7 +28,10 @@ namespace OnlineBooksStore.App.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddTransient<IRepository, DataRepository>();
+            services.AddTransient<IBookRepository, BookRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IPublisherRepository, PublisherRepository>();
+
             var configString = Configuration["ConnectionStrings:DefaultConnection"];
             services.AddDbContext<DataContext>(options => options.UseSqlServer(configString, b => b.MigrationsAssembly("OnlineBooksStore.App.MVC")));
         }

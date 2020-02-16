@@ -11,29 +11,29 @@ namespace OnlineBooksStore.App.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IRepository _repository;
+        private readonly IBookRepository _bookRepository;
 
-        public HomeController(IRepository repository)
+        public HomeController(IBookRepository bookRepository)
         {
-            _repository = repository;
+            _bookRepository = bookRepository ?? throw new ArgumentNullException(nameof(bookRepository));
         }
 
         public IActionResult Index()
         {
-            return View(_repository.Books);
+            return View(_bookRepository.Books);
         }
 
         [HttpPost]
         public IActionResult AddBook(Book book)
         {
-            _repository.AddBook(book);
+            _bookRepository.AddBook(book);
             
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult UpdateBook(long key)
         {
-            return View(key == 0 ? new Book() : _repository.GetBook(key));
+            return View(key == 0 ? new Book() : _bookRepository.GetBook(key));
         }
 
         [HttpPost]
@@ -41,11 +41,11 @@ namespace OnlineBooksStore.App.MVC.Controllers
         {
             if (book.Id == 0)
             {
-                _repository.AddBook(book);
+                _bookRepository.AddBook(book);
             }
             else
             {
-                _repository.UpdateBook(book);
+                _bookRepository.UpdateBook(book);
             }
 
             return RedirectToAction(nameof(Index));
@@ -55,13 +55,13 @@ namespace OnlineBooksStore.App.MVC.Controllers
         {
             ViewBag.UpdateAll = true;
 
-            return View(nameof(Index), _repository.Books);
+            return View(nameof(Index), _bookRepository.Books);
         }
 
         [HttpPost]
         public IActionResult UpdateAll(Book[] books)
         {
-            _repository.UpdateAll(books);
+            _bookRepository.UpdateAll(books);
 
             return RedirectToAction(nameof(Index));
         }
@@ -69,7 +69,7 @@ namespace OnlineBooksStore.App.MVC.Controllers
         [HttpPost]
         public IActionResult Delete(Book book)
         {
-            _repository.Delete(book);
+            _bookRepository.Delete(book);
 
             return RedirectToAction(nameof(Index));
         }

@@ -1,16 +1,15 @@
 ﻿using OnlineBooksStore.Domain.Contracts.Entities;
 using OnlineBooksStore.Domain.Contracts.Repositories;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OnlineBooksStore.Persistence.EF
 {
-    public class DataRepository : IRepository
+    public class BookRepository : IBookRepository
     {
         private readonly DataContext _context;
 
-        public DataRepository(DataContext context)
+        public BookRepository(DataContext context)
         {
             _context = context;
         }

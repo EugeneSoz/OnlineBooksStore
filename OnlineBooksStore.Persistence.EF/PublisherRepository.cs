@@ -5,31 +5,32 @@ using OnlineBooksStore.Domain.Contracts.Repositories;
 
 namespace OnlineBooksStore.Persistence.EF
 {
-    public class CategoryRepository : ICategoryRepository
+    public class PublisherRepository : IPublisherRepository
     {
         private readonly DataContext _context;
 
-        public CategoryRepository(DataContext context)
+        public PublisherRepository(DataContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        public IEnumerable<Category> Categories => _context.Categories;
 
-        public void AddCategory(Category category)
+        public IEnumerable<Publisher> Publishers => _context.Publishers;
+
+        public void AddPublisher(Publisher publisher)
         {
-            _context.Categories.Add(category);
+            _context.Publishers.Add(publisher);
             _context.SaveChanges();
         }
 
-        public void UpdateCategory(Category category)
+        public void UpdatePublisher(Publisher publisher)
         {
-            _context.Categories.Add(category);
+            _context.Publishers.Update(publisher);
             _context.SaveChanges();
         }
 
-        public void DeleteCategory(Category category)
+        public void DeletePublisher(Publisher publisher)
         {
-            _context.Categories.Remove(category);
+            _context.Publishers.Remove(publisher);
             _context.SaveChanges();
         }
     }
