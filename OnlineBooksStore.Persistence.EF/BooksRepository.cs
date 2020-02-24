@@ -20,12 +20,15 @@ namespace OnlineBooksStore.Persistence.EF
             .Include(b => b.Category)
             .Include(b => b.Publisher);
 
-        public PagedList<Book> GetBooks(QueryOptions options)
+        public PagedList<Book> GetBooks(QueryOptions options, long category = 0)
         {
-            var query = _context.Books
+            IQueryable<Book> query = _context.Books
                 .Include(b => b.Category)
                 .Include(b => b.Publisher);
-
+            if (category != 0)
+            {
+                query = query.Where(b => b.CategoryId == category);
+            }
             return new PagedList<Book>(query, options);
         }
         public Book GetBook(long key)

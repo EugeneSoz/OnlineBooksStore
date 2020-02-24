@@ -17,5 +17,7 @@ namespace OnlineBooksStore.Domain.Contracts.Entities
         /// The name of the category.
         /// </value>
         public string NameEng { get; set; }
+
+        public IEnumerable<Book> Books { get; set; }
     }
 }

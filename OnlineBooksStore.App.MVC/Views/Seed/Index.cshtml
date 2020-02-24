@@ -1,40 +1,69 @@
 ﻿@model IEnumerable<Book>
-<h3 class="p-2 bg-primary text-white text-center">Seed Data</h3>
-<form method="post">
-    <div class="form-group">
-        <label>Number of Objects to Create</label>
-        <input class="form-control" name="count" value="50" />
-    </div>
-    <div class="text-center">
-        <button type="submit" asp-action="CreateSeedData" class="btn btn-primary">
-            Seed Database
-        </button>
-        <button asp-action="ClearData" class="btn btn-danger">
-            Clear Database
-        </button>
-    </div>
-</form>
-<h5 class="text-center m-2">
-    There are @ViewBag.Count products in the database
-</h5>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-1 font-weight-bold">Id</div>
-        <div class="col font-weight-bold">Title</div>
-        <div class="col font-weight-bold">Category</div>
-        <div class="col font-weight-bold">Publisher</div>
-        <div class="col font-weight-bold text-right">Purchase</div>
-        <div class="col font-weight-bold text-right">Retail</div>
-    </div>
-    @foreach (var book in Model)
-    {
-        <div class="row">
-            <div class="col-1">@book.Id</div>
-            <div class="col">@book.Title</div>
-            <div class="col">@book.Category.NameEng</div>
-            <div class="col">@book.Publisher.Name</div>
-            <div class="col text-right">@book.PurchasePrice</div>
-            <div class="col text-right">@book.RetailPrice</div>
-        </div>
-    }
-</div>
+<h4 class="p-2 bg-primary text-white text-center">Database entities</h4>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Entity</th>
+            <th>Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Books</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Categories</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Publishers</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Orders</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h4 class="p-2 bg-primary text-white text-center">Database actions</h4>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Database tables</th>
+        <th>Database tables data</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <form method="post">
+                    <div class="text-center">
+                        <button type="submit" asp-action="CreateSeedData" class="btn btn-success">
+                            Create tables
+                        </button>
+                        <button asp-action="ClearData" class="btn btn-danger">
+                            Drop tables
+                        </button>
+                    </div>
+                </form>
+            </td>
+            <td>
+                <form method="post">
+                    <div class="form-group">
+                        <label>Number of Objects to Create</label>
+                        <input class="form-control" name="count" value="50" />
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" asp-action="CreateSeedData" class="btn btn-primary">
+                            Seed test data
+                        </button>
+                        <button asp-action="ClearData" class="btn btn-info">
+                            Clear table data
+                        </button>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
