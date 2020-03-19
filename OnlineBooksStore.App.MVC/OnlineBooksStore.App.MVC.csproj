@@ -7,6 +7,8 @@
 
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
@@ -17,6 +19,8 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\OnlineBooksStore.App.Contracts\OnlineBooksStore.App.Contracts.csproj" />
+    <ProjectReference Include="..\OnlineBooksStore.App.Handlers\OnlineBooksStore.App.Handlers.csproj" />
     <ProjectReference Include="..\OnlineBooksStore.Persistence.EF\OnlineBooksStore.Persistence.EF.csproj" />
   </ItemGroup>
 

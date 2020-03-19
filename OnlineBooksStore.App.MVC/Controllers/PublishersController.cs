@@ -1,7 +1,9 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using OnlineBooksStore.Domain.Contracts.Entities;
-using OnlineBooksStore.Domain.Contracts.Models.Pages;
+using OnlineBooksStore.App.Contracts.Command;
+using OnlineBooksStore.App.Contracts.Query;
+using OnlineBooksStore.App.Handlers.Command;
+using OnlineBooksStore.App.Handlers.Query;
 using OnlineBooksStore.Domain.Contracts.Repositories;
 
 namespace OnlineBooksStore.App.MVC.Controllers
@@ -9,40 +11,47 @@ namespace OnlineBooksStore.App.MVC.Controllers
     public class PublishersController : Controller
     {
         private readonly IPublishersRepository _publishersRepository;
+        private readonly PublisherQueryHandler _queryHandler;
+        private readonly PublisherCommandHandler _commandHandler;
 
-        public PublishersController(IPublishersRepository publishersRepository)
+        public PublishersController(
+            IPublishersRepository publishersRepository,
+            PublisherQueryHandler queryHandler,
+            PublisherCommandHandler commandHandler)
         {
             _publishersRepository = publishersRepository ?? throw new ArgumentNullException(nameof(publishersRepository));
+            _queryHandler = queryHandler ?? throw new ArgumentNullException(nameof(queryHandler));
+            _commandHandler = commandHandler ?? throw new ArgumentNullException(nameof(commandHandler));
         }
 
-        public IActionResult Index(QueryOptions options) => View(_publishersRepository.GetPublishers(options));
+        public IActionResult Index(PageFilterQuery query) => View(_queryHandler.Handle(query));
 
         [HttpPost]
-        public IActionResult AddPublisher(Publisher publisher)
+        public IActionResult AddPublisher(CreatePublisherCommand command)
         {
-            _publishersRepository.AddPublisher(publisher);
+            _commandHandler.Handle(command);
 
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult EditPublisher(long id)
+        public IActionResult EditPublisher(PublisherIdQuery query)
         {
-            ViewBag.EditId = id;
+            ViewBag.EditId = query.Id;
             return View("Index", _publishersRepository.Publishers);
         }
 
         [HttpPost]
-        public IActionResult UpdatePublisher(Publisher publisher)
+        public IActionResult UpdatePublisher(UpdatePublisherCommand command)
         {
-            _publishersRepository.UpdatePublisher(publisher);
+            _commandHandler.Handle(command);
 
             return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
-        public IActionResult DeletePublisher(Publisher publisher)
+        public IActionResult DeletePublisher(DeletePublisherCommand command)
         {
-            _publishersRepository.DeletePublisher(publisher);
+            _commandHandler.Handle(command);
 
             return RedirectToAction(nameof(Index));
         }
