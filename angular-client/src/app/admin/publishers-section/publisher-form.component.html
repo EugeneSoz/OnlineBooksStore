@@ -1,0 +1,45 @@
+<bs-admin-toolbar></bs-admin-toolbar>
+
+<div class="card m-2">
+    <div class="card-body">
+        <tabset>
+            <tab heading="Издательство">
+                <div class="bg-primary text-white p-2" [class.bg-warning]="editing">
+                    <div class="d-flex flex-row justify-content-between">
+                        <h5>{{title}} издательство</h5>
+                        <button type="button" [class]="background" [routerLink]="pageLink">
+                            К списку издательств
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="isAlertVisible" class="alert alert-success mt-2">
+                    Создана запись в бд
+                </div>
+                <form class="mt-3" novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <bs-server-validation [errors]="errors"></bs-server-validation>
+                    <div class="form-group row" *ngFor="let control of form.customControls; let i=index">
+                        <ng-container *ngIf="i > 0">
+                            <label class="col-sm-3 col-form-label">{{control.label}}</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" formControlName="{{control.property}}" />
+                                <bs-validation [messages]="getErrors(control.property)"></bs-validation>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label"></label>
+                        <div class="col-sm-7">
+                            <button type="submit" [class]="background" [disabled]="form.invalid">
+                                {{title}}
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+            </tab>
+            <tab heading="Связанные книги">
+                <bs-related-books-table [books]="books"></bs-related-books-table>
+            </tab>
+        </tabset>
+    </div>
+</div>

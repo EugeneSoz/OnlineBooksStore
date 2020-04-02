@@ -1,0 +1,41 @@
+<div class="container-fluid px-0">
+    <div id="store-content">
+        <bs-empty-toolbar></bs-empty-toolbar>
+        <div id="store-scrollable-content">
+            <div class="card m-2">
+                <div class="card-body">
+                    <h2 class="text-center">Детали заказа</h2>
+
+                    <table class="table m-2">
+                        <tr>
+                            <th>Ваше имя</th>
+                            <td>{{order.name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Адрес доставки</th>
+                            <td>{{order.address}}</td>
+                        </tr>
+                        <tr>
+                            <th>Заказываемые товары</th>
+                            <td>{{cart.itemCount}}</td>
+                        </tr>
+                        <tr>
+                            <th>Общая стоимость</th>
+                            <td>{{cart.totalPrice |currency:"RUB":"symbol":"2.2-2":"ru"}}</td>
+                        </tr>
+                    </table>
+
+                    <div class="text-center mt-2">
+                        <button class="btn btn-outline-primary" (click)="onGoToPayment()">
+                            Назад
+                        </button>
+                        <button class="btn btn-success ml-2" (click)="onSubmitOrder()">
+                            Разместить заказ
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="sidebar-header">
+    <h5><a style="cursor: pointer" [routerLink]="pageLink">Личный кабинет</a></h5>
+</div>
+
+<ul *ngIf="categories != null" class="list-unstyled components">
+    <li>
+        <a href="#" (click)="onFilter(); false">Все категории</a>
+    </li>
+
+    <li *ngFor="let category of categories">
+        <ng-container *ngIf="!category.hasChildren">
+            <a href="#" (click)="onFilter(category); false">
+                {{category.name}}
+            </a>
+        </ng-container>
+
+        <ng-container *ngIf="category.hasChildren">
+            <a class="d-flex justify-content-between" [class.selected]="checkOnSelection(category)"
+               href="#"
+               [attr.aria-expanded]="!category.isCollapsed"
+               [attr.aria-controls]="category.controlId"
+               (click)="onFilter(category); false">
+                {{category.name}}
+                <i class="fas fa-caret-down"></i>
+            </a>
+
+            <ul class="collapse list-unstyled" [id]="category.controlId" [collapse]="category.isCollapsed" [isAnimated]="true">
+                <li *ngFor="let subcategory of category.children">
+                    <a [class.selected]="checkOnSelection(subcategory)"
+                        (click)="onFilter(subcategory); false">
+                        {{subcategory.name}}
+                    </a>
+                </li>
+            </ul>
+        </ng-container>
+    </li>
+</ul>

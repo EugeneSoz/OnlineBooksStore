@@ -1,0 +1,55 @@
+<bs-admin-toolbar [isButtonsVisible]="true" [link]="pageLink"></bs-admin-toolbar>
+<bs-admin-filter [properties]="filterProperties" [term]="searchTerm" (searchEvent)="onSearch($event)"></bs-admin-filter>
+
+<div class="card m-3">
+    <div class="card-body">
+        <table class="table table-sm table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th *ngFor="let sortingProperty of sortingProperties">
+                        <bs-table-head [property]="sortingProperty" [sortPropertyName]="sortPropertyName"
+                            (sortingEvent)="onSort($event)">
+                        </bs-table-head>
+                    </th>
+
+                    <th style="width: 6rem">Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="adminEntities != null || adminEntities?.length > 0">
+                    <tr *ngFor="let book of adminEntities">
+                        <td>
+                            {{book.id}}
+                        </td>
+                        <td>{{book.title}}</td>
+                        <td>{{book.categoryName}}</td>
+                        <td>{{book.subcategoryName}}</td>
+                        <td>{{book.publisherName}}</td>
+                        <td class="text-right">{{book.price | currency:"RUB":"symbol":"2.2-2"}}</td>
+                        <td>
+                            <div class="d-inline-flex">
+                                <button type="button" class="btn btn-sm btn-warning text-white ml-1"
+                                    [routerLink]="[pageLink, 'edit', book.id]" tooltip="Редактировать">
+                                    <i class='fas fa-pencil-alt fa-lg'></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-danger ml-1"
+                                    (click)="onShowDeleteModal(book)" tooltip="Удалить">
+                                    <i class='fas fa-trash-alt fa-lg'></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+
+                <ng-container *ngIf="adminEntities == null">
+                    <tr>
+                        <td class="text-center" colspan="6">Нет данных</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+
+        <bs-pagination [pagination]="pagination" [pageNumbers]="pageNumbers" (pageNumberEvent)="onChangePage($event)">
+        </bs-pagination>
+    </div>
+</div>

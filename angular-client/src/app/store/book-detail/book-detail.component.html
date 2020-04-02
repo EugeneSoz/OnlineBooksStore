@@ -1,0 +1,84 @@
+<div class="container-fluid px-0">
+    <div id="store-content">
+        <bs-store-toolbar [isToolbarActionsVisible]="false" 
+        [isSearchToolbarVisible]="false"></bs-store-toolbar>
+        <div id="store-scrollable-content">
+            <div *ngIf="book != null" class="card m-3">
+                <div class="card-body">
+                    <div class="row no-gutters">
+                        <div class="col-lg-auto">
+                            <img src="" alt="Обложка книги" width="420" height="600" />
+                        </div>
+                        <div class="col-lg">
+                            <h3>{{book.title}}</h3>
+                            <div class="row">
+                                <div class="col-lg">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>Автор(ы)</td>
+                                                <td>{{book.authors}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Количество страниц</td>
+                                                <td>{{book.pageCount}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Год выпуска</td>
+                                                <td>{{book.year}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Категория</td>
+                                                <td>{{book.categoryName}}</td>
+                                            </tr>
+            
+                                            <tr>
+                                                <td>Издательство</td>
+                                                <td>{{book.publisherName}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Язык издания</td>
+                                                <td>{{book.language}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-lg-auto">
+                                    <div class="card border-primary">
+                                        <div class="card-body">
+                                            <h3 class="card-title">{{book.price | currency:"RUB":"symbol":"2.2-2"}}</h3>
+                                            <h6 class="card-subtitle text-center text-muted">В наличии</h6>
+                                        </div>
+                                        <div class="card-footer text-center">
+                                            <a style="cursor: pointer" class="card-link" href="#"
+                                                (click)="onAddToCart(book); false">В корзину</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="row">
+                                <div class="col-lg">
+                                    <button type="button" class="btn btn-info" [routerLink]="storePageLink">
+                                        К списку книг
+                                    </button>
+                                </div>
+                            </div>
+            
+                            <div class="row mt-lg-5">
+                                <div class="col-lg">
+                                    {{book.description}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+
+            <div *ngIf="book == null">
+                <h4>О данной книге информация отсутствует</h4>
+            </div>
+        </div>
+    </div>
+</div>

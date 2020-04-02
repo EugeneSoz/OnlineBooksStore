@@ -1,0 +1,19 @@
+<bs-store-toolbar></bs-store-toolbar>
+<div *ngIf="books != null" id="store-scrollable-content" class="pl-3">
+    <ng-container *ngFor="let row of rows">
+        <div class="row no-gutters">
+            <ng-container *ngFor="let col of cols">
+                <div class="col" *ngIf="isColEmpty(row, col) == false">
+                    <bs-book-card [book]="books[getBookIndex(row, col)]"></bs-book-card>
+                </div>
+                <div class="col" *ngIf="isColEmpty(row, col)"></div>
+            </ng-container>
+        </div>
+    </ng-container>
+</div>
+
+<div *ngIf="books != null" class="px-3 py-2 bg-light">
+    <bs-pagination [pagination]="pagination" [pageNumbers]="pageNumbers" 
+        (pageNumberEvent)="onChangePage($event)">
+    </bs-pagination>
+</div>

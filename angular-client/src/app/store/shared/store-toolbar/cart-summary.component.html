@@ -1,0 +1,11 @@
+<div [ngSwitch]="itemsCount" class="p-1">
+    <small *ngSwitchCase="0" class="text-white">
+        (Корзина: пусто)
+    </small>
+    <small *ngSwitchDefault class="text-white">
+        Корзина: {{itemsCount}} книг(и) на {{totalPrice | currency:"RUB":"symbol":"2.2-2"}}
+    </small>
+    <button class="text-white btn btn-sm ml-1" [disabled]="itemsCount == 0" [routerLink]="pageLink">
+        <i class="fa fa-shopping-cart fa-lg"></i>
+    </button>
+</div>

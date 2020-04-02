@@ -1,0 +1,31 @@
+<li dropdown *ngIf="gridSizeProperties != null" class="nav-item dropdown" placement="bottom right">
+    <a class="nav-link dropdown-toggle active" dropdownToggle
+       [href]="gridSizeProperties[0].href" id="basic-link1" aria-controls="basic-link-dropdown1" (click)="false">
+        {{gridSizeProperties[0].name}}
+    </a>
+
+    <ul id="basic-link-dropdown1" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="basic-link1">
+        <li *ngFor="let listItem of gridSizeProperties">
+            <ng-container *ngIf="listItem.name != gridSizeProperties[0].name">
+                <a [ngClass]="setElementCssClass(listItem)" [href]="listItem.href"
+                    (click)="onChangeBooksGridSize(listItem); false">{{listItem.name}}</a>
+            </ng-container>
+        </li>
+    </ul>
+</li>
+
+<li dropdown *ngIf="sortingProperties != null" class="nav-item dropdown" placement="bottom right">
+    <a class="nav-link dropdown-toggle active" dropdownToggle [href]="sortingProperties[0].href" id="basic-link2"
+        aria-controls="basic-link-dropdown2" (click)="false">
+        {{sortingProperties[0].name}}
+    </a>
+
+    <ul id="basic-link-dropdown2" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="basic-link2">
+        <li *ngFor="let listItem of sortingProperties">
+            <ng-container *ngIf="listItem.name != sortingProperties[0].name">
+                <a [ngClass]="setElementCssClass(listItem)" [href]="listItem.href"
+                    (click)="onSort(listItem); false">{{listItem.name}}</a>
+            </ng-container>
+        </li>
+    </ul>
+</li>

@@ -1,0 +1,26 @@
+<div *ngIf="pagination != null" class="btn-group">
+    <button type="button" class="btn btn-info" (click)="onChangePage(first)"
+        tooltip="Первая">
+        <i class="fas fa-angle-double-left"></i>
+    </button>
+    <button type="button" class="btn btn-info" 
+    [class.disabled]="!pagination.hasPreviousPage" 
+    (click)="onChangePage(previous)" tooltip="Предыдущая">
+        <i class="fas fa-angle-left"></i>
+    </button>
+
+    <button type="button" *ngFor="let page of pageNumbers" 
+        (click)="onChangePage(page)" class="btn btn-info"
+        [class.active]="page == selectedPage">
+        {{page}}
+    </button>
+
+    <button type="button" class="btn btn-info" 
+        [class.disabled]="!pagination.hasNextPage" 
+        (click)="onChangePage(next)" tooltip="Следующая">
+        <i class="fas fa-angle-right"></i>
+    </button>
+    <button type="button" class="btn btn-info" (click)="onChangePage(last)" tooltip="Последняя">
+        <i class="fas fa-angle-double-right"></i>
+    </button>
+</div>

@@ -1,0 +1,71 @@
+<bs-admin-toolbar></bs-admin-toolbar>
+<div class="card m-2">
+    <div class="card-body">
+        <tabset>
+            <tab heading="Книги">
+                <div class="bg-primary text-white p-2" [class.bg-warning]="editing">
+                    <div class="d-flex flex-row justify-content-between">
+                        <h5>{{title}} книгу</h5>
+                        <button type="button" [class]="background" [routerLink]="pageLink">
+                            К списку книг</button>
+                    </div>
+                </div>
+
+                <div *ngIf="isAlertVisible" class="alert alert-success mt-2">
+                    Создана запись в бд
+                </div>
+                <form class="mt-3" novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <bs-server-validation [errors]="errors"></bs-server-validation>
+                    <div class="form-group row" *ngFor="let control of form.customControls; let i=index">
+                        <ng-container *ngIf="i == 7">
+                            <label class="col-sm-3 col-form-label">{{control.label}}</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" [(ngModel)]="categoryName"
+                                    [ngModelOptions]="{standalone: true}" [typeaheadAsync]="true"
+                                    [typeahead]="categories$" typeaheadOptionField="displayedName"
+                                    (typeaheadOnSelect)="onSelectCategory($event)" />
+                                <bs-validation [messages]="getErrors(control.property)"></bs-validation>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="i == 8">
+                            <label class="col-sm-3 col-form-label">{{control.label}}</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" [(ngModel)]="publisherName"
+                                    [ngModelOptions]="{standalone: true}" [typeaheadAsync]="true"
+                                    [typeahead]="publishers$" typeaheadOptionField="name"
+                                    (typeaheadOnSelect)="onSelectPublisher($event)" />
+                                <bs-validation [messages]="getErrors(control.property)"></bs-validation>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="i <= 6 && i >= 1">
+                            <label class="col-sm-3 col-form-label">{{control.label}}</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" formControlName="{{control.property}}" />
+                                <bs-validation [messages]="getErrors(control.property)"></bs-validation>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="i == 9">
+                            <label class="col-sm-3 col-form-label">{{control.label}}</label>
+                            <div class="col-sm-7">
+                                <textarea class="form-control" formControlName="{{control.property}}" row="10"
+                                    col="20"></textarea>
+                                <bs-validation [messages]="getErrors(control.property)"></bs-validation>
+                            </div>
+                        </ng-container>
+
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label"></label>
+                        <div class="col-sm-7">
+                            <button type="submit" [class]="background" [disabled]="form.invalid">{{title}}</button>
+                        </div>
+
+                    </div>
+                </form>
+            </tab>
+            <tab heading="О книге">
+                <bs-book-info [book]="book"></bs-book-info>
+            </tab>
+        </tabset>
+    </div>
+</div>

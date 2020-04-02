@@ -1,0 +1,8 @@
+<div class="bg-danger text-white p-2 mb-2" *ngIf="errors != null">
+    Сервер вернул следующие ошибки
+    <ul>
+        <li *ngFor="let error of errors">
+            {{error}}
+        </li>
+    </ul>
+</div>

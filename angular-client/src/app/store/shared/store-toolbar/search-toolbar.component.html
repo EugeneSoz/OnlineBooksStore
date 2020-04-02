@@ -1,0 +1,15 @@
+<div class="input-group">
+    <input type="text" class="form-control" placeholder="Поиск по названию или автору"
+           aria-describedby="button-addon2" 
+           [value]="searchTerm"
+           (input)="onInputSearchValue($event.target.value)">
+    <div id="button-addon2" class="input-group-append">
+        <button *ngIf="isClearBtnVisible" class="btn btn-warning" type="button"
+            (click)="onClear()">
+            <i class="fas fa-times"></i>
+        </button>
+        <button class="btn btn-success" type="button" (click)="onSearch()">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+</div>

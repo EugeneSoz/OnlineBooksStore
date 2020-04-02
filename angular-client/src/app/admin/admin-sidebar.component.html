@@ -1,0 +1,8 @@
+<ul *ngIf="sections != undefined && sections != null" class="nav flex-column">
+    <li *ngFor="let section of sections" class="sidebar-item">
+        <a routerLink="{{section.href}}" routerLinkActive="active"
+           [routerLinkActiveOptions]="{exact: true}">
+            {{section.name}}
+        </a>
+    </li>
+</ul>

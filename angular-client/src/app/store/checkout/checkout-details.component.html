@@ -1,0 +1,30 @@
+<div class="container-fluid px-0">
+    <div id="store-content">
+        <bs-empty-toolbar></bs-empty-toolbar>
+        <div id="store-scrollable-content">
+            <div class="card m-2">
+                <div class="card-body">
+                   <h2 class="text-center mt-1">Шаг 1: Оформление заказа</h2>
+                   
+                   <form novalidate [formGroup]="form" (ngSubmit)="onSubmitForm()">
+                        <div class="form-group" *ngFor="let control of form.customControls">
+                            <label>{{control.label}}</label>
+                            <input type="text" class="form-control"
+                                formControlName="{{control.property}}" />
+                            <bs-validation [messages]="getErrors(control.property)"></bs-validation>
+                        </div>
+                        <div class="text-center mt-2">
+                            <button class="btn btn-outline-primary" (click)="onGoToStore()">Назад
+                            </button>
+                            <button type="submit" class="btn btn-success ml-2" 
+                                [disabled]="form.invalid">
+                                Далее
+                            </button>
+                        </div>
+                   </form>                   
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

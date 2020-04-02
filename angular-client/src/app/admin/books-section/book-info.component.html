@@ -1,0 +1,40 @@
+﻿<ng-container *ngIf="book == null || book.id == 0">
+    <h5>Информация о книге отсутствует</h5>
+</ng-container>
+
+<ng-container *ngIf="book != null && book.id > 0">
+    <h3>{{book.title}}</h3>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>Автор(ы)</td>
+                <td>{{book.authors}}</td>
+            </tr>
+            <tr>
+                <td>Количество страниц</td>
+                <td>{{book.pageCount}}</td>
+            </tr>
+            <tr>
+                <td>Год выпуска</td>
+                <td>{{book.year}}</td>
+            </tr>
+            <tr>
+                <td>Категория</td>
+                <td>{{book.categoryName}}</td>
+            </tr>
+    
+            <tr>
+                <td>Издательство</td>
+                <td>{{book.publisherName}}</td>
+            </tr>
+            <tr>
+                <td>Язык издания</td>
+                <td>{{book.language}}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="mt-lg-5">
+        {{book.description}}
+    </div>
+</ng-container>

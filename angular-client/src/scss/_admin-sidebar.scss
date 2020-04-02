@@ -1,0 +1,46 @@
+﻿@import '_shared';
+
+#admin-sidebar {
+    background-image: linear-gradient(#062e7a, #3a0647);
+    flex-direction: column;
+    height: 100vh;
+    width: 12rem;
+    overflow-y: auto;
+    @extend %marging-padding-reset;
+
+    ul {
+        list-style-type: none;
+    }
+
+    .sidebar-item {
+        height: 3.4rem;
+
+        a {
+            font-size: 1.2rem;
+            color: #d7d7d7;
+            border-radius: 4px;
+            cursor: pointer;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0 2rem;
+            margin: 0 1rem;
+        }
+
+        &:first-child {
+            margin: 1rem 0 0 0;
+        }
+
+        &:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        & .active {
+            background-color: rgba(255,255,255,0.25);
+            color: white;
+        }
+    }
+}

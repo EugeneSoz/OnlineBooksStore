@@ -1,0 +1,37 @@
+<bs-admin-toolbar></bs-admin-toolbar>
+<div class="card m-3">
+    <div class="card-body">
+        <table class="table table-sm table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Покупатель</th>
+                    <th>Адрес</th>
+                    <th>Товары</th>
+                    <th>На сумму</th>
+                    <th>Статус заказа</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="orders?.length > 0">
+                    <tr *ngFor="let o of orders">
+                        <td>{{o.name}}</td>
+                        <td>{{o.address}}</td>
+                        <td>{{o.goods.length}}</td>
+                        <td>{{o.payment.total | currency:"RUB":"symbol":"2.2-2":"ru"}}</td>
+                        <td *ngIf="!o.shipped">
+                            <button class="btn btn-sm btn-primary" (click)="markShipped(o)">
+                                Ждёт отправки
+                            </button>
+                        </td>
+                        <td *ngIf="o.shipped">Отправлен</td>
+                    </tr>
+                </ng-container>
+                <ng-container *ngIf="orders == null || orders?.length == 0">
+                    <tr>
+                        <td colspan="5">В настоящий момент в базе данных нет заказов</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>

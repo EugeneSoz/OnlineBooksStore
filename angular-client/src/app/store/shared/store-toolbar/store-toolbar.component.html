@@ -1,0 +1,19 @@
+<nav id="store-toolbar" class="navbar navbar-expand-lg navbar-dark">
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed"
+        aria-controls="navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse row" id="navbarSupportedContent" [collapse]="isCollapsed">
+        <div class="col-lg">
+            <bs-search-toolbar *ngIf="isSearchToolbarVisible"></bs-search-toolbar>
+        </div>
+        <div class="col-lg-auto d-flex flex-row">
+            <ul *ngIf="isToolbarActionsVisible" class="navbar-nav mr-auto">
+                <!-- actions -->
+            </ul>
+            <bs-cart-summary></bs-cart-summary>
+        </div>
+    </div>
+</nav>
