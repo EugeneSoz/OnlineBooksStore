@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using OnlineBooksStore.Domain.Contracts.Entities;
+using OnlineBooksStore.Domain.Contracts.Models;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
 
 namespace OnlineBooksStore.Domain.Contracts.Repositories
@@ -8,8 +8,9 @@ namespace OnlineBooksStore.Domain.Contracts.Repositories
     {
         IEnumerable<Publisher> Publishers { get; }
         PagedList<Publisher> GetPublishers(QueryOptions options);
-        void AddPublisher(Publisher publisher);
-        void UpdatePublisher(Publisher publisher);
-        void DeletePublisher(Publisher publisher);
+        Publisher GetPublisher(long id);
+        Publisher AddPublisher(Publisher publisher);
+        bool UpdatePublisher(Publisher publisher);
+        bool DeletePublisher(Publisher publisher);
     }
 }

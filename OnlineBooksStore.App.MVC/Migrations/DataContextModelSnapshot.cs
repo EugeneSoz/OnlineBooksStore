@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineBooksStore.Persistence.EF;
+using OnlineBooksStore.Persistence.EF.Mvc;
 
 namespace OnlineBooksStore.App.MVC.Migrations
 {

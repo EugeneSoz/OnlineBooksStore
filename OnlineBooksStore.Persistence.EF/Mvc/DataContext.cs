@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineBooksStore.Domain.Contracts.Entities;
+using OnlineBooksStore.Domain.Contracts.Models;
 
-namespace OnlineBooksStore.Persistence.EF
+namespace OnlineBooksStore.Persistence.EF.Mvc
 {
     public class DataContext : DbContext
     {

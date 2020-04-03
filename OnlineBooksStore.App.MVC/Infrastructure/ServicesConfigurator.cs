@@ -8,6 +8,7 @@ using OnlineBooksStore.App.Handlers.Query;
 using OnlineBooksStore.Domain.Contracts.Repositories;
 using OnlineBooksStore.Persistence.EF;
 using AutoMapper;
+using OnlineBooksStore.Persistence.EF.Mvc;
 
 namespace OnlineBooksStore.App.MVC.Infrastructure
 {

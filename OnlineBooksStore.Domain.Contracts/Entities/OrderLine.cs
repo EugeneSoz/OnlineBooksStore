@@ -1,4 +1,6 @@
-﻿namespace OnlineBooksStore.Domain.Contracts.Entities
+﻿using OnlineBooksStore.Domain.Contracts.Models;
+
+namespace OnlineBooksStore.Domain.Contracts.Entities
 {
     public class OrderLine : EntityBase
     {

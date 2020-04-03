@@ -8,38 +8,31 @@ namespace OnlineBooksStore.App.WebApi.Models.Repo
 {
     //базовый класс хранилища
     //используется для взаимодействия с базой данных с помощью CRUD операций
-    public class BaseRepo<T> : IDisposable, IBaseRepo<T> where T : EntityBase
+    public class BaseRepo<T> : IDisposable, IBaseRepo<T> where T : Domain.Contracts.Models.EntityBase
     {
-        protected readonly StoreDbContext context;
-
-        public BaseRepo(StoreDbContext ctx) => context = ctx;
+        protected BaseRepo(StoreDbContext ctx) => Context = ctx;
 
         //ссылка на контекст бд
-        protected StoreDbContext Context => context;
+        protected StoreDbContext Context { get; }
 
         public void Dispose() => Context?.Dispose();
 
         public IQueryable<T> GetEntities()
         {
-            if (Context.Database.GetAppliedMigrations().Count() > 0)
-            {
-                return Context.Set<T>();
-            }
-
-            return null;
+            return Context.Database.GetAppliedMigrations().Any() ? Context.Set<T>() : null;
         }
 
         //создать запись в бд
-        public async Task<T> AddAsync(T entity)
+        public T Add(T entity)
         {
-            await Context.AddAsync(entity);
-            await Context.SaveChangesAsync();
+            Context.Add(entity);
+            Context.SaveChanges();
 
             return entity;
         }
 
         //обновить запись в бд
-        public async Task<bool> UpdateAsync(T entity)
+        public bool Update(T entity)
         {
             long id = entity.Id;
             bool isExist = EntityExist(id);
@@ -47,15 +40,15 @@ namespace OnlineBooksStore.App.WebApi.Models.Repo
             {
                 return false;
             }
-            Context.Update<T>(entity);
+            Context.Update(entity);
 
-            await Context.SaveChangesAsync();
+            Context.SaveChanges();
 
             return true;
         }
 
         //удалить запись в бд по id
-        public async Task<bool> DeleteAsync(T entity)
+        public bool Delete(T entity)
         {
             long id = entity.Id;
             bool isExist = EntityExist(id);
@@ -65,7 +58,7 @@ namespace OnlineBooksStore.App.WebApi.Models.Repo
             }
             Context.Remove(entity);
 
-            await Context.SaveChangesAsync();
+            Context.SaveChanges();
 
             return true;
         }

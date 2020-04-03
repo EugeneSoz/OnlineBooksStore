@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnlineBooksStore.Persistence.EF;
+using OnlineBooksStore.Persistence.EF.Mvc;
 
 namespace OnlineBooksStore.App.MVC.Controllers
 {

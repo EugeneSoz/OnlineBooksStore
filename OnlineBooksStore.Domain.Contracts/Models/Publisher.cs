@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using OnlineBooksStore.Domain.Contracts.Entities;
 
-namespace OnlineBooksStore.Domain.Contracts.Entities
+namespace OnlineBooksStore.Domain.Contracts.Models
 {
     /// <summary>
     /// Represents a book publisher
@@ -17,7 +16,6 @@ namespace OnlineBooksStore.Domain.Contracts.Entities
         /// The name.
         /// </value>
         public string Name { get; set; }
-        //страна происхождения        
         /// <summary>
         /// Gets or sets the publisher country of origin.
         /// </summary>
@@ -25,5 +23,12 @@ namespace OnlineBooksStore.Domain.Contracts.Entities
         /// The country of origin.
         /// </value>
         public string Country { get; set; }
+        /// <summary>
+        /// Gets or sets the related books.
+        /// </summary>
+        /// <value>
+        /// The related books.
+        /// </value>
+        public List<RelatedBook> Books { get; set; }
     }
 }

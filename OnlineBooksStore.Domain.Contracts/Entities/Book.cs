@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using OnlineBooksStore.Domain.Contracts.Models;
 
 namespace OnlineBooksStore.Domain.Contracts.Entities
 {

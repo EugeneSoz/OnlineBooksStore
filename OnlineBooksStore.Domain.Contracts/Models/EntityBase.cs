@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OnlineBooksStore.Domain.Contracts.Entities
+﻿namespace OnlineBooksStore.Domain.Contracts.Models
 {
     /// <summary>
     /// Base entity class with the identifier

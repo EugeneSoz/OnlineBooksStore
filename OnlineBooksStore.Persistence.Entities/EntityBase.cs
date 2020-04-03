@@ -1,4 +1,6 @@
-﻿namespace OnlineBooksStore.Persistence.Entities
+﻿using System;
+
+namespace OnlineBooksStore.Persistence.Entities
 {
     /// <summary>
     /// Base entity class with the identifier
@@ -11,6 +13,20 @@
         /// <value>
         /// The identifier.
         /// </value>
-        public virtual long Id { get; set; }
+        public long Id { get; set; }
+        /// <summary>
+        /// Gets or sets the created date with time.
+        /// </summary>
+        /// <value>
+        /// The created date with time.
+        /// </value>
+        public DateTime Created { get; set; }
+        /// <summary>
+        /// Gets or sets the updated date with time.
+        /// </summary>
+        /// <value>
+        /// The updated date with time.
+        /// </value>
+        public DateTime Updated { get; set; }  
     }
 }

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
 using OnlineBooksStore.Domain.Contracts.Entities;
 using OnlineBooksStore.Domain.Contracts.Repositories;
 
-namespace OnlineBooksStore.Persistence.EF
+namespace OnlineBooksStore.Persistence.EF.Mvc
 {
     public class OrdersRepository : IOrdersRepository
     {

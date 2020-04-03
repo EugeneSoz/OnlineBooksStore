@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using OnlineBooksStore.App.WebApi.Data.DTO;
 
-namespace OnlineBooksStore.App.WebApi.Models
+namespace OnlineBooksStore.Domain.Contracts.Models.Pages
 {
     public class QueryProcessing<T>
     {

@@ -4,6 +4,7 @@ using AutoMapper;
 using OnlineBooksStore.App.Contracts.Query;
 using OnlineBooksStore.App.Handlers.Interfaces;
 using OnlineBooksStore.Domain.Contracts.Entities;
+using OnlineBooksStore.Domain.Contracts.Models;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
 using OnlineBooksStore.Domain.Contracts.Repositories;
 

@@ -7,8 +7,8 @@ namespace OnlineBooksStore.App.WebApi.Models.Repo
     public interface IBaseRepo<T>
     {
         IQueryable<T> GetEntities();
-        Task<T> AddAsync(T entity);
-        Task<bool> UpdateAsync(T entity);
-        Task<bool> DeleteAsync(T entity);
+        T Add(T entity);
+        bool Update(T entity);
+        bool Delete(T entity);
     }
 }

@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OnlineBooksStore.App.WebApi.Controllers;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using OnlineBooksStore.App.WebApi.Data;
 using OnlineBooksStore.App.WebApi.Data.DTO;
 using OnlineBooksStore.App.WebApi.Infrastructure;
@@ -12,8 +13,10 @@ using OnlineBooksStore.App.WebApi.Models.Repo;
 namespace OnlineBooksStore.App.WebApi.Areas.Admin
 {
     [Authorize(Roles = "Administrator")]
+    [Route("api/[controller]")]
+    [Produces("application/json")]
     [AutoValidateAntiforgeryToken]
-    public class CategoryController : BaseController
+    public class CategoryController : Controller
     {
         private readonly ICategoryRepo _repo;
 
@@ -26,18 +29,11 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
         }
 
         [HttpPost("categories")]
-        public async Task<PagedResponse<CategoryResponse>> GetCategoriesAsync(
-            [FromBody] QueryOptions options)
+        public async Task<PagedResponse<CategoryResponse>> GetCategoriesAsync([FromBody] QueryOptions options)
         {
             PagedList<CategoryResponse> categories = await _repo.GetCategoriesAsync(options);
 
             return categories.MapPagedResponse();
-        }
-
-        [HttpGet("storecategories")]
-        public async Task<List<StoreCategoryResponse>> GetStoreCategoriesAsync()
-        {
-            return await _repo.GetStoreCategoriesAsync();
         }
 
         [HttpGet("parentcategories")]
@@ -65,15 +61,51 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
         [HttpPost("create")]
         public async Task<ActionResult> CreateCategoryAsync([FromBody] CategoryDTO categoryDTO)
         {
-            Category category = categoryDTO.MapCategory();
-            return await CreateAsync(category, _repo.AddAsync);
+            if (!ModelState.IsValid)
+            {
+                return Ok(GetServerErrors(ModelState));
+            }
+
+            Category category;
+            try
+            {
+                category = categoryDTO.MapCategory();
+                await _repo.AddAsync(category);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $@"Невозможно создать запись: {ex.Message}");
+                return BadRequest(GetServerErrors(ModelState));
+            }
+
+            return Created("", category);
         }
 
         [HttpPut("update")]
         public async Task<ActionResult> UpdateCategoryAsync([FromBody] CategoryDTO categoryDTO)
         {
-            Category category = categoryDTO.MapCategory();
-            return await UpdateAsync(category, _repo.UpdateAsync);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(GetServerErrors(ModelState));
+            }
+
+            bool isOk;
+            try
+            {
+                Category category = categoryDTO.MapCategory();
+                isOk = await _repo.UpdateAsync(category);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $@"Невозможно сохранить запись: {ex.Message}");
+                return BadRequest(GetServerErrors(ModelState));
+            }
+
+            if (!isOk)
+            {
+                return NotFound();
+            }
+            return Ok();
         }
 
         [HttpDelete("delete")]
@@ -92,6 +124,41 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
             }
             //удалить любую категорию, у которой нет дочерних
             return await DeleteAsync(category, _repo.DeleteAsync);
+        }
+
+        private async Task<ActionResult> DeleteAsync<T>(T entity, Func<T, Task<bool>> deleteMethod)
+        {
+            bool isOk;
+
+            try
+            {
+                isOk = await deleteMethod?.Invoke(entity);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $@"Невозможно удалить запись: {ex.Message}");
+                return BadRequest(GetServerErrors(ModelState));
+            }
+
+            if (!isOk)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
+
+        private List<string> GetServerErrors(ModelStateDictionary modelstate)
+        {
+            List<string> errors = new List<string>();
+            foreach (ModelStateEntry error in modelstate.Values)
+            {
+                foreach (ModelError e in error.Errors)
+                {
+                    errors.Add(e.ErrorMessage);
+                }
+            }
+
+            return errors;
         }
     }
 }

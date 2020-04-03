@@ -1,11 +1,11 @@
-﻿using OnlineBooksStore.Domain.Contracts.Entities;
-using OnlineBooksStore.Domain.Contracts.Repositories;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using OnlineBooksStore.Domain.Contracts.Entities;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
+using OnlineBooksStore.Domain.Contracts.Repositories;
 
-namespace OnlineBooksStore.Persistence.EF
+namespace OnlineBooksStore.Persistence.EF.Mvc
 {
     public class BooksRepository : IBooksRepository
     {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using OnlineBooksStore.Domain.Contracts.Entities;
 using OnlineBooksStore.Domain.Contracts.Repositories;
 
-namespace OnlineBooksStore.Persistence.EF
+namespace OnlineBooksStore.Persistence.EF.Mvc
 {
     public class WebServiceRepository : IWebServiceRepository
     {
