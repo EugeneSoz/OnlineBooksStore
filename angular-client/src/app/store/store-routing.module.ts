@@ -22,9 +22,9 @@ const routes: Routes = [
             { path: PageLink.summary, component: CheckoutSummaryComponent },
             { path: PageLink.confirmation, component: OrderConfirmationComponent },
             { path: PageLink.cart, component: CartDetailsComponent },
-            { path: "", component: BooksListComponent },
+            { path: "", component: BooksListComponent }
         ]
-    },
+    }
 ];
 
 @NgModule({

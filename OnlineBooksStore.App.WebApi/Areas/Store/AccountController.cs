@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineBooksStore.App.WebApi.Models;
 
-namespace OnlineBooksStore.App.WebApi.Controllers
+namespace OnlineBooksStore.App.WebApi.Areas.Store
 {
+    [Area("Store")]
     [Route("api/[controller]")]
     public class AccountController : Controller
     {

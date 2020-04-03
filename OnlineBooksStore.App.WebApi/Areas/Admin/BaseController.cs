@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace OnlineBooksStore.App.WebApi.Controllers
+namespace OnlineBooksStore.App.WebApi.Areas.Admin
 {
     [Route("api/[controller]")]
     [Produces("application/json")]

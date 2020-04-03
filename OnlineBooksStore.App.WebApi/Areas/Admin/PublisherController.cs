@@ -8,7 +8,7 @@ using OnlineBooksStore.App.WebApi.Infrastructure;
 using OnlineBooksStore.App.WebApi.Models;
 using OnlineBooksStore.App.WebApi.Models.Repo;
 
-namespace OnlineBooksStore.App.WebApi.Controllers
+namespace OnlineBooksStore.App.WebApi.Areas.Admin
 {
     [Authorize(Roles = "Administrator")]
     [ValidateAntiForgeryToken]

@@ -31,10 +31,10 @@ namespace OnlineBooksStore.App.WebApi
             services.AddSwaggerGen(options =>
                 options.SwaggerDoc("v1", new Info { Title = "BooksStore API", Version = "v1" }));
 
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist/ClientApp";
-            });
+            //services.AddSpaStaticFiles(configuration =>
+            //{
+            //    configuration.RootPath = "ClientApp/dist/ClientApp";
+            //});
 
             services.AddTransient<IPublisherRepo, PublisherRepo>();
             services.AddTransient<ICategoryRepo, CategoryRepo>();
@@ -89,7 +89,7 @@ namespace OnlineBooksStore.App.WebApi
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+            //app.UseSpaStaticFiles();
             app.UseSession();
             app.UseAuthentication();
 
@@ -107,7 +107,7 @@ namespace OnlineBooksStore.App.WebApi
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
 
             app.UseSwagger();

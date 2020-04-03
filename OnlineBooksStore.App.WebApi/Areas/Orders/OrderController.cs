@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using OnlineBooksStore.App.WebApi.Data;
 using OnlineBooksStore.App.WebApi.Models;
 
-namespace OnlineBooksStore.App.WebApi.Controllers
+namespace OnlineBooksStore.App.WebApi.Areas.Orders
 {
     [Route("api/orders")]
     [Produces("application/json")]
