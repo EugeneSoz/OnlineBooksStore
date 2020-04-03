@@ -2,13 +2,14 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OnlineBooksStore.App.WebApi.Controllers;
 using OnlineBooksStore.App.WebApi.Data;
 using OnlineBooksStore.App.WebApi.Data.DTO;
 using OnlineBooksStore.App.WebApi.Infrastructure;
 using OnlineBooksStore.App.WebApi.Models;
 using OnlineBooksStore.App.WebApi.Models.Repo;
 
-namespace OnlineBooksStore.App.WebApi.Controllers
+namespace OnlineBooksStore.App.WebApi.Areas.Admin
 {
     [Authorize(Roles = "Administrator")]
     [AutoValidateAntiforgeryToken]
@@ -34,7 +35,6 @@ namespace OnlineBooksStore.App.WebApi.Controllers
         }
 
         [HttpGet("storecategories")]
-        [AllowAnonymous]
         public async Task<List<StoreCategoryResponse>> GetStoreCategoriesAsync()
         {
             return await _repo.GetStoreCategoriesAsync();

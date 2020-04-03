@@ -13,28 +13,28 @@ import { Dropdown } from "../../../domain/model/entities/DTO/dropdown.model";
 @Injectable()
 export class StoreService {
     constructor(
-        private _rest: RestDatasource) {
+        private readonly _rest: RestDatasource) {
 
         this._queryOptions = new QueryOptions();
         this._queryOptions.resetToDefault();
     }
 
-    private _cardsCountInRow: number = 4;
+    private _cardsCountInRow = 4;
     private _queryOptions: QueryOptions = null;
 
     //общее кол-во отображаемых книг на странице
-    displayedBooksCount: number
+    displayedBooksCount: number;
     //кол-во строк отображаемых книг на странице
-    rows: Array<number> = new Array<number>();
-    cols: Array<number> = new Array<number>();
+    rows = new Array<number>();
+    cols = new Array<number>();
 
     //уведомляет об получении новых объектов книг от сервера
-    private _booksChanged: Subject<void> = new Subject<void>();
+    private _booksChanged = new Subject<void>();
     get booksChanged(): Observable<void> {
         return this._booksChanged.asObservable();
     }
 
-    private _receivedFromServerBooksCount: number = 0;
+    private _receivedFromServerBooksCount = 0;
     get cardsCountInRow(): number {
         return this._cardsCountInRow;
     }
@@ -48,8 +48,7 @@ export class StoreService {
     }
 
     getBooks(): Observable<PagedResponse<BookResponse>> {
-        return this._rest.receiveAll<PagedResponse<BookResponse>, QueryOptions>(Url.books,
-            this._queryOptions)
+        return this._rest.receiveAll<PagedResponse<BookResponse>, QueryOptions>(Url.storeBooks, this._queryOptions)
             .pipe(map(response => {
                 this._receivedFromServerBooksCount = response.entities.length;
                 this.setBooksRowsAndCol(this._cardsCountInRow);
@@ -59,7 +58,7 @@ export class StoreService {
     }
 
     getBook(id: number): Observable<BookResponse> {
-        return this._rest.getOne<BookResponse>(`${Url.book}/${id}`);
+        return this._rest.getOne<BookResponse>(`${Url.storeBook}/${id}`);
     }
 
     changeBooksGridSize(cardsCountInRow: number): void {
@@ -109,7 +108,7 @@ export class StoreService {
         {
             this.cols.push(i);
         }
-        let row: number = Math.ceil(this.displayedBooksCount / this.cardsCountInRow);
+        const row = Math.ceil(this.displayedBooksCount / this.cardsCountInRow);
         for (let i = 0; i < row; i++)
         {
             this.rows.push(i);

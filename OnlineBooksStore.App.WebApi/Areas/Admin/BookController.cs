@@ -1,13 +1,14 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OnlineBooksStore.App.WebApi.Controllers;
 using OnlineBooksStore.App.WebApi.Data;
 using OnlineBooksStore.App.WebApi.Data.DTO;
 using OnlineBooksStore.App.WebApi.Infrastructure;
 using OnlineBooksStore.App.WebApi.Models;
 using OnlineBooksStore.App.WebApi.Models.Repo;
 
-namespace OnlineBooksStore.App.WebApi.Controllers
+namespace OnlineBooksStore.App.WebApi.Areas.Admin
 {
     [Authorize(Roles = "Administrator")]
     [AutoValidateAntiforgeryToken]
@@ -18,14 +19,12 @@ namespace OnlineBooksStore.App.WebApi.Controllers
         public BookController(IBookRepo repo) => _repo = repo;
 
         [HttpGet("book/{id}")]
-        [AllowAnonymous]
         public async Task<BookResponse> GetBookAsync(long id)
         {
             return await _repo.GetBookAsync(id);
         }
 
         [HttpPost("books")]
-        [AllowAnonymous]
         public async Task<PagedResponse<BookResponse>> GetBooksAsync([FromBody] QueryOptions options)
         {
             PagedList<BookResponse> books = await _repo.GetBooksAsync(options);

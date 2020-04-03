@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using OnlineBooksStore.App.WebApi.Data.DTO;
 
-namespace OnlineBooksStore.App.WebApi.Controllers
+namespace OnlineBooksStore.App.WebApi.Areas.Orders
 {
     [Route("api/session")]
     [AutoValidateAntiforgeryToken]

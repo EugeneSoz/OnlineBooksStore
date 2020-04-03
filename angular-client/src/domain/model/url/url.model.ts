@@ -7,8 +7,12 @@ export class Url {
     static options_clear = `${Url.baseoptionsUrl}/clear`;
     static options_context = `${Url.baseoptionsUrl}/context`;
 
+    private static baseStoreUrl = `/api/store`;
+    static storeBooks = `${Url.baseStoreUrl}/books`;
+    static storeBook = `${Url.baseStoreUrl}/book`;
+    static storeCategories = `${Url.baseStoreUrl}/categories`;
+
     private static baseCategoryUrl = `/api/category`;
-    static storeCategories = `${Url.baseCategoryUrl}/storecategories`;
     static categories = `${Url.baseCategoryUrl}/categories`;
     static parentCategories = `${Url.baseCategoryUrl}/parentcategories`;
     static category = `${Url.baseCategoryUrl}/category`;

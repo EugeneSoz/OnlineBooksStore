@@ -8,7 +8,7 @@ using OnlineBooksStore.App.WebApi.Models;
 using OnlineBooksStore.App.WebApi.Models.Database;
 using OnlineBooksStore.App.WebApi.Models.Repo;
 
-namespace OnlineBooksStore.App.WebApi.Controllers
+namespace OnlineBooksStore.App.WebApi.Areas.Admin
 {
     [Route("api/options")]
     [ApiController]
