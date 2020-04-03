@@ -1,4 +1,4 @@
-import { BookDTO } from './bookDTO.model';
+import { BookDTO } from "./bookDTO.model";
 
 export class BookResponse extends BookDTO {
     constructor(

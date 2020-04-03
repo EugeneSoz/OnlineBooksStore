@@ -1,9 +1,9 @@
 import { Component, Input } from "@angular/core";
-import { AuthenticationService } from '../../../authentication/shared/authentication.service';
+import { AuthenticationService } from "../../../authentication/shared/authentication.service";
 
 @Component({
-    selector: 'bs-admin-toolbar',
-    templateUrl: './admin-toolbar.component.html',
+    selector: "bs-admin-toolbar",
+    templateUrl: "./admin-toolbar.component.html",
 })
 export class AdminToolbarComponent {
     constructor(

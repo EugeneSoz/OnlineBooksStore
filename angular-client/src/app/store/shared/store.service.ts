@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
-import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subject } from "rxjs";
+import { map } from "rxjs/operators";
 
-import { QueryOptions } from '../../models/domain/DTO/query-options.model';
-import { BookResponse } from '../../models/domain/DTO/book-response.model';
-import { Url } from '../../models/url.model';
-import { PagedResponse } from '../../models/paged-response.model';
-import { RestDatasource } from '../../core/rest-datasource.service';
-import { StoreCategoryResponse } from '../../models/domain/DTO/store-category-response.model';
-import { Dropdown } from '../../models/domain/DTO/dropdown.model';
+import { QueryOptions } from "../../models/domain/DTO/query-options.model";
+import { BookResponse } from "../../models/domain/DTO/book-response.model";
+import { Url } from "../../models/url.model";
+import { PagedResponse } from "../../models/paged-response.model";
+import { RestDatasource } from "../../core/rest-datasource.service";
+import { StoreCategoryResponse } from "../../models/domain/DTO/store-category-response.model";
+import { Dropdown } from "../../models/domain/DTO/dropdown.model";
 
 @Injectable()
 export class StoreService {

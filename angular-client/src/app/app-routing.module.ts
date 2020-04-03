@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
 
-import { PageLink } from './models/enums/page-link.enum';
-import { AuthenticationComponent } from './authentication/authentication.component';
+import { PageLink } from "./models/enums/page-link.enum";
+import { AuthenticationComponent } from "./authentication/authentication.component";
 
 const routes: Routes = [
     { path: PageLink.login, component: AuthenticationComponent },
@@ -11,12 +11,12 @@ const routes: Routes = [
     },
     {
         path: PageLink.store,
-        loadChildren: () => import('./store/store.module').then(m => m.StoreModule)
+        loadChildren: () => import("./store/store.module").then(m => m.StoreModule)
     },
     {
         path: PageLink.admin,
-        loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
-    },
+        loadChildren: () => import("./admin/admin.module").then(m => m.AdminModule)
+    }
 ];
 
 @NgModule({

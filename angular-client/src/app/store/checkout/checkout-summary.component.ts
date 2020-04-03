@@ -1,14 +1,14 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
 
-import { Order } from '../../models/domain/order.model';
-import { CartService } from '../shared/cart.service';
-import { PageLink } from '../../models/enums/page-link.enum';
-import { createPageLink } from '../../core/helper-functions';
-import { OrderService } from '../shared/order.service';
+import { Order } from "../../models/domain/order.model";
+import { CartService } from "../shared/cart.service";
+import { PageLink } from "../../models/enums/page-link.enum";
+import { createPageLink } from "../../core/helper-functions";
+import { OrderService } from "../shared/order.service";
 
 @Component({
-    templateUrl: './checkout-summary.component.html',
+    templateUrl: "./checkout-summary.component.html",
 })
 export class CheckoutSummaryComponent implements OnInit {
     constructor(

@@ -1,15 +1,15 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
 
-import { BaseFormComponent } from '../../models/components/base-form.model';
-import { CheckoutFormGroup } from '../../models/forms/checkout-form.model';
-import { Order } from '../../models/domain/order.model';
-import { nameof, createPageLink } from '../../core/helper-functions';
-import { OrderService } from '../shared/order.service';
-import { PageLink } from '../../models/enums/page-link.enum';
+import { BaseFormComponent } from "../../models/components/base-form.model";
+import { CheckoutFormGroup } from "../../models/forms/checkout-form.model";
+import { Order } from "../../models/domain/order.model";
+import { nameof, createPageLink } from "../../core/helper-functions";
+import { OrderService } from "../shared/order.service";
+import { PageLink } from "../../models/enums/page-link.enum";
 
 @Component({
-    templateUrl: './checkout-details.component.html',
+    templateUrl: "./checkout-details.component.html",
 })
 export class CheckoutDetailsComponent extends BaseFormComponent<CheckoutFormGroup> implements OnInit {
     constructor(

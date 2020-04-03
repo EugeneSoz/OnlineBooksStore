@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-    selector: 'bs-store-toolbar',
-    templateUrl: './store-toolbar.component.html',
+    selector: "bs-store-toolbar",
+    templateUrl: "./store-toolbar.component.html",
 })
 export class StoreToolbarComponent {
     @Input() isToolbarActionsVisible: boolean = true;

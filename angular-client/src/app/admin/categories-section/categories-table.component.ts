@@ -1,20 +1,20 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Subscription } from "rxjs";
 
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { BaseTableComponent } from '../../models/components/base-table.model';
-import { Category } from '../../models/domain/category.model';
-import { CategoryResponse } from '../../models/domain/DTO/category-response.model';
-import { CategoryDTO } from '../../models/domain/DTO/categoryDTO.model';
-import { CategoryService } from '../shared/category.service';
-import { EntityType } from '../../models/enums/entity-type.enum';
-import { PageLink } from '../../models/enums/page-link.enum';
-import { EntityExtensions } from '../../models/entity-extensions.model';
-import { DeleteMessageComponent } from '../shared/delete-message/delete-message.component';
-import { createPageLink } from '../../core/helper-functions';
+import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
+import { BaseTableComponent } from "../../models/components/base-table.model";
+import { Category } from "../../models/domain/category.model";
+import { CategoryResponse } from "../../models/domain/DTO/category-response.model";
+import { CategoryDTO } from "../../models/domain/DTO/categoryDTO.model";
+import { CategoryService } from "../shared/category.service";
+import { EntityType } from "../../models/enums/entity-type.enum";
+import { PageLink } from "../../models/enums/page-link.enum";
+import { EntityExtensions } from "../../models/entity-extensions.model";
+import { DeleteMessageComponent } from "../shared/delete-message/delete-message.component";
+import { createPageLink } from "../../core/helper-functions";
 
 @Component({
-    templateUrl: './categories-table.component.html',
+    templateUrl: "./categories-table.component.html",
 })
 export class CategoriesTableComponent extends BaseTableComponent<Category, CategoryResponse, CategoryDTO>
     implements OnInit, OnDestroy {
@@ -44,7 +44,7 @@ export class CategoriesTableComponent extends BaseTableComponent<Category, Categ
         this._subscriptions.push(
             this.modalService.onHide.subscribe(() => {
                 if (this.modalRef != null &&
-                    (this.modalRef.content as DeleteMessageComponent).result == "delete") {
+                    (this.modalRef.content as DeleteMessageComponent).result === "delete") {
                     this._service.deleteEntity(this.categoryDTO);
                 }
                 this.unsubscribe();

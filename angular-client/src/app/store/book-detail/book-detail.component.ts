@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 
-import { StoreService } from '../shared/store.service';
-import { BookResponse } from '../../models/domain/DTO/book-response.model';
-import { CartService } from '../shared/cart.service';
-import { PageLink } from '../../models/enums/page-link.enum';
+import { StoreService } from "../shared/store.service";
+import { BookResponse } from "../../models/domain/DTO/book-response.model";
+import { CartService } from "../shared/cart.service";
+import { PageLink } from "../../models/enums/page-link.enum";
 
 @Component({
-    templateUrl: './book-detail.component.html',
+    templateUrl: "./book-detail.component.html",
 })
 export class BookDetailComponent implements OnInit {
     constructor(

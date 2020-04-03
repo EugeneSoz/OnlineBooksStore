@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 
-import { Order } from '../../models/domain/order.model';
-import { OrderService } from '../../store/shared/order.service';
-import { CartService } from '../../store/shared/cart.service';
+import { Order } from "../../models/domain/order.model";
+import { OrderService } from "../../store/shared/order.service";
+import { CartService } from "../../store/shared/cart.service";
 
 @Component({
-    templateUrl: './orders-section.component.html',
+    templateUrl: "./orders-section.component.html",
     providers: [
         OrderService,
         CartService

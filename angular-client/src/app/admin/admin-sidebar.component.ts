@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
-import { AdminSidebarSection } from '../models/components/admin-sidebar-section.model';
-import { PageLink } from '../models/enums/page-link.enum';
-import { createPageLink } from '../core/helper-functions';
+import { AdminSidebarSection } from "../models/components/admin-sidebar-section.model";
+import { PageLink } from "../models/enums/page-link.enum";
+import { createPageLink } from "../core/helper-functions";
 
 @Component({
-    selector: 'bs-admin-sidebar',
-    templateUrl: './admin-sidebar.component.html',
+    selector: "bs-admin-sidebar",
+    templateUrl: "./admin-sidebar.component.html",
 })
 export class AdminSidebarComponent implements OnInit {
     sections: Array<AdminSidebarSection>;

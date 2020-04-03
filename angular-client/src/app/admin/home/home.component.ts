@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 
-import { DataOptionsService } from '../shared/data-options.service';
-import { MigrationsOptions } from '../../models/domain/DTO/migrations-options.model';
+import { DataOptionsService } from "../shared/data-options.service";
+import { MigrationsOptions } from "../../models/domain/DTO/migrations-options.model";
 
 @Component({
-    templateUrl: './home.component.html',
+    templateUrl: "./home.component.html",
     providers: [DataOptionsService]
 })
 export class HomeComponent implements OnInit {

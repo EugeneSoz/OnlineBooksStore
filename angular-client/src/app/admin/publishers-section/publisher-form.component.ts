@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 
-import { BaseAdminFormComponent } from '../../models/components/base-admin-form.model';
-import { PublisherFormGroup } from '../../models/forms/publisher-form.model';
-import { PublisherService } from '../shared/publisher.service';
-import { PageLink } from '../../models/enums/page-link.enum';
-import { PublisherDTO } from '../../models/domain/DTO/publisherDTO.model';
-import { Book } from '../../models/domain/book.model';
-import { createPageLink } from '../../core/helper-functions';
+import { BaseAdminFormComponent } from "../../models/components/base-admin-form.model";
+import { PublisherFormGroup } from "../../models/forms/publisher-form.model";
+import { PublisherService } from "../shared/publisher.service";
+import { PageLink } from "../../models/enums/page-link.enum";
+import { PublisherDTO } from "../../models/domain/DTO/publisherDTO.model";
+import { Book } from "../../models/domain/book.model";
+import { createPageLink } from "../../core/helper-functions";
 
 @Component({
-    templateUrl: './publisher-form.component.html',
+    templateUrl: "./publisher-form.component.html",
 })
 export class PublisherFormComponent extends BaseAdminFormComponent<PublisherFormGroup> implements OnInit {
     constructor(

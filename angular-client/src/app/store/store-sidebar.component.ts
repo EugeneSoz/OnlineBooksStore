@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
 
-import { StoreService } from './shared/store.service';
-import { PageLink } from '../models/enums/page-link.enum';
-import { nameof } from '../core/helper-functions';
-import { BookResponse } from '../models/domain/DTO/book-response.model';
-import { StoreCategoryResponse } from '../models/domain/DTO/store-category-response.model';
+import { StoreService } from "./shared/store.service";
+import { PageLink } from "../models/enums/page-link.enum";
+import { nameof } from "../core/helper-functions";
+import { BookResponse } from "../models/domain/DTO/book-response.model";
+import { StoreCategoryResponse } from "../models/domain/DTO/store-category-response.model";
 
 @Component({
-    selector: 'bs-store-sidebar',
-    templateUrl: './store-sidebar.component.html',
+    selector: "bs-store-sidebar",
+    templateUrl: "./store-sidebar.component.html",
 })
 export class StoreSidebarComponent implements OnInit {
 

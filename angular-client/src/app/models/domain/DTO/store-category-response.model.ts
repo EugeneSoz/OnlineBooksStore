@@ -1,4 +1,4 @@
-import { CategoryDTO } from './categoryDTO.model';
+import { CategoryDTO } from "./categoryDTO.model";
 
 export class StoreCategoryResponse extends CategoryDTO {
     constructor(

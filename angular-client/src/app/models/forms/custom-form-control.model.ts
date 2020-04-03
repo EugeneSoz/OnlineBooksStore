@@ -1,7 +1,7 @@
 import { FormControl, ValidatorFn, FormGroup } from "@angular/forms";
 
-import { EntityType } from '../enums/entity-type.enum';
-import { ModelErrors } from '../validation/model-errors.model';
+import { EntityType } from "../enums/entity-type.enum";
+import { ModelErrors } from "../validation/model-errors.model";
 
 export class CustomFormControl extends FormControl {
     constructor(value: string | number | boolean, validator: ValidatorFn | ValidatorFn[],

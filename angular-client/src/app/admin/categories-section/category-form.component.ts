@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 
-import { BaseAdminFormComponent } from '../../models/components/base-admin-form.model';
-import { CategoryFormGroup } from '../../models/forms/category-form.model';
-import { CategoryService } from '../shared/category.service';
-import { PageLink } from '../../models/enums/page-link.enum';
-import { CategoryDTO } from '../../models/domain/DTO/categoryDTO.model';
-import { Book } from '../../models/domain/book.model';
-import { Category } from '../../models/domain/category.model';
-import { createPageLink } from '../../core/helper-functions';
+import { BaseAdminFormComponent } from "../../models/components/base-admin-form.model";
+import { CategoryFormGroup } from "../../models/forms/category-form.model";
+import { CategoryService } from "../shared/category.service";
+import { PageLink } from "../../models/enums/page-link.enum";
+import { CategoryDTO } from "../../models/domain/DTO/categoryDTO.model";
+import { Book } from "../../models/domain/book.model";
+import { Category } from "../../models/domain/category.model";
+import { createPageLink } from "../../core/helper-functions";
 
 @Component({
-    templateUrl: './category-form.component.html',
+    templateUrl: "./category-form.component.html",
 })
 export class CategoryFormComponent extends BaseAdminFormComponent<CategoryFormGroup> implements OnInit {
     constructor(

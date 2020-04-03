@@ -1,11 +1,11 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from "@angular/core";
 
-import { FilterSortingProps } from '../../../models/domain/DTO/filter-sorting-props.model';
-import { QueryOptions } from '../../../models/domain/DTO/query-options.model';
+import { FilterSortingProps } from "../../../models/domain/DTO/filter-sorting-props.model";
+import { QueryOptions } from "../../../models/domain/DTO/query-options.model";
 
 @Component({
-    selector: 'bs-table-head',
-    templateUrl: './table-head.component.html',
+    selector: "bs-table-head",
+    templateUrl: "./table-head.component.html",
 })
 export class TableHeadComponent implements OnChanges {
     @Input() property: FilterSortingProps = null;

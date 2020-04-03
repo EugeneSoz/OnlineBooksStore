@@ -1,5 +1,5 @@
-import { FormGroup } from '@angular/forms';
-import { CustomFormControl } from '../../models/forms/custom-form-control.model';
+import { FormGroup } from "@angular/forms";
+import { CustomFormControl } from "../../models/forms/custom-form-control.model";
 
 export abstract class BaseFormComponent<TFormGroup extends FormGroup> {
 

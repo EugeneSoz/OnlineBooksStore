@@ -1,11 +1,11 @@
 import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from "@angular/core";
 
-import { FilterSortingProps } from '../../../models/domain/DTO/filter-sorting-props.model';
-import { QueryOptions } from '../../../models/domain/DTO/query-options.model';
+import { FilterSortingProps } from "../../../models/domain/DTO/filter-sorting-props.model";
+import { QueryOptions } from "../../../models/domain/DTO/query-options.model";
 
 @Component({
-    selector: 'bs-admin-filter',
-    templateUrl: './admin-filter.component.html',
+    selector: "bs-admin-filter",
+    templateUrl: "./admin-filter.component.html",
 })
 export class AdminFilterComponent implements OnChanges {
     @Input() properties: Array<FilterSortingProps> = null;

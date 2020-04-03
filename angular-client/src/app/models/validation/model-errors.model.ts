@@ -1,11 +1,11 @@
-import { EntityType } from '../enums/entity-type.enum';
-import { Publisher } from '../domain/publisher.model';
-import { ErrorAttributes } from '../enums/error-attributes.enum';
-import { Category } from '../domain/category.model';
-import { Book } from '../domain/book.model';
-import { Order } from '../domain/order.model';
-import { nameof } from '../../core/helper-functions';
-import { Payment } from '../payment.model';
+import { EntityType } from "../enums/entity-type.enum";
+import { Publisher } from "../domain/publisher.model";
+import { ErrorAttributes } from "../enums/error-attributes.enum";
+import { Category } from "../domain/category.model";
+import { Book } from "../domain/book.model";
+import { Order } from "../domain/order.model";
+import { nameof } from "../../core/helper-functions";
+import { Payment } from "../payment.model";
 
 export class ModelErrors {
 
@@ -26,28 +26,28 @@ export class ModelErrors {
     private getPublishersValidationErrors(property: string, errorAttribute: string): string {
         let msg: string = null;
 
-        if (property == nameof<Publisher>("name")
-            && errorAttribute == ErrorAttributes.required) {
+        if (property === nameof<Publisher>("name")
+            && errorAttribute === ErrorAttributes.required) {
             msg = "Укажите название издательства";
         }
-        else if (property == nameof<Publisher>("name")
-            && errorAttribute == ErrorAttributes.pattern) {
+        else if (property === nameof<Publisher>("name")
+            && errorAttribute === ErrorAttributes.pattern) {
             msg = "Неверный формат ввода издательства";
         }
-        else if (property == nameof<Publisher>("name")
-            && errorAttribute == ErrorAttributes.range) {
+        else if (property === nameof<Publisher>("name")
+            && errorAttribute === ErrorAttributes.range) {
             msg = "Название должно быть не меньше 2 и не больше 100 символов";
         }
-        else if (property == nameof<Publisher>("country")
-            && errorAttribute == ErrorAttributes.required) {
+        else if (property === nameof<Publisher>("country")
+            && errorAttribute === ErrorAttributes.required) {
             msg = "Укажите название страны нахождения издательства";
         }
-        else if (property == nameof<Publisher>("country")
-            && errorAttribute == ErrorAttributes.pattern) {
+        else if (property === nameof<Publisher>("country")
+            && errorAttribute === ErrorAttributes.pattern) {
             msg = "Неверный формат ввода страны нахождения издательства";
         }
-        else if (property == nameof<Publisher>("country")
-            && errorAttribute == ErrorAttributes.range) {
+        else if (property === nameof<Publisher>("country")
+            && errorAttribute === ErrorAttributes.range) {
             msg = "Название должно быть не меньше 2 и не больше 100 символов";
         }
 
@@ -57,12 +57,12 @@ export class ModelErrors {
     private getCategoriesValidationErrors(property: string, errorAttribute: string): string {
         let msg: string = null;
 
-        if (property == nameof<Category>("name")
-            && errorAttribute == ErrorAttributes.required) {
+        if (property === nameof<Category>("name")
+            && errorAttribute === ErrorAttributes.required) {
             msg = "Укажите название категории/подкатегории";
         }
-        else if (property == nameof<Category>("name")
-            && errorAttribute == ErrorAttributes.pattern) {
+        else if (property === nameof<Category>("name")
+            && errorAttribute === ErrorAttributes.pattern) {
             msg = "Неверный формат ввода категории/подкатегории";
         }
         else if (property == nameof<Category>("name")

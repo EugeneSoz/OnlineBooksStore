@@ -25,6 +25,27 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksStoreSPA", "BooksStore
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineBooksStore.App.WebApi", "OnlineBooksStore.App.WebApi\OnlineBooksStore.App.WebApi.csproj", "{22BB9F44-62A2-4F25-BA83-A7B56051AF3E}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "angular-client", "angular-client\", "{65A280E7-F89A-4BE7-B6BE-54FE55D7AEB1}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_53798"
+		Debug.AspNetCompiler.PhysicalPath = "angular-client\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53798\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_53798"
+		Release.AspNetCompiler.PhysicalPath = "angular-client\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53798\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "53798"
+		SlnRelativePath = "angular-client\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +84,10 @@ Global
 		{22BB9F44-62A2-4F25-BA83-A7B56051AF3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22BB9F44-62A2-4F25-BA83-A7B56051AF3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22BB9F44-62A2-4F25-BA83-A7B56051AF3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65A280E7-F89A-4BE7-B6BE-54FE55D7AEB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65A280E7-F89A-4BE7-B6BE-54FE55D7AEB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65A280E7-F89A-4BE7-B6BE-54FE55D7AEB1}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{65A280E7-F89A-4BE7-B6BE-54FE55D7AEB1}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +100,7 @@ Global
 		{3E3596D1-E12D-4DD7-A5F9-815BA08E613B} = {D10105BB-7CB0-489D-9FA3-FA8457CAFB81}
 		{D7545C0F-CDE8-4AD7-BE3E-EABA9061F14B} = {D10105BB-7CB0-489D-9FA3-FA8457CAFB81}
 		{22BB9F44-62A2-4F25-BA83-A7B56051AF3E} = {D10105BB-7CB0-489D-9FA3-FA8457CAFB81}
+		{65A280E7-F89A-4BE7-B6BE-54FE55D7AEB1} = {D10105BB-7CB0-489D-9FA3-FA8457CAFB81}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D41D3A1B-D237-46BA-85B0-86E3A689D936}

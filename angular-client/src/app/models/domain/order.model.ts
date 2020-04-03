@@ -1,5 +1,5 @@
-import { Payment } from '../payment.model';
-import { OrderLine } from '../order-line.model';
+import { Payment } from "../payment.model";
+import { OrderLine } from "../order-line.model";
 
 export class Order {
     constructor(

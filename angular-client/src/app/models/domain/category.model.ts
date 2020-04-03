@@ -1,5 +1,5 @@
-import { CategoryDTO } from './DTO/categoryDTO.model';
-import { Book } from './book.model';
+import { CategoryDTO } from "./DTO/categoryDTO.model";
+import { Book } from "./book.model";
 
 export class Category extends CategoryDTO {
     constructor(

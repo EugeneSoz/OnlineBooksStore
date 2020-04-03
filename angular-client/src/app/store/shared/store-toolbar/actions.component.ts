@@ -1,24 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
-import { StoreService } from '../../shared/store.service';
-import { BooksGridType } from '../../../models/enums/book-grid-type.enum';
-import { QueryOptions } from '../../../models/domain/DTO/query-options.model';
-import { ListItem } from '../../../models/domain/DTO/dropdown.model';
+import { StoreService } from "../../shared/store.service";
+import { BooksGridType } from "../../../models/enums/book-grid-type.enum";
+import { QueryOptions } from "../../../models/domain/DTO/query-options.model";
+import { ListItem } from "../../../models/domain/DTO/dropdown.model";
+
 
 @Component({
-    selector: '.navbar-nav .mr-auto',
-    templateUrl: './actions.component.html',
+    selector: ".navbar-nav .mr-auto",
+    templateUrl: "./actions.component.html",
 })
 export class ActionsComponent implements OnInit {
 
     constructor(
-        private _storeService: StoreService) { }
+        private readonly _storeService: StoreService) { }
 
     gridSizeProperties: Array<ListItem>;
     sortingProperties: Array<ListItem>;
-    gridSizeName: string = BooksGridType.ThreeByFour;
+    gridSizeName: string = BooksGridType.threeByFour;
 
-    private _sortPropertyName: string = "";
+    private _sortPropertyName = "";
 
     private _descendingOrder: boolean = false;
 
@@ -53,10 +54,10 @@ export class ActionsComponent implements OnInit {
     {
         let cardsCountInRow: number = 0;
         switch (listItem.propertyName) {
-            case BooksGridType.SixByTwo:
+            case BooksGridType.sixByTwo:
                 cardsCountInRow = 2;
                 break;
-            case BooksGridType.FourByThree:
+            case BooksGridType.fourByThree:
                 cardsCountInRow = 3;
                 break;
             default:

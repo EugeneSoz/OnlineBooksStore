@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { CartService } from '../../shared/cart.service';
-import { createPageLink } from '../../../core/helper-functions';
-import { PageLink } from '../../../models/enums/page-link.enum';
+import { Component } from "@angular/core";
+import { CartService } from "../../shared/cart.service";
+import { createPageLink } from "../../../core/helper-functions";
+import { PageLink } from "../../../models/enums/page-link.enum";
 
 @Component({
-    selector: 'bs-cart-summary',
-    templateUrl: './cart-summary.component.html',
+    selector: "bs-cart-summary",
+    templateUrl: "./cart-summary.component.html",
 })
 export class CartSummaryComponent {
     constructor(

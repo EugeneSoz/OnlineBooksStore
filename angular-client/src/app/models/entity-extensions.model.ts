@@ -1,9 +1,9 @@
-import { Publisher } from './domain/publisher.model';
-import { PublisherDTO } from './domain/DTO/publisherDTO.model';
-import { Category } from './domain/category.model';
-import { CategoryDTO } from './domain/DTO/categoryDTO.model';
-import { BookResponse } from './domain/DTO/book-response.model';
-import { BookDTO } from './domain/DTO/bookDTO.model';
+import { Publisher } from "./domain/publisher.model";
+import { PublisherDTO } from "./domain/DTO/publisherDTO.model";
+import { Category } from "./domain/category.model";
+import { CategoryDTO } from "./domain/DTO/categoryDTO.model";
+import { BookResponse } from "./domain/DTO/book-response.model";
+import { BookDTO } from "./domain/DTO/bookDTO.model";
 
 export class EntityExtensions {
     mapPublisherDTO(publisher: Publisher): PublisherDTO {

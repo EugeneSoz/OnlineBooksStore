@@ -1,19 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Subscription } from "rxjs";
 
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { BaseTableComponent } from '../../models/components/base-table.model';
-import { Publisher } from '../../models/domain/publisher.model';
-import { PublisherDTO } from '../../models/domain/DTO/publisherDTO.model';
-import { PublisherService } from '../shared/publisher.service';
-import { EntityType } from '../../models/enums/entity-type.enum';
-import { PageLink } from '../../models/enums/page-link.enum';
-import { EntityExtensions } from '../../models/entity-extensions.model';
-import { DeleteMessageComponent } from '../shared/delete-message/delete-message.component';
-import { createPageLink } from '../../core/helper-functions';
+import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
+import { BaseTableComponent } from "../../models/components/base-table.model";
+import { Publisher } from "../../models/domain/publisher.model";
+import { PublisherDTO } from "../../models/domain/DTO/publisherDTO.model";
+import { PublisherService } from "../shared/publisher.service";
+import { EntityType } from "../../models/enums/entity-type.enum";
+import { PageLink } from "../../models/enums/page-link.enum";
+import { EntityExtensions } from "../../models/entity-extensions.model";
+import { DeleteMessageComponent } from "../shared/delete-message/delete-message.component";
+import { createPageLink } from "../../core/helper-functions";
 
 @Component({
-    templateUrl: './publishers-table.component.html',
+    templateUrl: "./publishers-table.component.html",
 })
 export class PublishersTableComponent extends BaseTableComponent<Publisher, Publisher, PublisherDTO>
     implements OnInit, OnDestroy {

@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Subscription } from "rxjs";
 
-import { StoreService } from '../shared/store.service';
-import { BookResponse } from '../../models/domain/DTO/book-response.model';
-import { Pagination } from '../../models/pagination.model';
-import { PagedResponse } from '../../models/paged-response.model';
+import { StoreService } from "../shared/store.service";
+import { BookResponse } from "../../models/domain/DTO/book-response.model";
+import { Pagination } from "../../models/pagination.model";
+import { PagedResponse } from "../../models/paged-response.model";
 
 @Component({
-    selector: '[id=store-main-content]',
-    templateUrl: './books-grid.component.html',
+    selector: "[id=store-main-content]",
+    templateUrl: "./books-grid.component.html",
 })
 export class BooksGridComponent implements OnInit, OnDestroy
 {

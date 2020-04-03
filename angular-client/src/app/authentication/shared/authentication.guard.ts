@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Injectable } from "@angular/core";
+import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 
-import { AuthenticationService } from './authentication.service';
-import { PageLink } from '../../models/enums/page-link.enum';
+import { AuthenticationService } from "./authentication.service";
+import { PageLink } from "../../models/enums/page-link.enum";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationGuard {

@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
 
-import { AuthenticationService } from './shared/authentication.service';
+import { AuthenticationService } from "./shared/authentication.service";
 
 @Component({
-    templateUrl: './authentication.component.html',
+    templateUrl: "./authentication.component.html",
 })
 export class AuthenticationComponent {
     constructor(

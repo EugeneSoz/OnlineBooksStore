@@ -1,12 +1,12 @@
-import { Validators } from '@angular/forms';
+import { Validators } from "@angular/forms";
 
-import { CustomFormGroup, CustomFormControl } from './custom-form-control.model';
-import { ModelErrors } from '../validation/model-errors.model';
-import { BookDTO } from '../domain/DTO/bookDTO.model';
-import { EntityType } from '../enums/entity-type.enum';
-import { RangeValidator } from '../validation/range.formvalidator';
-import { NotNullMinValidator } from '../validation/notNullMin.formvalidator';
-import { nameof } from '../../core/helper-functions';
+import { CustomFormGroup, CustomFormControl } from "./custom-form-control.model";
+import { ModelErrors } from "../validation/model-errors.model";
+import { BookDTO } from "../domain/DTO/bookDTO.model";
+import { EntityType } from "../enums/entity-type.enum";
+import { RangeValidator } from "../validation/range.formvalidator";
+import { NotNullMinValidator } from "../validation/notNullMin.formvalidator";
+import { nameof } from "../../core/helper-functions";
 
 export class BookFormGroup extends CustomFormGroup {
     constructor(

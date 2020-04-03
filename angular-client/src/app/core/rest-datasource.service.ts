@@ -3,12 +3,12 @@ import { Observable, throwError } from "rxjs";
 import { map, catchError } from "rxjs/operators";
 
 import { HttpClient, HttpResponse, HttpErrorResponse } from "@angular/common/http";
-import { HttpMethod } from '../models/http-method.model';
-import { HttpStatusCode } from '../models/enums/http-status-code.enum';
-import { Login } from '../models/login.model';
+import { HttpMethod } from "../models/http-method.model";
+import { HttpStatusCode } from "../models/enums/http-status-code.enum";
+import { Login } from "../models/login.model";
 
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class RestDatasource {
     constructor(
         private _http: HttpClient) { }
@@ -122,7 +122,7 @@ export class RestDatasource {
     private handleError(error: HttpErrorResponse) {
         if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.
-            console.error('Произошла ошибка:', error.error.message);
+            console.error("Произошла ошибка:", error.error.message);
         }
         else {
             this._errors = <string[]>error.error

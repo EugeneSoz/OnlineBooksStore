@@ -1,22 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Observable, Subject } from "rxjs";
+import { debounceTime, distinctUntilChanged, switchMap } from "rxjs/operators";
 
-import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
-import { AbstractControl } from '@angular/forms';
-import { BaseAdminFormComponent } from '../../models/components/base-admin-form.model';
-import { BookFormGroup } from '../../models/forms/book-form.model';
-import { BookService } from '../shared/book.service';
-import { PageLink } from '../../models/enums/page-link.enum';
-import { BookDTO } from '../../models/domain/DTO/bookDTO.model';
-import { Publisher } from '../../models/domain/publisher.model';
-import { CategoryResponse } from '../../models/domain/DTO/category-response.model';
-import { BookResponse } from '../../models/domain/DTO/book-response.model';
-import { nameof, createPageLink } from '../../core/helper-functions';
+import { TypeaheadMatch } from "ngx-bootstrap/typeahead";
+import { AbstractControl } from "@angular/forms";
+import { BaseAdminFormComponent } from "../../models/components/base-admin-form.model";
+import { BookFormGroup } from "../../models/forms/book-form.model";
+import { BookService } from "../shared/book.service";
+import { PageLink } from "../../models/enums/page-link.enum";
+import { BookDTO } from "../../models/domain/DTO/bookDTO.model";
+import { Publisher } from "../../models/domain/publisher.model";
+import { CategoryResponse } from "../../models/domain/DTO/category-response.model";
+import { BookResponse } from "../../models/domain/DTO/book-response.model";
+import { nameof, createPageLink } from "../../core/helper-functions";
 
 @Component({
-    templateUrl: './book-form.component.html',
+    templateUrl: "./book-form.component.html",
 })
 export class BookFormComponent extends BaseAdminFormComponent<BookFormGroup> implements OnInit {
     constructor(

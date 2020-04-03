@@ -1,10 +1,10 @@
 import { Component } from "@angular/core";
 
-import { BsModalRef } from 'ngx-bootstrap/modal';
-import { EntityType } from '../../../models/enums/entity-type.enum';
+import { BsModalRef } from "ngx-bootstrap/modal";
+import { EntityType } from "../../../models/enums/entity-type.enum";
 
 @Component({
-    templateUrl: './delete-message.component.html',
+    templateUrl: "./delete-message.component.html",
 })
 export class DeleteMessageComponent {
     constructor(

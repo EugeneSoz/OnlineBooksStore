@@ -1,13 +1,13 @@
-import { Router } from '@angular/router';
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
-import { HttpResponse } from '@angular/common/http';
+import { Router } from "@angular/router";
+import { Injectable } from "@angular/core";
+import { Observable, of } from "rxjs";
+import { map, catchError } from "rxjs/operators";
+import { HttpResponse } from "@angular/common/http";
 
-import { RestDatasource } from '../../core/rest-datasource.service';
-import { Url } from '../../models/url.model';
-import { PageLink } from '../../models/enums/page-link.enum';
-import { Login } from '../../models/login.model';
+import { RestDatasource } from "../../core/rest-datasource.service";
+import { Url } from "../../models/url.model";
+import { PageLink } from "../../models/enums/page-link.enum";
+import { Login } from "../../models/login.model";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {

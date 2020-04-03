@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -112,21 +113,23 @@ namespace OnlineBooksStore.App.WebApi
             app.UseSwagger();
 
             app.UseSwaggerUI(options =>
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "BooksStore API v1"));
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "OnlineBooksStore API v1"));
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "ClientApp/dist/ClientApp";
-
-                if (env.IsDevelopment())
+                var strategy = Configuration.GetValue<string>("DevTools:ConnectionStrategy");
+                if (strategy == "proxy")
                 {
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
-                    //spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
+                }
+                else if (strategy == "managed")
+                {
+                    spa.Options.SourcePath = "../angular-client";
+                    spa.UseAngularCliServer("start");
                 }
             });
 
-            IdentitySeedData.SeedDatabase(identityContext,
-                userManager, roleManager).GetAwaiter().GetResult();
+            IdentitySeedData.SeedDatabase(identityContext, userManager, roleManager).GetAwaiter().GetResult();
         }
     }
 }

@@ -1,5 +1,5 @@
-export enum BooksGridType {
-    SixByTwo = "SixByTwo",
-    FourByThree = "FourByThree",
-    ThreeByFour = "ThreeByFour"
+export class BooksGridType {
+    static readonly sixByTwo = "sixByTwo";
+    static readonly fourByThree = "fourByThree";
+    static readonly threeByFour = "threeByFour";
 }
