@@ -2,9 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 
 import { StoreService } from "../shared/store.service";
-import { BookResponse } from "../../models/domain/DTO/book-response.model";
 import { CartService } from "../shared/cart.service";
-import { PageLink } from "../../models/enums/page-link.enum";
+import { BookResponse } from "../../../domain/model/entities/DTO/book-response.model";
+import { PageLink } from "../../../domain/model/url/page-link.model";
 
 @Component({
     templateUrl: "./book-detail.component.html",

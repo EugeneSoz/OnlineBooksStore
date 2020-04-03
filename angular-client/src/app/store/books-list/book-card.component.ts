@@ -1,9 +1,9 @@
 import { Component, Input } from "@angular/core";
 
 import { CartService } from "../shared/cart.service";
-import { BookResponse } from "../../models/domain/DTO/book-response.model";
-import { createPageLink } from "../../core/helper-functions";
-import { PageLink } from "../../models/enums/page-link.enum";
+import { createPageLink } from "../../../infrastructure/helper-functions";
+import { PageLink } from "../../../domain/model/url/page-link.model";
+import { BookResponse } from "../../../domain/model/entities/DTO/book-response.model";
 
 @Component({
   selector: "bs-book-card",

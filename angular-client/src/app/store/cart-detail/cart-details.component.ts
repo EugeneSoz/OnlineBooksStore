@@ -2,9 +2,9 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { CartService } from "../shared/cart.service";
-import { PageLink } from "../../models/enums/page-link.enum";
 import { OrderService } from "../shared/order.service";
-import { createPageLink } from "../../core/helper-functions";
+import { PageLink } from "../../../domain/model/url/page-link.model";
+import { createPageLink } from "../../../infrastructure/helper-functions";
 
 @Component({
     templateUrl: "./cart-details.component.html",

@@ -3,9 +3,9 @@ import { Observable, throwError } from "rxjs";
 import { map, catchError } from "rxjs/operators";
 
 import { HttpClient, HttpResponse, HttpErrorResponse } from "@angular/common/http";
-import { HttpMethod } from "../models/http-method.model";
-import { HttpStatusCode } from "../models/enums/http-status-code.enum";
-import { Login } from "../models/login.model";
+import { HttpMethod } from "../../domain/model/http-method.model";
+import { Login } from "../../domain/model/login.model";
+import { HttpStatusCode } from "../../domain/model/enums/http-status-code.enum";
 
 
 @Injectable({ providedIn: "root" })

@@ -1,13 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 
 import { Router } from "@angular/router";
-import { BaseFormComponent } from "../../models/components/base-form.model";
-import { PaymentFormGroup } from "../../models/forms/payment-form.model";
-import { nameof, createPageLink } from "../../core/helper-functions";
 import { OrderService } from "../shared/order.service";
-import { Payment } from "../../models/payment.model";
-import { PageLink } from "../../models/enums/page-link.enum";
-import { CustomFormControl } from "../../models/forms/custom-form-control.model";
+import { BaseFormComponent } from "../../../domain/model/components/base-form.model";
+import { PaymentFormGroup } from "../../../domain/model/forms/payment-form.model";
+import { CustomFormControl } from "../../../domain/model/forms/custom-form-control.model";
+import { PageLink } from "../../../domain/model/url/page-link.model";
+import { Payment } from "../../../domain/model/payment.model";
+import { createPageLink, nameof } from "../../../infrastructure/helper-functions";
 
 @Component({
     templateUrl: "./checkout-payment.component.html",

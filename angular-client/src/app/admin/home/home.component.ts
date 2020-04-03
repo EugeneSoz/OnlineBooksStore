@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
 import { DataOptionsService } from "../shared/data-options.service";
-import { MigrationsOptions } from "../../models/domain/DTO/migrations-options.model";
+import { MigrationsOptions } from "../../../domain/model/entities/DTO/migrations-options.model";
 
 @Component({
     templateUrl: "./home.component.html",

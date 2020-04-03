@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 
 import { BsModalRef } from "ngx-bootstrap/modal";
-import { EntityType } from "../../../models/enums/entity-type.enum";
+import { EntityType } from "../../../../domain/model/enums/entity-type.enum";
 
 @Component({
     templateUrl: "./delete-message.component.html",
@@ -16,7 +16,7 @@ export class DeleteMessageComponent {
     confirmationBtnTitle = "Да";
     cancelationBtnTitle = "Нет";
 
-    result: string = "";
+    result: string = String.empty;
 
     get formHeader(): string {
         switch (this.entityType) {

@@ -5,15 +5,15 @@ import { debounceTime, distinctUntilChanged, switchMap } from "rxjs/operators";
 
 import { TypeaheadMatch } from "ngx-bootstrap/typeahead";
 import { AbstractControl } from "@angular/forms";
-import { BaseAdminFormComponent } from "../../models/components/base-admin-form.model";
-import { BookFormGroup } from "../../models/forms/book-form.model";
 import { BookService } from "../shared/book.service";
-import { PageLink } from "../../models/enums/page-link.enum";
-import { BookDTO } from "../../models/domain/DTO/bookDTO.model";
-import { Publisher } from "../../models/domain/publisher.model";
-import { CategoryResponse } from "../../models/domain/DTO/category-response.model";
-import { BookResponse } from "../../models/domain/DTO/book-response.model";
-import { nameof, createPageLink } from "../../core/helper-functions";
+import { BaseAdminFormComponent } from "../../../domain/model/components/base-admin-form.model";
+import { BookFormGroup } from "../../../domain/model/forms/book-form.model";
+import { PageLink } from "../../../domain/model/url/page-link.model";
+import { BookDTO } from "../../../domain/model/entities/DTO/bookDTO.model";
+import { Publisher } from "../../../domain/model/entities/publisher.model";
+import { CategoryResponse } from "../../../domain/model/entities/DTO/category-response.model";
+import { BookResponse } from "../../../domain/model/entities/DTO/book-response.model";
+import { createPageLink, nameof } from "../../../infrastructure/helper-functions";
 
 @Component({
     templateUrl: "./book-form.component.html",
@@ -30,8 +30,8 @@ export class BookFormComponent extends BaseAdminFormComponent<BookFormGroup> imp
     }
 
     bookDTO: BookDTO = new BookDTO();
-    publisherName: string = "";
-    categoryName: string = "";
+    publisherName: string = String.empty;
+    categoryName: string = String.empty;
 
     publishers$: Observable<Array<Publisher>> = null;
     categories$: Observable<Array<CategoryResponse>> = null;
@@ -111,7 +111,7 @@ export class BookFormComponent extends BaseAdminFormComponent<BookFormGroup> imp
             this._bookService.updateEntity(this.bookDTO);
         }//create
         else {
-            this._bookService.createEntity(this.bookDTO)
+            this._bookService.createEntity(this.bookDTO);
             this.isAlertVisible = true;
             this.bookDTO = new BookDTO();
         }

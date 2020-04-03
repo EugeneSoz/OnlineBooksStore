@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 
-import { AdminSidebarSection } from "../models/components/admin-sidebar-section.model";
-import { PageLink } from "../models/enums/page-link.enum";
-import { createPageLink } from "../core/helper-functions";
+import { AdminSidebarSection } from "../../domain/model/components/admin-sidebar-section.model";
+import { PageLink } from "../../domain/model/url/page-link.model";
+import { createPageLink } from "../../infrastructure/helper-functions";
 
 @Component({
     selector: "bs-admin-sidebar",

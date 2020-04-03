@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 
-import { BookResponse } from "../../models/domain/DTO/book-response.model";
+import { BookResponse } from "../../../domain/model/entities/DTO/book-response.model";
 
 @Component({
     selector: "bs-book-info",

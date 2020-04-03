@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 
 import { AuthenticationService } from "./authentication.service";
-import { PageLink } from "../../models/enums/page-link.enum";
+import { PageLink } from "../../../domain/model/url/page-link.model";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationGuard {

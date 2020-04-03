@@ -1,11 +1,11 @@
 import { EntityType } from "../enums/entity-type.enum";
-import { Publisher } from "../domain/publisher.model";
-import { ErrorAttributes } from "../enums/error-attributes.enum";
-import { Category } from "../domain/category.model";
-import { Book } from "../domain/book.model";
-import { Order } from "../domain/order.model";
-import { nameof } from "../../core/helper-functions";
 import { Payment } from "../payment.model";
+import { nameof } from "../../../infrastructure/helper-functions";
+import { Publisher } from "../entities/publisher.model";
+import { ErrorAttributes } from "./error-attributes.model";
+import { Category } from "../entities/category.model";
+import { Book } from "../entities/book.model";
+import { Order } from "../entities/order.model";
 
 export class ModelErrors {
 

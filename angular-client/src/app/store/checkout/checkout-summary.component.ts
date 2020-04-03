@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { Order } from "../../models/domain/order.model";
 import { CartService } from "../shared/cart.service";
-import { PageLink } from "../../models/enums/page-link.enum";
-import { createPageLink } from "../../core/helper-functions";
 import { OrderService } from "../shared/order.service";
+import { Order } from "../../../domain/model/entities/order.model";
+import { PageLink } from "../../../domain/model/url/page-link.model";
+import { createPageLink } from "../../../infrastructure/helper-functions";
 
 @Component({
     templateUrl: "./checkout-summary.component.html",

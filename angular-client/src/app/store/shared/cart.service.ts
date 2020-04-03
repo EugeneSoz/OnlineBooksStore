@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 
-import { BookResponse } from "../../models/domain/DTO/book-response.model";
-import { Url } from "../../models/url.model";
 import { RestDatasource } from "../../core/rest-datasource.service";
-import { CartLine } from "../../models/domain/DTO/cart-line.model";
 import { Observable } from "rxjs";
+import { CartLine } from "../../../domain/model/entities/DTO/cart-line.model";
+import { BookResponse } from "../../../domain/model/entities/DTO/book-response.model";
+import { Url } from "../../../domain/model/url/url.model";
 
 @Injectable()
 export class CartService {

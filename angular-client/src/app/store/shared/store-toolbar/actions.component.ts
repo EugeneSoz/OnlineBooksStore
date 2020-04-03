@@ -1,10 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 
 import { StoreService } from "../../shared/store.service";
-import { BooksGridType } from "../../../models/enums/book-grid-type.enum";
-import { QueryOptions } from "../../../models/domain/DTO/query-options.model";
-import { ListItem } from "../../../models/domain/DTO/dropdown.model";
-
+import { ListItem } from "../../../../domain/model/entities/DTO/dropdown.model";
+import { BooksGridType } from "../../../../domain/model/book-grid-type.model";
+import { QueryOptions } from "../../../../domain/model/entities/DTO/query-options.model";
 
 @Component({
     selector: ".navbar-nav .mr-auto",

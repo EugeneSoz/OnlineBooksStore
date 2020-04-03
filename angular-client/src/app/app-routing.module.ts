@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
-import { PageLink } from "./models/enums/page-link.enum";
 import { AuthenticationComponent } from "./authentication/authentication.component";
+import { PageLink } from "../domain/model/url/page-link.model";
 
 const routes: Routes = [
     { path: PageLink.login, component: AuthenticationComponent },

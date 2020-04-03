@@ -2,15 +2,15 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
 
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
-import { BaseTableComponent } from "../../models/components/base-table.model";
-import { BookResponse } from "../../models/domain/DTO/book-response.model";
-import { BookDTO } from "../../models/domain/DTO/bookDTO.model";
 import { BookService } from "../shared/book.service";
-import { EntityType } from "../../models/enums/entity-type.enum";
-import { PageLink } from "../../models/enums/page-link.enum";
-import { EntityExtensions } from "../../models/entity-extensions.model";
 import { DeleteMessageComponent } from "../shared/delete-message/delete-message.component";
-import { createPageLink } from "../../core/helper-functions";
+import { BaseTableComponent } from "../../../domain/model/components/base-table.model";
+import { BookResponse } from "../../../domain/model/entities/DTO/book-response.model";
+import { BookDTO } from "../../../domain/model/entities/DTO/bookDTO.model";
+import { EntityType } from "../../../domain/model/enums/entity-type.enum";
+import { PageLink } from "../../../domain/model/url/page-link.model";
+import { EntityExtensions } from "../../../domain/model/entity-extensions.model";
+import { createPageLink } from "../../../infrastructure/helper-functions";
 
 @Component({
     templateUrl: "./books-table.component.html",

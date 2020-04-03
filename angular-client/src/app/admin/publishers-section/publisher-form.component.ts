@@ -1,13 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 
-import { BaseAdminFormComponent } from "../../models/components/base-admin-form.model";
-import { PublisherFormGroup } from "../../models/forms/publisher-form.model";
 import { PublisherService } from "../shared/publisher.service";
-import { PageLink } from "../../models/enums/page-link.enum";
-import { PublisherDTO } from "../../models/domain/DTO/publisherDTO.model";
-import { Book } from "../../models/domain/book.model";
-import { createPageLink } from "../../core/helper-functions";
+import { BaseAdminFormComponent } from "../../../domain/model/components/base-admin-form.model";
+import { PublisherFormGroup } from "../../../domain/model/forms/publisher-form.model";
+import { PageLink } from "../../../domain/model/url/page-link.model";
+import { PublisherDTO } from "../../../domain/model/entities/DTO/publisherDTO.model";
+import { Book } from "../../../domain/model/entities/book.model";
+import { createPageLink } from "../../../infrastructure/helper-functions";
 
 @Component({
     templateUrl: "./publisher-form.component.html",

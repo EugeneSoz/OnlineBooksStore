@@ -5,9 +5,9 @@ import { map, catchError } from "rxjs/operators";
 import { HttpResponse } from "@angular/common/http";
 
 import { RestDatasource } from "../../core/rest-datasource.service";
-import { Url } from "../../models/url.model";
-import { PageLink } from "../../models/enums/page-link.enum";
-import { Login } from "../../models/login.model";
+import { Login } from "../../../domain/model/login.model";
+import { Url } from "../../../domain/model/url/url.model";
+import { PageLink } from "../../../domain/model/url/page-link.model";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {

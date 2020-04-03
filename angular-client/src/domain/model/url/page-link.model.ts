@@ -1,5 +1,5 @@
 export class PageLink {
-    static readonly empty = string.empty;
+    static readonly empty = String.empty;
     static readonly admin = "admin";
     static readonly publishers = "publishers";
     static readonly books = "books";

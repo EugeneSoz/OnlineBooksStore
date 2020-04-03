@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
-import { Book } from "../../../models/domain/book.model";
-import { createPageLink } from "../../../core/helper-functions";
-import { PageLink } from "../../../models/enums/page-link.enum";
+import { Book } from "../../../../domain/model/entities/book.model";
+import { PageLink } from "../../../../domain/model/url/page-link.model";
+import { createPageLink } from "../../../../infrastructure/helper-functions";
 
 @Component({
     selector: "bs-related-books-table",

@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
-import { OrderLine } from "../../models/order-line.model";
 import { CartService } from "./cart.service";
-import { Order } from "../../models/domain/order.model";
-import { Url } from "../../models/url.model";
 import { RestDatasource } from "../../core/rest-datasource.service";
-import { OrderConfirmation } from "../../models/order.confirmation.model";
-import { CheckoutState } from "../../models/domain/DTO/checkout-state.model";
+import { Order } from "../../../domain/model/entities/order.model";
+import { OrderConfirmation } from "../../../domain/model/order.confirmation.model";
+import { OrderLine } from "../../../domain/model/order-line.model";
+import { Url } from "../../../domain/model/url/url.model";
+import { CheckoutState } from "../../../domain/model/entities/DTO/checkout-state.model";
 
 @Injectable()
 export class OrderService {

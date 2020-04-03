@@ -3,8 +3,8 @@ import { Subscription } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 import { FormGroup } from "@angular/forms";
 
-import { EntityExtensions } from "../../models/entity-extensions.model";
 import { BaseFormComponent } from "./base-form.model";
+import { EntityExtensions } from "../entity-extensions.model";
 
 export class BaseAdminFormComponent<TFormGroup extends FormGroup> extends BaseFormComponent<TFormGroup>
     implements OnDestroy {

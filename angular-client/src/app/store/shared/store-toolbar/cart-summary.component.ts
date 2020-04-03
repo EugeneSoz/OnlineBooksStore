@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { CartService } from "../../shared/cart.service";
-import { createPageLink } from "../../../core/helper-functions";
-import { PageLink } from "../../../models/enums/page-link.enum";
+import { createPageLink } from "../../../../infrastructure/helper-functions";
+import { PageLink } from "../../../../domain/model/url/page-link.model";
 
 @Component({
     selector: "bs-cart-summary",

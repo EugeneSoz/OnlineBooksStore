@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 
-import { MigrationsOptions } from "../../models/domain/DTO/migrations-options.model";
-import { Url } from "../../models/url.model";
 import { RestDatasource } from "../../core/rest-datasource.service";
+import { MigrationsOptions } from "../../../domain/model/entities/DTO/migrations-options.model";
+import { Url } from "../../../domain/model/url/url.model";
 
 @Injectable()
 export class DataOptionsService {

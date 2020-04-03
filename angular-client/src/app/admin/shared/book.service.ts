@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
-import { Url } from "../../models/url.model";
 import { BaseAdminService } from "./base-admin.service";
-import { BookResponse } from "../../models/domain/DTO/book-response.model";
-import { BookDTO } from "../../models/domain/DTO/bookDTO.model";
-import { SearchTerm } from "../../models/domain/DTO/search-term.model";
-import { Publisher } from "../../models/domain/publisher.model";
-import { CategoryResponse } from "../../models/domain/DTO/category-response.model";
 import { RestDatasource } from "../../core/rest-datasource.service";
+import { BookResponse } from "../../../domain/model/entities/DTO/book-response.model";
+import { BookDTO } from "../../../domain/model/entities/DTO/bookDTO.model";
+import { Url } from "../../../domain/model/url/url.model";
+import { Publisher } from "../../../domain/model/entities/publisher.model";
+import { SearchTerm } from "../../../domain/model/entities/DTO/search-term.model";
+import { CategoryResponse } from "../../../domain/model/entities/DTO/category-response.model";
 
 @Injectable()
 export class BookService extends BaseAdminService<BookResponse, BookResponse, BookDTO> {

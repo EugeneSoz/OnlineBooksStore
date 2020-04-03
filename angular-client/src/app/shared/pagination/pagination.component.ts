@@ -1,7 +1,7 @@
 import { Component, Input, EventEmitter, Output, OnChanges, SimpleChanges } from "@angular/core";
 
-import { Pagination } from "../../models/pagination.model";
-import { PaginationButtonType } from "../../models/enums/pagination-button-type.enum";
+import { Pagination } from "../../../domain/model/pagination.model";
+import { PaginationButtonType } from "../../../domain/model/enums/pagination-button-type.enum";
 
 @Component({
     selector: "bs-pagination",

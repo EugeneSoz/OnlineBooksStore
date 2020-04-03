@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 
-import { Order } from "../../models/domain/order.model";
 import { OrderService } from "../../store/shared/order.service";
 import { CartService } from "../../store/shared/cart.service";
+import { Order } from "../../../domain/model/entities/order.model";
 
 @Component({
     templateUrl: "./orders-section.component.html",

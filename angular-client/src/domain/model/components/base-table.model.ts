@@ -1,12 +1,12 @@
 import { Subscription } from "rxjs";
 
-import { EntityType } from "../../models/enums/entity-type.enum";
-import { FilterSortingProps } from "../../models/domain/DTO/filter-sorting-props.model";
-import { Pagination } from "../../models/pagination.model";
-import { QueryOptions } from "../../models/domain/DTO/query-options.model";
-import { BaseAdminService } from "../../admin/shared/base-admin.service";
 import { BsModalService } from "ngx-bootstrap/modal";
-import { DeleteMessageComponent } from "../../admin/shared/delete-message/delete-message.component";
+import { BaseAdminService } from "../../../app/admin/shared/base-admin.service";
+import { EntityType } from "../enums/entity-type.enum";
+import { FilterSortingProps } from "../entities/DTO/filter-sorting-props.model";
+import { Pagination } from "../pagination.model";
+import { QueryOptions } from "../entities/DTO/query-options.model";
+import { DeleteMessageComponent } from "../../../app/admin/shared/delete-message/delete-message.component";
 
 export abstract class BaseTableComponent<TEntity, TEntities, TEntityDTO> {
     constructor(

@@ -2,16 +2,16 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
 
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
-import { BaseTableComponent } from "../../models/components/base-table.model";
-import { Category } from "../../models/domain/category.model";
-import { CategoryResponse } from "../../models/domain/DTO/category-response.model";
-import { CategoryDTO } from "../../models/domain/DTO/categoryDTO.model";
 import { CategoryService } from "../shared/category.service";
-import { EntityType } from "../../models/enums/entity-type.enum";
-import { PageLink } from "../../models/enums/page-link.enum";
-import { EntityExtensions } from "../../models/entity-extensions.model";
 import { DeleteMessageComponent } from "../shared/delete-message/delete-message.component";
-import { createPageLink } from "../../core/helper-functions";
+import { BaseTableComponent } from "../../../domain/model/components/base-table.model";
+import { Category } from "../../../domain/model/entities/category.model";
+import { CategoryResponse } from "../../../domain/model/entities/DTO/category-response.model";
+import { CategoryDTO } from "../../../domain/model/entities/DTO/categoryDTO.model";
+import { EntityType } from "../../../domain/model/enums/entity-type.enum";
+import { PageLink } from "../../../domain/model/url/page-link.model";
+import { EntityExtensions } from "../../../domain/model/entity-extensions.model";
+import { createPageLink } from "../../../infrastructure/helper-functions";
 
 @Component({
     templateUrl: "./categories-table.component.html",

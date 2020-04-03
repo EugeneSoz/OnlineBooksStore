@@ -1,11 +1,11 @@
 import { Validators } from "@angular/forms";
 
 import { CustomFormGroup, CustomFormControl } from "./custom-form-control.model";
-import { PublisherDTO } from "../domain/DTO/publisherDTO.model";
 import { ModelErrors } from "../validation/model-errors.model";
 import { EntityType } from "../enums/entity-type.enum";
 import { RangeValidator } from "../validation/range.formvalidator";
-import { nameof } from "../../core/helper-functions";
+import { nameof } from "../../../infrastructure/helper-functions";
+import { PublisherDTO } from "../entities/DTO/publisherDTO.model";
 
 export class PublisherFormGroup extends CustomFormGroup {
     constructor(

@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from "@angular/core";
 
-import { FilterSortingProps } from "../../../models/domain/DTO/filter-sorting-props.model";
-import { QueryOptions } from "../../../models/domain/DTO/query-options.model";
+import { FilterSortingProps } from "../../../../domain/model/entities/DTO/filter-sorting-props.model";
+import { QueryOptions } from "../../../../domain/model/entities/DTO/query-options.model";
 
 @Component({
     selector: "bs-table-head",

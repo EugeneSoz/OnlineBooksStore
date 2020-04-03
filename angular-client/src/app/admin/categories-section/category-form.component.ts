@@ -1,14 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 
-import { BaseAdminFormComponent } from "../../models/components/base-admin-form.model";
-import { CategoryFormGroup } from "../../models/forms/category-form.model";
 import { CategoryService } from "../shared/category.service";
-import { PageLink } from "../../models/enums/page-link.enum";
-import { CategoryDTO } from "../../models/domain/DTO/categoryDTO.model";
-import { Book } from "../../models/domain/book.model";
-import { Category } from "../../models/domain/category.model";
-import { createPageLink } from "../../core/helper-functions";
+import { BaseAdminFormComponent } from "../../../domain/model/components/base-admin-form.model";
+import { CategoryFormGroup } from "../../../domain/model/forms/category-form.model";
+import { PageLink } from "../../../domain/model/url/page-link.model";
+import { CategoryDTO } from "../../../domain/model/entities/DTO/categoryDTO.model";
+import { Book } from "../../../domain/model/entities/book.model";
+import { Category } from "../../../domain/model/entities/category.model";
+import { createPageLink } from "../../../infrastructure/helper-functions";
 
 @Component({
     templateUrl: "./category-form.component.html",
@@ -74,7 +74,7 @@ export class CategoryFormComponent extends BaseAdminFormComponent<CategoryFormGr
             this._categoryService.updateEntity(this.category);
         }//create
         else {
-            this._categoryService.createEntity(this.category)
+            this._categoryService.createEntity(this.category);
             this.isAlertVisible = true;
             this.category = new CategoryDTO();
             this._categoryService.getParentCategories();

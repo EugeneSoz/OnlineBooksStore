@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
 
 import { StoreService } from "../../shared/store.service";
-import { QueryOptions } from "../../../models/domain/DTO/query-options.model";
-import { BookResponse } from "../../../models/domain/DTO/book-response.model";
-import { nameof } from "../../../core/helper-functions";
+import { QueryOptions } from "../../../../domain/model/entities/DTO/query-options.model";
+import { BookResponse } from "../../../../domain/model/entities/DTO/book-response.model";
+import { nameof } from "../../../../infrastructure/helper-functions";
 
 @Component({
     selector: "bs-search-toolbar",

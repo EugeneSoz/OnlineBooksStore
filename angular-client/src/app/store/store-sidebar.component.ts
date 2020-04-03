@@ -2,10 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 
 import { StoreService } from "./shared/store.service";
-import { PageLink } from "../models/enums/page-link.enum";
-import { nameof } from "../core/helper-functions";
-import { BookResponse } from "../models/domain/DTO/book-response.model";
-import { StoreCategoryResponse } from "../models/domain/DTO/store-category-response.model";
+import { PageLink } from "../../domain/model/url/page-link.model";
+import { StoreCategoryResponse } from "../../domain/model/entities/DTO/store-category-response.model";
+import { BookResponse } from "../../domain/model/entities/DTO/book-response.model";
+import { nameof } from "../../infrastructure/helper-functions";
 
 @Component({
     selector: "bs-store-sidebar",
