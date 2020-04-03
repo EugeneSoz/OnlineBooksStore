@@ -34,9 +34,9 @@ namespace OnlineBooksStore.App.WebApi.Data.DTO
         public List<ListItem> GridSizeProperties => new List<ListItem>
         {
             new ListItem("", "Отобразить", false),
-            new ListItem("SixByTwo", "6 x 2 (строка x столбец)"),
-            new ListItem("FourByThree", "4 x 3 (строка x столбец)"),
-            new ListItem("ThreeByFour", "3 x 4 (строка x столбец)")
+            new ListItem("sixByTwo", "6 x 2 (строка x столбец)"),
+            new ListItem("fourByThree", "4 x 3 (строка x столбец)"),
+            new ListItem("threeByFour", "3 x 4 (строка x столбец)")
         };
     }
 }
