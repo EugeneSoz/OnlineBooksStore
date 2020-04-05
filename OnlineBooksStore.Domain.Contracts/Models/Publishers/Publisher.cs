@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using OnlineBooksStore.Domain.Contracts.Models.Books;
 
-namespace OnlineBooksStore.Domain.Contracts.Models.Publisher
+namespace OnlineBooksStore.Domain.Contracts.Models.Publishers
 {
     /// <summary>
     /// Represents a book publisher

@@ -1,6 +1,4 @@
-﻿using OnlineBooksStore.Domain.Contracts.Entities;
-
-namespace OnlineBooksStore.Domain.Contracts.Models
+﻿namespace OnlineBooksStore.Domain.Contracts.Models.Books
 {
     /// <summary>
     /// Represents a related book

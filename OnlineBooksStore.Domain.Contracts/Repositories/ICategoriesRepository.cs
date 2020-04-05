@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using OnlineBooksStore.Domain.Contracts.Models.Category;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
 using OnlineBooksStore.Persistence.Entities;
 

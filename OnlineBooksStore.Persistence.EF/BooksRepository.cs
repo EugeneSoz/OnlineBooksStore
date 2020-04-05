@@ -1,30 +1,27 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using OnlineBooksStore.Domain.Contracts.Models;
-using OnlineBooksStore.Domain.Contracts.Models.Category;
+using OnlineBooksStore.Domain.Contracts.Models.Categories;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
-using OnlineBooksStore.Domain.Contracts.Models.Publisher;
+using OnlineBooksStore.Domain.Contracts.Models.Publishers;
 using OnlineBooksStore.Domain.Contracts.Repositories;
-using Book = OnlineBooksStore.Domain.Contracts.Models.Book;
+using OnlineBooksStore.Persistence.Entities;
 
 namespace OnlineBooksStore.Persistence.EF
 {
-    public class BooksRepository : BaseRepo<Book>, IBooksRepository
+    public class BooksRepository : BaseRepo<BookEntity>, IBooksRepository
     {
         public BooksRepository(StoreDbContext ctx) : base(ctx) { }
         
-        public IEnumerable<Book> Books { get; }
-        public PagedList<Book> GetBooks(QueryOptions options)
+        public PagedList<BookEntity> GetBooks(QueryOptions options)
         {
-            QueryProcessing<Book> processing = new QueryProcessing<Book>(options);
+            QueryProcessing<BookEntity> processing = new QueryProcessing<BookEntity>(options);
 
-            IQueryable<Book> query = GetEntities()
+            IQueryable<BookEntity> query = GetEntities()
                 .Include(p => p.Publisher)
                 .Include(c => c.Category)
                 .ThenInclude(c => c.ParentCategory);
 
-            IQueryable<BookResponse> processedBooks;
+            IQueryable<BookEntity> processedBooks;
 
             if (options.SortPropertyName == $"{nameof(Publisher)}.{nameof(Publisher.Name)}" ||
                 options.SortPropertyName == $"{nameof(Category)}.{nameof(Category.Name)}" ||
@@ -33,50 +30,47 @@ namespace OnlineBooksStore.Persistence.EF
             {
                 processedBooks = options.DescendingOrder
                     ? processing.ProcessQuery(query.OrderByDescending(b => b.Title))
-                        .Select(e => e.MapBookResponse())
-                    : processing.ProcessQuery(query.OrderBy(b => b.Title))
-                        .Select(e => e.MapBookResponse());
+                    : processing.ProcessQuery(query.OrderBy(b => b.Title));
             }
             else
             {
-                processedBooks = processing.ProcessQuery(query)
-                    .Select(e => e.MapBookResponse());
+                processedBooks = processing.ProcessQuery(query);
             }
 
-            PagedList<BookResponse> books = new PagedList<BookResponse>(processedBooks, options);
+            var booksPagedList = new PagedList<BookEntity>(processedBooks, options);
 
-            return books;
+            return booksPagedList;
 
            
         }
 
-        public Book GetBook(long key)
+        public BookEntity GetBook(long key)
         {
-            IQueryable<Book> entities = GetEntities();
+            IQueryable<BookEntity> entities = GetEntities();
 
-            IQueryable<Book> book = entities
+            IQueryable<BookEntity> book = entities
                 .Include(p => p.Publisher)
                 .Include(c => c.Category)
                 .ThenInclude(c => c.ParentCategory);
 
-            Book result = book.SingleOrDefault(b => b.Id == key);
+            BookEntity result = book.SingleOrDefault(b => b.Id == key);
 
-            return result.MapBookResponse();
+            return result;
         }
 
-        public void AddBook(Book book)
+        public BookEntity AddBook(BookEntity book)
         {
-            throw new System.NotImplementedException();
+            return Add(book);
         }
 
-        public void UpdateBook(Book book)
+        public bool UpdateBook(BookEntity book)
         {
-            throw new System.NotImplementedException();
+            return Update(book);
         }
 
-        public void Delete(Book book)
+        public bool DeleteBook(BookEntity book)
         {
-            throw new System.NotImplementedException();
+            return Delete(book);
         }
     }
 }

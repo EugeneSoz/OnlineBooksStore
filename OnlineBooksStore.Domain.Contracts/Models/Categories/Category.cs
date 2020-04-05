@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using OnlineBooksStore.Domain.Contracts.Models.Books;
 
-namespace OnlineBooksStore.Domain.Contracts.Models.Category
+namespace OnlineBooksStore.Domain.Contracts.Models.Categories
 {
     /// <summary>
     /// Represents a book category

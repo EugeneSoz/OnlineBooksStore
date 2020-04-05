@@ -1,4 +1,6 @@
-﻿using OnlineBooksStore.Domain.Contracts.Models.Category;
+﻿using OnlineBooksStore.Domain.Contracts.Models.Books;
+using OnlineBooksStore.Domain.Contracts.Models.Categories;
+using OnlineBooksStore.Domain.Contracts.Models.Publishers;
 
 namespace OnlineBooksStore.Domain.Contracts.Models.Pages
 {
@@ -73,13 +75,13 @@ namespace OnlineBooksStore.Domain.Contracts.Models.Pages
             switch (valueToChange)
             {
                 case nameof(CategoryResponse.ParentCategoryName):
-                    return $"{nameof(Category.Category.ParentCategory)}.{nameof(Category.Category.Name)}";
+                    return $"{nameof(Category.ParentCategory)}.{nameof(Category.Name)}";
                 case nameof(BookResponse.PublisherName):
-                    return $"{nameof(Publisher.Publisher)}.{nameof(Publisher.Publisher.Name)}";
+                    return $"{nameof(Publisher)}.{nameof(Publisher.Name)}";
                 case nameof(BookResponse.SubcategoryName):
-                    return $"{nameof(Category.Category)}.{nameof(Category.Category.Name)}";
+                    return $"{nameof(Category)}.{nameof(Category.Name)}";
                 case nameof(BookResponse.CategoryName):
-                    return $"{nameof(Category.Category)}.{nameof(Category.Category.ParentCategory)}.{nameof(Category.Category.Name)}";
+                    return $"{nameof(Category)}.{nameof(Category.ParentCategory)}.{nameof(Category.Name)}";
                 default:
                     return valueToChange;
             }
@@ -90,9 +92,9 @@ namespace OnlineBooksStore.Domain.Contracts.Models.Pages
             switch (valueToChange)
             {
                 case nameof(BookResponse.SubcategoryName):
-                    return $"{nameof(Category.Category)}.{nameof(Category.Category.Id)}";
+                    return $"{nameof(Category)}.{nameof(Category.Id)}";
                 case nameof(BookResponse.CategoryName):
-                    return $"{nameof(Category.Category)}.{nameof(Category.Category.ParentCategory)}.{nameof(Category.Category.Id)}";
+                    return $"{nameof(Category)}.{nameof(Category.ParentCategory)}.{nameof(Category.Id)}";
                 default:
                     return valueToChange;
             }

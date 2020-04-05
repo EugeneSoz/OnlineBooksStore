@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace OnlineBooksStore.Domain.Contracts.Models.Category
+namespace OnlineBooksStore.Domain.Contracts.Models.Categories
 {
     public class StoreCategoryResponse : EntityBase
     {

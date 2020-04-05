@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using OnlineBooksStore.App.Contracts.Command;
-using OnlineBooksStore.Domain.Contracts.Models;
+using OnlineBooksStore.Domain.Contracts.Models.Books;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
-using OnlineBooksStore.Domain.Contracts.Models.Publisher;
+using OnlineBooksStore.Domain.Contracts.Models.Publishers;
 using OnlineBooksStore.Persistence.Entities;
 
 namespace OnlineBooksStore.App.Handlers.Mapping

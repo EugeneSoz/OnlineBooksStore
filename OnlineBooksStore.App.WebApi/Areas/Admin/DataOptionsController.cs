@@ -8,8 +8,9 @@ using OnlineBooksStore.App.WebApi.Models;
 using OnlineBooksStore.App.WebApi.Models.Database;
 using OnlineBooksStore.App.WebApi.Models.Repo;
 using OnlineBooksStore.Domain.Contracts.Models;
-using OnlineBooksStore.Domain.Contracts.Models.Category;
-using OnlineBooksStore.Domain.Contracts.Models.Publisher;
+using OnlineBooksStore.Domain.Contracts.Models.Books;
+using OnlineBooksStore.Domain.Contracts.Models.Categories;
+using OnlineBooksStore.Domain.Contracts.Models.Publishers;
 
 namespace OnlineBooksStore.App.WebApi.Areas.Admin
 {

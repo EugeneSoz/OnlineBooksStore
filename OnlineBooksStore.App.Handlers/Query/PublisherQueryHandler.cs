@@ -6,7 +6,7 @@ using OnlineBooksStore.App.Contracts.Query;
 using OnlineBooksStore.App.Handlers.Interfaces;
 using OnlineBooksStore.App.Handlers.Mapping;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
-using OnlineBooksStore.Domain.Contracts.Models.Publisher;
+using OnlineBooksStore.Domain.Contracts.Models.Publishers;
 using OnlineBooksStore.Domain.Contracts.Repositories;
 
 namespace OnlineBooksStore.App.Handlers.Query

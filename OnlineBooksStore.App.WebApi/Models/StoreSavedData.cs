@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using OnlineBooksStore.App.WebApi.Data;
 using OnlineBooksStore.Domain.Contracts.Models;
-using OnlineBooksStore.Domain.Contracts.Models.Category;
-using OnlineBooksStore.Domain.Contracts.Models.Publisher;
+using OnlineBooksStore.Domain.Contracts.Models.Books;
+using OnlineBooksStore.Domain.Contracts.Models.Categories;
+using OnlineBooksStore.Domain.Contracts.Models.Publishers;
 
 namespace OnlineBooksStore.App.WebApi.Models
 {

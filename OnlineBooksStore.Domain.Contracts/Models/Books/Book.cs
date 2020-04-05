@@ -1,4 +1,7 @@
-﻿namespace OnlineBooksStore.Domain.Contracts.Models
+﻿using OnlineBooksStore.Domain.Contracts.Models.Categories;
+using OnlineBooksStore.Domain.Contracts.Models.Publishers;
+
+namespace OnlineBooksStore.Domain.Contracts.Models.Books
 {
     /// <summary>
     /// Represents a book
@@ -97,13 +100,13 @@
         /// <value>
         /// The category.
         /// </value>
-        public Category.Category Category { get; set; }
+        public Category Category { get; set; }
         /// <summary>
         /// Gets or sets the publisher.
         /// </summary>
         /// <value>
         /// The publisher.
         /// </value>
-        public Publisher.Publisher Publisher { get; set; }
+        public Publisher Publisher { get; set; }
     }
 }

@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OnlineBooksStore.App.WebApi.Data.DTO
+namespace OnlineBooksStore.App.Contracts.Command
 {
-    //класс, описывающий книгу
-    public class BookDTO : EntityBase
+    public abstract class BookCommand : Command
     {
         //название книги
         [Required(ErrorMessage = "Укажите название книги")]
@@ -35,11 +34,19 @@ namespace OnlineBooksStore.App.WebApi.Data.DTO
 
         //текущая цена
         [Range(1, 100000, ErrorMessage = "Укажите стоимость товара")]
-        public decimal Price { get; set; }
+        public decimal RetailPrice { get; set; }
+
+        //текущая цена
+        [Range(1, 100000, ErrorMessage = "Укажите стоимость товара")]
+        public decimal PurchasePrice { get; set; }
 
         //ссылка на изображение обложки
         public string BookCover { get; set; }
-        public long? CategoryID { get; set; }
-        public long? PublisherID { get; set; }
+        public long? CategoryId { get; set; }
+        public long? PublisherId { get; set; }
     }
+
+    public sealed class CreateBookCommand : BookCommand { }
+    public sealed class UpdateBookCommand : BookCommand { }
+    public sealed class DeleteBookCommand : BookCommand { }
 }

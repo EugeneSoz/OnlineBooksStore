@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using OnlineBooksStore.Domain.Contracts.Entities;
+using OnlineBooksStore.Domain.Contracts.Models.Books;
 
 namespace OnlineBooksStore.Domain.Contracts.Models
 {

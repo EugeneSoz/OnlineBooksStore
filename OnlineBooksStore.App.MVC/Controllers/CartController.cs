@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using OnlineBooksStore.App.MVC.Infrastructure;
 using OnlineBooksStore.Domain.Contracts.Entities;
 using OnlineBooksStore.Domain.Contracts.Models;
+using OnlineBooksStore.Domain.Contracts.Models.Books;
 using OnlineBooksStore.Domain.Contracts.Repositories;
 
 namespace OnlineBooksStore.App.MVC.Controllers

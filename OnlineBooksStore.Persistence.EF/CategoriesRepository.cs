@@ -2,11 +2,10 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using OnlineBooksStore.Domain.Contracts.Models;
-using OnlineBooksStore.Domain.Contracts.Models.Category;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
 using OnlineBooksStore.Domain.Contracts.Repositories;
 using OnlineBooksStore.Persistence.Entities;
-using Book = OnlineBooksStore.Domain.Contracts.Models.Book;
+using Book = OnlineBooksStore.Domain.Contracts.Models.Books.Book;
 
 namespace OnlineBooksStore.Persistence.EF
 {

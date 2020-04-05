@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using OnlineBooksStore.Domain.Contracts.Models;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
-using OnlineBooksStore.Domain.Contracts.Models.Publisher;
 using OnlineBooksStore.Persistence.Entities;
 
 namespace OnlineBooksStore.Domain.Contracts.Repositories

@@ -4,7 +4,7 @@ using System.Linq;
 using OnlineBooksStore.App.Contracts.Query;
 using OnlineBooksStore.App.Handlers.Interfaces;
 using OnlineBooksStore.App.Handlers.Mapping;
-using OnlineBooksStore.Domain.Contracts.Models.Category;
+using OnlineBooksStore.Domain.Contracts.Models.Categories;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
 using OnlineBooksStore.Domain.Contracts.Repositories;
 using OnlineBooksStore.Persistence.Entities;

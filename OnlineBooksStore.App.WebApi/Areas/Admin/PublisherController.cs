@@ -8,7 +8,7 @@ using OnlineBooksStore.App.Contracts.Query;
 using OnlineBooksStore.App.Handlers.Command;
 using OnlineBooksStore.App.Handlers.Query;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
-using OnlineBooksStore.Domain.Contracts.Models.Publisher;
+using OnlineBooksStore.Domain.Contracts.Models.Publishers;
 using OnlineBooksStore.Persistence.Entities;
 
 namespace OnlineBooksStore.App.WebApi.Areas.Admin

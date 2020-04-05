@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using OnlineBooksStore.Domain.Contracts.Models;
+using OnlineBooksStore.Domain.Contracts.Models.Books;
 
 namespace OnlineBooksStore.App.WebApi.Data.DTO
 {

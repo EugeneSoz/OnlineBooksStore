@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using OnlineBooksStore.App.WebApi.Data;
-using OnlineBooksStore.App.WebApi.Data.DTO;
-using OnlineBooksStore.App.WebApi.Infrastructure;
-using OnlineBooksStore.App.WebApi.Models;
-using OnlineBooksStore.App.WebApi.Models.Repo;
-using OnlineBooksStore.Domain.Contracts.Models;
+using OnlineBooksStore.App.Contracts.Command;
+using OnlineBooksStore.App.Contracts.Query;
+using OnlineBooksStore.App.Handlers.Command;
+using OnlineBooksStore.App.Handlers.Query;
+using OnlineBooksStore.Domain.Contracts.Models.Books;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
+using OnlineBooksStore.Persistence.Entities;
 
 namespace OnlineBooksStore.App.WebApi.Areas.Admin
 {
@@ -20,37 +19,39 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
     [AutoValidateAntiforgeryToken]
     public class BookController : Controller
     {
-        private readonly IBookRepo _repo;
+        private readonly BookQueryHandler _queryHandler;
+        private readonly BookCommandHandler _commandHandler;
 
-        public BookController(IBookRepo repo) => _repo = repo;
+        public BookController(BookQueryHandler queryHandler, BookCommandHandler commandHandler)
+        {
+            _queryHandler = queryHandler ?? throw new ArgumentNullException(nameof(queryHandler));
+            _commandHandler = commandHandler ?? throw new ArgumentNullException(nameof(commandHandler));
+        }
 
         [HttpGet("book/{id}")]
-        public async Task<BookResponse> GetBookAsync(long id)
+        public BookResponse GetBook([FromQuery] BookIdQuery query)
         {
-            return await _repo.GetBookAsync(id);
+            return _queryHandler.Handle(query);
         }
 
         [HttpPost("books")]
-        public async Task<PagedResponse<BookResponse>> GetBooksAsync([FromBody] QueryOptions options)
+        public PagedResponse<BookResponse> GetBooks([FromBody] PageFilterQuery query)
         {
-            PagedList<BookResponse> books = await _repo.GetBooksAsync(options);
-
-            return books.MapPagedResponse();
+            return _queryHandler.Handle(query);
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult> CreateBookAsync([FromBody] BookDTO bookDTO)
+        public ActionResult CreateBook([FromBody] CreateBookCommand command)
         {
             if (!ModelState.IsValid)
             {
                 return Ok(GetServerErrors(ModelState));
             }
 
-            Book book;
+            BookEntity book;
             try
             {
-                book = bookDTO.MapBook();
-                await _repo.AddAsync(book);
+                book = _commandHandler.Handle(command);
             }
             catch (Exception ex)
             {
@@ -62,7 +63,7 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
         }
 
         [HttpPut("update")]
-        public async Task<ActionResult> UpdateBookAsync([FromBody] BookDTO bookDTO)
+        public ActionResult UpdateBook([FromBody] UpdateBookCommand command)
         {
             if (!ModelState.IsValid)
             {
@@ -72,8 +73,7 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
             bool isOk;
             try
             {
-                Book book = bookDTO.MapBook();
-                isOk = await _repo.UpdateAsync(book);
+                isOk = _commandHandler.Handle(command);
             }
             catch (Exception ex)
             {
@@ -89,14 +89,13 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
         }
 
         [HttpDelete("delete")]
-        public async Task<ActionResult> DeleteTaskAsync([FromBody] BookDTO bookDTO)
+        public ActionResult DeleteBook([FromBody] DeleteBookCommand command)
         {
             bool isOk;
 
             try
             {
-                Book book = bookDTO.MapBook();
-                isOk = await _repo.DeleteAsync(book);
+                isOk = _commandHandler.Handle(command);
             }
             catch (Exception ex)
             {
