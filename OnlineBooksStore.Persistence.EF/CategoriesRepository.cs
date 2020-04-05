@@ -2,123 +2,122 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using OnlineBooksStore.Domain.Contracts.Models;
+using OnlineBooksStore.Domain.Contracts.Models.Category;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
 using OnlineBooksStore.Domain.Contracts.Repositories;
+using OnlineBooksStore.Persistence.Entities;
 using Book = OnlineBooksStore.Domain.Contracts.Models.Book;
 
 namespace OnlineBooksStore.Persistence.EF
 {
-    public class CategoriesRepository : BaseRepo<Category>, ICategoriesRepository
+    public class CategoriesRepository : BaseRepo<CategoryEntity>, ICategoriesRepository
     {
         public CategoriesRepository(StoreDbContext ctx) : base(ctx) { }
-        public IEnumerable<Category> Categories { get; }
-        public Domain.Contracts.Models.Pages.PagedList<Category> GetCategories(QueryOptions options)
+        public PagedList<CategoryEntity> GetCategories(QueryOptions options)
         {
             if (string.IsNullOrEmpty(options.SortPropertyName))
             {
-                options.SortPropertyName = nameof(Category.Name);
+                options.SortPropertyName = nameof(CategoryEntity.Name);
             }
 
-            var processing = new QueryProcessing<Category>(options);
+            var processing = new QueryProcessing<CategoryEntity>(options);
 
             var entities = GetEntities();
             var query = from subcategories in entities
                 join categories in entities
                     on subcategories.ParentId equals categories.Id into categoriesWithParent
                 from cwp in categoriesWithParent.DefaultIfEmpty()
-                select new Category
+                select new CategoryEntity
                 {
                     Id = subcategories.Id,
                     Name = subcategories.Name,
                     ParentId = subcategories.ParentId,
-                    DisplayedName = subcategories.ParentId == null
+                    ParentAndChildName = subcategories.ParentId == null
                         ? subcategories.Name
                         : subcategories.ParentCategory.Name + " <=> " + subcategories.Name
                 };
 
-            IQueryable<CategoryResponse> processedCategories;
+            IQueryable<CategoryEntity> processedCategories;
 
-            if (options.SortPropertyName == $"{nameof(Category.Name)}")
+            if (options.SortPropertyName == $"{nameof(CategoryEntity.Name)}")
             {
-                options.SortPropertyName = $"{nameof(Category.DisplayedName)}";
-                processedCategories = processing.ProcessQuery(query)
-                    .Select(e => e.MapCategoryResponse());
+                options.SortPropertyName = $"{nameof(CategoryEntity.ParentAndChildName)}";
+                processedCategories = processing.ProcessQuery(query);
             }
             else
             {
-                processedCategories = processing.ProcessQuery(query)
-                    .Select(e => e.MapCategoryResponse());
+                processedCategories = processing.ProcessQuery(query);
             }
 
-            var pagedList = new PagedList<CategoryResponse>(processedCategories, options);
+            var pagedList = new PagedList<CategoryEntity>(processedCategories, options);
 
             return pagedList;
         }
 
-        public Category GetCategory(long id)
+        public CategoryEntity GetCategory(long id)
         {
             var categories = GetEntities();
-            IQueryable<Book> books = Context.Books.OrderBy(b => b.Title);
+            IQueryable<BookEntity> books = Context.Books.OrderBy(b => b.Title);
 
-            var result = await categories
-                .GroupJoin(books, c => c.Id, b => b.CategoryID, (c, relbooks) =>
-                    new Category
+            var result = categories
+                .GroupJoin(books, c => c.Id, b => b.CategoryId, (c, relbooks) =>
+                    new CategoryEntity
                     {
                         Id = c.Id,
                         Name = c.Name,
                         ParentId = c.ParentId,
                         Books = relbooks.ToList()
                     })
-                .SingleOrDefaultAsync(p => p.Id == id);
+                .SingleOrDefault(p => p.Id == id);
 
             return result;
         }
 
-        public List<StoreCategoryResponse> GetStoreCategories()
+        public List<CategoryEntity> GetStoreCategories()
         {
             var query = GetEntities();
             var categories = query.Where(c => c.ParentId == null).OrderBy(c => c.Id).ToList();
             var subCategories = query.Where(s => s.ParentId != null)
                 .OrderBy(s => s.Name)
-                .OrderBy(s => s.ParentId).ToListAsync();
+                .ThenBy(s => s.ParentId).ToList();
 
             foreach (var category in categories)
             {
-                category.ChildrenCategories = new List<Category>();
+                category.ChildrenCategories = new List<CategoryEntity>();
                 foreach (var subcategory in subCategories)
                 {
-                    if (subcategory.ParentCategoryID == category.Id)
+                    if (subcategory.ParentId == category.Id)
                     {
                         category.ChildrenCategories.Add(subcategory);
                     }
                 }
             }
 
-            return CreateStoreCategoryResponses(categories);
+            return categories;
         }
 
-        public List<Category> GetParentCategories()
+        public List<CategoryEntity> GetParentCategories()
         {
-            IQueryable<Category> query = GetEntities()
+            IQueryable<CategoryEntity> query = GetEntities()
                 .Where(c => c.ParentId == null)
                 .OrderBy(c => c.Name);
 
-            return await query.ToListAsync();
+            return query.ToList();
         }
 
-        public Category AddCategory(Category category)
+        public CategoryEntity AddCategory(CategoryEntity category)
         {
             return Add(category);
         }
 
-        public bool UpdateCategory(Category category)
+        public bool UpdateCategory(CategoryEntity category)
         {
             return Update(category);
         }
 
-        public bool DeleteCategory(Category category)
+        public bool DeleteChildrenCategories(long parentId)
         {
-            var query = GetEntities().Where(c => c.ParentId == parentCategoryId);
+            var query = GetEntities().Where(c => c.ParentId == parentId);
             var categories = query.ToList();
             if (categories.Any())
             {
@@ -130,46 +129,9 @@ namespace OnlineBooksStore.Persistence.EF
             return false;
         }
 
-        private List<StoreCategoryResponse> CreateStoreCategoryResponses(List<Category> categories)
+        public bool DeleteCategory(CategoryEntity category)
         {
-            var storeCategories = new List<StoreCategoryResponse>();
-
-            foreach (var category in categories)
-            {
-                bool hasChildren = category.ChildrenCategories.Any();
-                var storeCategory = new StoreCategoryResponse
-                {
-                    Id = category.Id,
-                    ControlId = $"c_{category.Id}",
-                    Name = category.Name,
-                    IsParent = hasChildren,
-                    HasChildren = hasChildren,
-                };
-
-                if (hasChildren)
-                {
-                    var children = new List<StoreCategoryResponse>();
-                    foreach (var child in category.ChildrenCategories)
-                    {
-                        var storeChildCategory = new StoreCategoryResponse
-                        {
-                            Id = child.Id,
-                            ControlId = $"c_{child.Id}",
-                            ParentId = category.Id,
-                            Name = child.Name,
-                            IsParent = false,
-                            HasChildren = false,
-                        };
-
-                        children.Add(storeChildCategory);
-                    }
-                    storeCategory.Children = children;
-                }
-
-                storeCategories.Add(storeCategory);
-            }
-
-            return storeCategories;
+            return Delete(category);
         }
     }
 }

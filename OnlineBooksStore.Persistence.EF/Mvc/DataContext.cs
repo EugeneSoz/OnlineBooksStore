@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineBooksStore.Domain.Contracts.Entities;
 using OnlineBooksStore.Domain.Contracts.Models;
+using OnlineBooksStore.Domain.Contracts.Models.Category;
 using OnlineBooksStore.Domain.Contracts.Models.Publisher;
 
 namespace OnlineBooksStore.Persistence.EF.Mvc

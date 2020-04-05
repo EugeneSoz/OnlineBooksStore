@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace OnlineBooksStore.Domain.Contracts.Models
+namespace OnlineBooksStore.Domain.Contracts.Models.Category
 {
     /// <summary>
     /// Represents a book category
@@ -16,10 +16,8 @@ namespace OnlineBooksStore.Domain.Contracts.Models
         /// </value>
         public string Name { get; set; }
         public long? ParentId { get; set; }
-        public string DisplayedName { get; set; }
         public Category ParentCategory { get; set; }
         public List<Category> ChildrenCategories { get; set; }
-
-        public IEnumerable<RelatedBook> Books { get; set; }
+        public List<RelatedBook> Books { get; set; }
     }
 }

@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace OnlineBooksStore.Domain.Contracts.Models
+namespace OnlineBooksStore.Domain.Contracts.Models.Category
 {
-    public class StoreCategoryResponse
+    public class StoreCategoryResponse : EntityBase
     {
-        public long Id { get; set; }
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; }
 
         //если свойство не равно null, тогда категория является подкатегорией
         public long? ParentId { get; set; }

@@ -1,8 +1,7 @@
-﻿namespace OnlineBooksStore.Domain.Contracts.Models
+﻿namespace OnlineBooksStore.Domain.Contracts.Models.Category
 {
-    public class CategoryResponse
+    public class CategoryResponse : EntityBase
     {
-        public long Id { get; set; }
         public string Name { get; set; } = string.Empty;
 
         //если свойство не равно null, тогда категория является подкатегорией

@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Category\" />
     <Folder Include="Models\Book\" />
   </ItemGroup>
 

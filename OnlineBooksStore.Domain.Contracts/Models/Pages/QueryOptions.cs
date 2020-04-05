@@ -1,4 +1,6 @@
-﻿namespace OnlineBooksStore.Domain.Contracts.Models.Pages
+﻿using OnlineBooksStore.Domain.Contracts.Models.Category;
+
+namespace OnlineBooksStore.Domain.Contracts.Models.Pages
 {
     public class QueryOptions
     {
@@ -71,13 +73,13 @@
             switch (valueToChange)
             {
                 case nameof(CategoryResponse.ParentCategoryName):
-                    return $"{nameof(Category.ParentCategory)}.{nameof(Category.Name)}";
+                    return $"{nameof(Category.Category.ParentCategory)}.{nameof(Category.Category.Name)}";
                 case nameof(BookResponse.PublisherName):
                     return $"{nameof(Publisher.Publisher)}.{nameof(Publisher.Publisher.Name)}";
                 case nameof(BookResponse.SubcategoryName):
-                    return $"{nameof(Category)}.{nameof(Category.Name)}";
+                    return $"{nameof(Category.Category)}.{nameof(Category.Category.Name)}";
                 case nameof(BookResponse.CategoryName):
-                    return $"{nameof(Category)}.{nameof(Category.ParentCategory)}.{nameof(Category.Name)}";
+                    return $"{nameof(Category.Category)}.{nameof(Category.Category.ParentCategory)}.{nameof(Category.Category.Name)}";
                 default:
                     return valueToChange;
             }
@@ -88,9 +90,9 @@
             switch (valueToChange)
             {
                 case nameof(BookResponse.SubcategoryName):
-                    return $"{nameof(Category)}.{nameof(Category.Id)}";
+                    return $"{nameof(Category.Category)}.{nameof(Category.Category.Id)}";
                 case nameof(BookResponse.CategoryName):
-                    return $"{nameof(Category)}.{nameof(Category.ParentCategory)}.{nameof(Category.Id)}";
+                    return $"{nameof(Category.Category)}.{nameof(Category.Category.ParentCategory)}.{nameof(Category.Category.Id)}";
                 default:
                     return valueToChange;
             }

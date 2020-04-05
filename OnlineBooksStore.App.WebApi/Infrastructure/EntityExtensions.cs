@@ -3,6 +3,7 @@ using OnlineBooksStore.App.WebApi.Data;
 using OnlineBooksStore.App.WebApi.Data.DTO;
 using OnlineBooksStore.App.WebApi.Models;
 using OnlineBooksStore.Domain.Contracts.Models;
+using OnlineBooksStore.Domain.Contracts.Models.Category;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
 using OnlineBooksStore.Domain.Contracts.Models.Publisher;
 
@@ -50,31 +51,7 @@ namespace OnlineBooksStore.App.WebApi.Infrastructure
                 PublisherID = bookDTO.PublisherID
             };
         }
-
-        public static CategoryResponse MapCategoryResponse(this Category category)
-        {
-            return new CategoryResponse
-            {
-                Id = category.Id,
-                Name = category.Name,
-                ParentId = category.ParentCategory?.Id ?? null,
-                ParentCategoryName = category.ParentCategory?.Name ?? "",
-                DisplayedName = category.DisplayedName
-            };
-        }
-
-        public static Category MapCategory(this CategoryDTO categoryDTO)
-        {
-            return new Category
-            {
-                Id = categoryDTO.Id,
-                Name = categoryDTO.Name,
-                ParentId = categoryDTO.ParentCategoryID
-            };
-        }
-
         
-
         public static PagedResponse<T> MapPagedResponse<T>(this PagedList<T> response)
         {
             List<int> numbers = new List<int>();

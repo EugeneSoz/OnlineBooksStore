@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OnlineBooksStore.App.WebApi.Data.DTO;
+using OnlineBooksStore.App.Contracts.Query;
+using OnlineBooksStore.App.Handlers.Query;
 using OnlineBooksStore.App.WebApi.Infrastructure;
-using OnlineBooksStore.App.WebApi.Models;
-using OnlineBooksStore.App.WebApi.Models.Repo;
 using OnlineBooksStore.Domain.Contracts.Models;
+using OnlineBooksStore.Domain.Contracts.Models.Category;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
 
 namespace OnlineBooksStore.App.WebApi.Areas.Store
@@ -14,12 +14,12 @@ namespace OnlineBooksStore.App.WebApi.Areas.Store
     public class StoreController : Controller
     {
         private readonly IBookRepo _bookRepo;
-        private readonly ICategoryRepo _categoryRepo;
+        private readonly CategoryQueryHandler _queryHandler;
 
-        public StoreController(IBookRepo bookRepo, ICategoryRepo categoryRepo)
+        public StoreController(IBookRepo bookRepo, CategoryQueryHandler queryHandler)
         {
             _bookRepo = bookRepo;
-            _categoryRepo = categoryRepo;
+            _queryHandler = queryHandler;
         }
         [HttpGet("book/{id}")]
         public async Task<BookResponse> GetBookAsync(long id)
@@ -36,9 +36,9 @@ namespace OnlineBooksStore.App.WebApi.Areas.Store
         }
 
         [HttpGet("categories")]
-        public async Task<List<StoreCategoryResponse>> GetStoreCategoriesAsync()
+        public List<StoreCategoryResponse> GetStoreCategories([FromQuery] StoreCategoryQuery query)
         {
-            return await _categoryRepo.GetStoreCategoriesAsync();
+            return _queryHandler.Handle(query);
         }
     }
 }

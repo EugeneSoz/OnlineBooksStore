@@ -97,7 +97,7 @@
         /// <value>
         /// The category.
         /// </value>
-        public Category Category { get; set; }
+        public Category.Category Category { get; set; }
         /// <summary>
         /// Gets or sets the publisher.
         /// </summary>
