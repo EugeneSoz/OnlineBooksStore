@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using OnlineBooksStore.App.WebApi.Data;
+using OnlineBooksStore.Domain.Contracts.Repositories;
+using OnlineBooksStore.Persistence.Entities;
 
-namespace OnlineBooksStore.App.WebApi.Models.Repo
+namespace OnlineBooksStore.Persistence.EF
 {
     //базовый класс хранилища
     //используется для взаимодействия с базой данных с помощью CRUD операций
-    public class BaseRepo<T> : IDisposable, IBaseRepo<T> where T : Domain.Contracts.Models.EntityBase
+    public class BaseRepo<T> : IDisposable, IBaseRepo<T> where T : BaseEntity
     {
         protected BaseRepo(StoreDbContext ctx) => Context = ctx;
 

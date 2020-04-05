@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using OnlineBooksStore.App.WebApi.Data;
+using OnlineBooksStore.Domain.Contracts.Models;
+using OnlineBooksStore.Domain.Contracts.Models.Publisher;
 
 namespace OnlineBooksStore.App.WebApi.Models
 {

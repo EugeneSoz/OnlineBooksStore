@@ -9,6 +9,7 @@ using OnlineBooksStore.App.WebApi.Data.DTO;
 using OnlineBooksStore.App.WebApi.Infrastructure;
 using OnlineBooksStore.App.WebApi.Models;
 using OnlineBooksStore.App.WebApi.Models.Repo;
+using OnlineBooksStore.Domain.Contracts.Models.Pages;
 
 namespace OnlineBooksStore.App.WebApi.Areas.Admin
 {

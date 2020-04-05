@@ -1,9 +1,7 @@
-﻿using OnlineBooksStore.App.Contracts.Command;
-
-namespace OnlineBooksStore.App.Handlers.Interfaces
+﻿namespace OnlineBooksStore.App.Handlers.Interfaces
 {
-    public interface ICommandHandler<in TCommand> where TCommand : Contracts.Command.Command
+    public interface ICommandHandler<in TCommand, out TResult> where TCommand : Contracts.Command.Command
     {
-        void Handle(TCommand command);
+        TResult Handle(TCommand command);
     }
 }

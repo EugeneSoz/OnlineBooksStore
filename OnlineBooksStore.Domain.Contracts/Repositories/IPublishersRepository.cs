@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using OnlineBooksStore.Domain.Contracts.Models;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
+using OnlineBooksStore.Domain.Contracts.Models.Publisher;
+using OnlineBooksStore.Persistence.Entities;
 
 namespace OnlineBooksStore.Domain.Contracts.Repositories
 {
     public interface IPublishersRepository
     {
-        IEnumerable<Publisher> Publishers { get; }
-        PagedList<Publisher> GetPublishers(QueryOptions options);
-        Publisher GetPublisher(long id);
-        Publisher AddPublisher(Publisher publisher);
-        bool UpdatePublisher(Publisher publisher);
-        bool DeletePublisher(Publisher publisher);
+        PagedList<PublisherEntity> GetPublishers(QueryOptions options);
+        PublisherEntity GetPublisher(long id);
+        PublisherEntity AddPublisher(PublisherEntity publisher);
+        bool UpdatePublisher(PublisherEntity publisher);
+        bool DeletePublisher(PublisherEntity publisher);
     }
 }

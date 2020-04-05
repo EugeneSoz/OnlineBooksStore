@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using OnlineBooksStore.App.WebApi.Models;
 
-namespace OnlineBooksStore.App.WebApi.Data.DTO
+namespace OnlineBooksStore.Domain.Contracts.Models.Pages
 {
     public class PagedResponse<T>
     {

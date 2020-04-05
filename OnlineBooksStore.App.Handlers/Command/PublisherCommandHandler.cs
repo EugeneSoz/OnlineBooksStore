@@ -2,17 +2,16 @@
 using AutoMapper;
 using OnlineBooksStore.App.Contracts.Command;
 using OnlineBooksStore.App.Handlers.Interfaces;
-using OnlineBooksStore.Domain.Contracts.Entities;
-using OnlineBooksStore.Domain.Contracts.Models;
+using OnlineBooksStore.App.Handlers.Mapping;
 using OnlineBooksStore.Domain.Contracts.Repositories;
+using OnlineBooksStore.Persistence.Entities;
 
 namespace OnlineBooksStore.App.Handlers.Command
 {
-    public class PublisherCommandHandler : ICommandHandler<CreatePublisherCommand>,
-        ICommandHandler<UpdatePublisherCommand>,
-        ICommandHandler<DeletePublisherCommand>
+    public class PublisherCommandHandler : ICommandHandler<CreatePublisherCommand, PublisherEntity>,
+        ICommandHandler<UpdatePublisherCommand, bool>,
+        ICommandHandler<DeletePublisherCommand, bool>
     {
-
         private readonly IMapper _mapper;
         private readonly IPublishersRepository _repository;
 
@@ -22,22 +21,22 @@ namespace OnlineBooksStore.App.Handlers.Command
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        public void Handle(CreatePublisherCommand command)
+        public PublisherEntity Handle(CreatePublisherCommand command)
         {
-            var publisher = _mapper.Map<Publisher>(command);
-            _repository.AddPublisher(publisher);
+            var publisher = command.MapPublisherEntity();
+            return _repository.AddPublisher(publisher);
         }
 
-        public void Handle(UpdatePublisherCommand command)
+        public bool Handle(UpdatePublisherCommand command)
         {
-            var publisher = _mapper.Map<Publisher>(command);
-            _repository.UpdatePublisher(publisher);
+            var publisher = command.MapPublisherEntity();
+            return _repository.UpdatePublisher(publisher);
         }
 
-        public void Handle(DeletePublisherCommand command)
+        public bool Handle(DeletePublisherCommand command)
         {
-            var publisher = _mapper.Map<Publisher>(command);
-            _repository.DeletePublisher(publisher);
+            var publisher = command.MapPublisherEntity();
+            return _repository.DeletePublisher(publisher);
         }
     }
 }

@@ -1,9 +1,14 @@
 ﻿using System.Collections.Generic;
 
-namespace OnlineBooksStore.App.WebApi.Data.DTO
+namespace OnlineBooksStore.Domain.Contracts.Models
 {
-    public class StoreCategoryResponse : CategoryDTO
+    public class StoreCategoryResponse
     {
+        public long Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+
+        //если свойство не равно null, тогда категория является подкатегорией
+        public long? ParentId { get; set; }
         //id элемента html разметки
         public string ControlId { get; set; }
         //родительская категория

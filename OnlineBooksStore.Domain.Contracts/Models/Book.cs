@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using OnlineBooksStore.Domain.Contracts.Models;
-
-namespace OnlineBooksStore.Domain.Contracts.Entities
+﻿namespace OnlineBooksStore.Domain.Contracts.Models
 {
     /// <summary>
     /// Represents a book
@@ -109,6 +104,6 @@ namespace OnlineBooksStore.Domain.Contracts.Entities
         /// <value>
         /// The publisher.
         /// </value>
-        public Publisher Publisher { get; set; }
+        public Publisher.Publisher Publisher { get; set; }
     }
 }

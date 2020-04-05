@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OnlineBooksStore.Domain.Contracts.Entities;
 using OnlineBooksStore.Persistence.Entities;
 
-namespace OnlineBooksStore.App.WebApi.Data
+namespace OnlineBooksStore.Persistence.EF
 {
     public class StoreDbContext : DbContext
     {

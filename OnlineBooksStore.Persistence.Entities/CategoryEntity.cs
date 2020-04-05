@@ -5,8 +5,8 @@ namespace OnlineBooksStore.Persistence.Entities
     /// <summary>
     /// Represents a book category
     /// </summary>
-    /// <seealso cref="EntityBase" />
-    public class CategoryEntity : EntityBase
+    /// <seealso cref="BaseEntity" />
+    public class CategoryEntity : BaseEntity
     {
         /// <summary>
         /// Gets or sets the name of the category.

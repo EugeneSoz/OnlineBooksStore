@@ -5,7 +5,7 @@ namespace OnlineBooksStore.Persistence.Entities
     /// <summary>
     /// Base entity class with the identifier
     /// </summary>
-    public class EntityBase
+    public abstract class BaseEntity
     {
         /// <summary>
         /// Gets or sets the identifier.

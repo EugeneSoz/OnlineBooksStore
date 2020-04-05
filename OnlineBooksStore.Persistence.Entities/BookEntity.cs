@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents a book
     /// </summary>
-    public class BookEntity : EntityBase
+    public class BookEntity : BaseEntity
     {
         /// <summary>
         /// Gets or sets the book title.

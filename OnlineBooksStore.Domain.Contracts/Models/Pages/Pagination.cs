@@ -1,4 +1,4 @@
-﻿namespace OnlineBooksStore.App.WebApi.Models
+﻿namespace OnlineBooksStore.Domain.Contracts.Models.Pages
 {
     public class Pagination
     {

@@ -12,6 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OnlineBooksStore.App.Contracts\OnlineBooksStore.App.Contracts.csproj" />
+    <ProjectReference Include="..\OnlineBooksStore.App.Handlers\OnlineBooksStore.App.Handlers.csproj" />
     <ProjectReference Include="..\OnlineBooksStore.Domain.Contracts\OnlineBooksStore.Domain.Contracts.csproj" />
     <ProjectReference Include="..\OnlineBooksStore.Persistence.Entities\OnlineBooksStore.Persistence.Entities.csproj" />
   </ItemGroup>

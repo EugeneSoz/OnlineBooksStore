@@ -8,4 +8,13 @@
     <None Remove=".editorconfig" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineBooksStore.Persistence.Entities\OnlineBooksStore.Persistence.Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Category\" />
+    <Folder Include="Models\Book\" />
+  </ItemGroup>
+
 </Project>

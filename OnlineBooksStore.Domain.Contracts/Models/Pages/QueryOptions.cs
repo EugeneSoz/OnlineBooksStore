@@ -73,7 +73,7 @@
                 case nameof(CategoryResponse.ParentCategoryName):
                     return $"{nameof(Category.ParentCategory)}.{nameof(Category.Name)}";
                 case nameof(BookResponse.PublisherName):
-                    return $"{nameof(Publisher)}.{nameof(Publisher.Name)}";
+                    return $"{nameof(Publisher.Publisher)}.{nameof(Publisher.Publisher.Name)}";
                 case nameof(BookResponse.SubcategoryName):
                     return $"{nameof(Category)}.{nameof(Category.Name)}";
                 case nameof(BookResponse.CategoryName):

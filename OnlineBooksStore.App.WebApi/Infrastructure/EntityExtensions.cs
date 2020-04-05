@@ -2,6 +2,9 @@
 using OnlineBooksStore.App.WebApi.Data;
 using OnlineBooksStore.App.WebApi.Data.DTO;
 using OnlineBooksStore.App.WebApi.Models;
+using OnlineBooksStore.Domain.Contracts.Models;
+using OnlineBooksStore.Domain.Contracts.Models.Pages;
+using OnlineBooksStore.Domain.Contracts.Models.Publisher;
 
 namespace OnlineBooksStore.App.WebApi.Infrastructure
 {
@@ -54,7 +57,7 @@ namespace OnlineBooksStore.App.WebApi.Infrastructure
             {
                 Id = category.Id,
                 Name = category.Name,
-                ParentCategoryID = category.ParentCategory?.Id ?? null,
+                ParentId = category.ParentCategory?.Id ?? null,
                 ParentCategoryName = category.ParentCategory?.Name ?? "",
                 DisplayedName = category.DisplayedName
             };
@@ -66,19 +69,11 @@ namespace OnlineBooksStore.App.WebApi.Infrastructure
             {
                 Id = categoryDTO.Id,
                 Name = categoryDTO.Name,
-                ParentCategoryID = categoryDTO.ParentCategoryID
+                ParentId = categoryDTO.ParentCategoryID
             };
         }
 
-        public static Publisher MapPublisher(this PublisherDTO publisherDTO)
-        {
-            return new Publisher
-            {
-                Id = publisherDTO.Id,
-                Name = publisherDTO.Name,
-                Country = publisherDTO.Country
-            };
-        }
+        
 
         public static PagedResponse<T> MapPagedResponse<T>(this PagedList<T> response)
         {

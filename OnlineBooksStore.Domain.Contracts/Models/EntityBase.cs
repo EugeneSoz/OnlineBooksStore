@@ -3,7 +3,7 @@
     /// <summary>
     /// Base entity class with the identifier
     /// </summary>
-    public class EntityBase
+    public abstract class EntityBase
     {
         /// <summary>
         /// Gets or sets the identifier.

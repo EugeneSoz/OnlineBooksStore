@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using OnlineBooksStore.App.WebApi.Data;
-using OnlineBooksStore.App.WebApi.Data.DTO;
-using OnlineBooksStore.App.WebApi.Infrastructure;
-using OnlineBooksStore.App.WebApi.Models;
-using OnlineBooksStore.App.WebApi.Models.Repo;
+using OnlineBooksStore.App.Contracts.Command;
+using OnlineBooksStore.App.Contracts.Query;
+using OnlineBooksStore.App.Handlers.Command;
+using OnlineBooksStore.App.Handlers.Query;
+using OnlineBooksStore.Domain.Contracts.Models.Pages;
+using OnlineBooksStore.Domain.Contracts.Models.Publisher;
+using OnlineBooksStore.Persistence.Entities;
 
 namespace OnlineBooksStore.App.WebApi.Areas.Admin
 {
@@ -18,53 +19,45 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
     [ValidateAntiForgeryToken]
     public class PublisherController : Controller
     {
-        private readonly IPublisherRepo _repo;
+        private readonly PublisherCommandHandler _commandHandler;
+        private readonly PublisherQueryHandler _queryHandler;
 
-        public PublisherController(IPublisherRepo repo) => _repo = repo;
+        public PublisherController(PublisherCommandHandler commandHandler, PublisherQueryHandler queryHandler)
+        {
+            _commandHandler = commandHandler;
+            _queryHandler = queryHandler;
+        }
 
         [HttpGet("publisher/{id}")]
-        public async Task<Publisher> GetPublisherAsync(long id)
+        public Publisher GetPublisher([FromRoute] EntityIdQuery query)
         {
-            return await _repo.GetPublisherAsync(id);
+            return _queryHandler.Handle(query);
         }
 
         [HttpPost("publishers")]
-        public async Task<PagedResponse<Publisher>> GetPublishersAsync([FromBody] QueryOptions options)
+        public PagedResponse<PublisherResponse> GetPublishers([FromBody] PageFilterQuery query)
         {
-            PagedList<Publisher> publishers = await _repo.GetPublishersAsync(options);
-
-            return publishers?.MapPagedResponse();
+            return _queryHandler.Handle(query);
         }
 
         [HttpPost("publishersforselection")]
-        public async Task<List<Publisher>> GetPublishersForSelectionAsync([FromBody] SearchTerm term)
+        public List<PublisherResponse> GetPublishersForSelection([FromBody] SearchTermQuery query)
         {
-            QueryOptions options = new QueryOptions
-            {
-                SearchTerm = term.Value,
-                SearchPropertyNames = new[] { nameof(Publisher.Name) },
-                SortPropertyName = nameof(Publisher.Name),
-                PageSize = 10
-            };
-
-            PagedList<Publisher> pagedPublishers = await _repo.GetPublishersAsync(options);
-
-            return pagedPublishers.Entities;
+            return _queryHandler.Handle(query);
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult> CreatePublisherAsync([FromBody] PublisherDTO publisherDTO)
+        public ActionResult CreatePublisher([FromBody] CreatePublisherCommand command)
         {
             if (!ModelState.IsValid)
             {
                 return Ok(GetServerErrors(ModelState));
             }
 
-            Publisher publisher;
+            PublisherEntity publisher;
             try
             {
-                publisher = publisherDTO.MapPublisher();
-                await _repo.AddAsync(publisher);
+                publisher = _commandHandler.Handle(command);
             }
             catch (Exception ex)
             {
@@ -76,7 +69,7 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
         }
 
         [HttpPut("update")]
-        public async Task<ActionResult> UpdatePublisherAsync([FromBody] Publisher publisherDTO)
+        public ActionResult UpdatePublisher([FromBody] UpdatePublisherCommand command)
         {
             if (!ModelState.IsValid)
             {
@@ -86,8 +79,7 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
             bool isOk;
             try
             {
-                Publisher publisher = publisherDTO.MapPublisher();
-                isOk = await _repo.UpdateAsync(publisher);
+                isOk = _commandHandler.Handle(command);
             }
             catch (Exception ex)
             {
@@ -103,14 +95,13 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
         }
 
         [HttpDelete("delete")]
-        public async Task<ActionResult> DeletePublisherAsync([FromBody] Publisher publisherDTO)
+        public ActionResult DeletePublisher([FromBody] DeletePublisherCommand command)
         {
             bool isOk;
 
             try
             {
-                Publisher publisher = publisherDTO.MapPublisher();
-                isOk = await _repo.DeleteAsync(publisher);
+                isOk = _commandHandler.Handle(command);
             }
             catch (Exception ex)
             {
