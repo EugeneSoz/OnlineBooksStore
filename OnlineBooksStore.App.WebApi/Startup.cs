@@ -8,7 +8,12 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OnlineBooksStore.App.Handlers.Command;
+using OnlineBooksStore.App.Handlers.Query;
 using OnlineBooksStore.App.WebApi.Models.Database;
+using OnlineBooksStore.Domain.Contracts.Repositories;
+using OnlineBooksStore.Domain.Contracts.Services;
+using OnlineBooksStore.Domain.Services;
 using OnlineBooksStore.Persistence.EF;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -29,11 +34,6 @@ namespace OnlineBooksStore.App.WebApi
 
             services.AddSwaggerGen(options =>
                 options.SwaggerDoc("v1", new Info { Title = "BooksStore API", Version = "v1" }));
-
-            //services.AddSpaStaticFiles(configuration =>
-            //{
-            //    configuration.RootPath = "ClientApp/dist/ClientApp";
-            //});
 
             services.AddTransient<MigrationsManager>();
 
@@ -68,6 +68,23 @@ namespace OnlineBooksStore.App.WebApi
             services.AddAntiforgery(options => {
                 options.HeaderName = "X-XSRF-TOKEN";
             });
+
+            services.AddTransient<IBooksRepository, BooksRepository>();
+            services.AddTransient<ICategoriesRepository, CategoriesRepository>();
+            services.AddTransient<IPublishersRepository, PublishersRepository>();
+            services.AddTransient<IOrdersRepository, OrdersRepository>();
+
+            services.AddTransient<BookQueryHandler>();
+            services.AddTransient<CategoryQueryHandler>();
+            services.AddTransient<PublisherQueryHandler>();
+            services.AddTransient<OrderQueryHandler>();
+
+            services.AddTransient<BookCommandHandler>();
+            services.AddTransient<CategoryCommandHandler>();
+            services.AddTransient<PublisherCommandHandler>();
+            services.AddTransient<OrderCommandHandler>();
+            services.AddTransient<TablesCommandHandlers>();
+            services.AddTransient<IDbDataService, DbDataService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, 
@@ -87,7 +104,6 @@ namespace OnlineBooksStore.App.WebApi
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            //app.UseSpaStaticFiles();
             app.UseSession();
             app.UseAuthentication();
 

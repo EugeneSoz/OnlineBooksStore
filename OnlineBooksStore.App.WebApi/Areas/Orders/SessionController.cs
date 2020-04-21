@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using OnlineBooksStore.App.WebApi.Data.DTO;
 using OnlineBooksStore.App.WebApi.Models;
+using OnlineBooksStore.Domain.Contracts.Models.Orders;
 
 namespace OnlineBooksStore.App.WebApi.Areas.Orders
 {
