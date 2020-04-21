@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using OnlineBooksStore.App.WebApi.Data;
+using OnlineBooksStore.Persistence.EF;
 
 namespace OnlineBooksStore.App.WebApi.Models.Database
 {

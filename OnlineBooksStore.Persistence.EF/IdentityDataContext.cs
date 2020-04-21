@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace OnlineBooksStore.App.WebApi.Data
+namespace OnlineBooksStore.Persistence.EF
 {
     public class IdentityDataContext : IdentityDbContext<IdentityUser>
     {

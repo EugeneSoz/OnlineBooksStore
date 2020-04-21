@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OnlineBooksStore.App.WebApi.Data;
 using OnlineBooksStore.App.WebApi.Models.Database;
 using OnlineBooksStore.Persistence.EF;
 using Swashbuckle.AspNetCore.Swagger;
@@ -39,7 +38,8 @@ namespace OnlineBooksStore.App.WebApi
             services.AddTransient<MigrationsManager>();
 
             services.AddDbContext<IdentityDataContext>(options =>
-                options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnection"]));
+                options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnection"], b =>
+                    b.MigrationsAssembly("OnlineBooksStore.App.WebApi")));
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityDataContext>()
@@ -47,7 +47,8 @@ namespace OnlineBooksStore.App.WebApi
 
             services.AddDbContext<StoreDbContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]);
+                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"], b =>
+                    b.MigrationsAssembly("OnlineBooksStore.App.WebApi"));
             });
 
             services.AddDistributedSqlServerCache(options =>
