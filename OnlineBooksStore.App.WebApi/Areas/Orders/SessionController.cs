@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using OnlineBooksStore.App.WebApi.Data.DTO;
+using OnlineBooksStore.App.WebApi.Models;
 
 namespace OnlineBooksStore.App.WebApi.Areas.Orders
 {
@@ -19,7 +20,7 @@ namespace OnlineBooksStore.App.WebApi.Areas.Orders
         }
 
         [HttpPost("cart")]
-        public ActionResult StoreCart([FromBody] CartLine[] products)
+        public ActionResult StoreCart([FromBody] OrderLine[] products)
         {
             string jsonData = JsonConvert.SerializeObject(products, 
                 new JsonSerializerSettings {

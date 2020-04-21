@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using OnlineBooksStore.Domain.Contracts.Models.Categories;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
@@ -42,6 +43,13 @@ namespace OnlineBooksStore.Persistence.EF
             return booksPagedList;
 
            
+        }
+
+        public IEnumerable<BookEntity> GetSomeBooks(IEnumerable<long> booksIds)
+        {
+            var books = GetEntities().Where(b => booksIds.Contains(b.Id));
+
+            return books.AsEnumerable();
         }
 
         public BookEntity GetBook(long key)

@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using OnlineBooksStore.App.WebApi.Data;
-using OnlineBooksStore.App.WebApi.Models;
+using OnlineBooksStore.App.Contracts.Command;
+using OnlineBooksStore.App.Contracts.Query;
+using OnlineBooksStore.App.Handlers.Command;
+using OnlineBooksStore.App.Handlers.Query;
+using OnlineBooksStore.Domain.Contracts.Models.Orders;
 
 namespace OnlineBooksStore.App.WebApi.Areas.Orders
 {
@@ -15,80 +16,41 @@ namespace OnlineBooksStore.App.WebApi.Areas.Orders
     [AutoValidateAntiforgeryToken]
     public class OrderController : ControllerBase
     {
-        private readonly StoreDbContext _context;
+        private readonly OrderQueryHandler _queryHandler;
+        private readonly OrderCommandHandler _commandHandler;
 
-        public OrderController(StoreDbContext context)
+        public OrderController(OrderQueryHandler queryHandler, OrderCommandHandler commandHandler)
         {
-            _context = context;
+            _queryHandler = queryHandler ?? throw new ArgumentNullException(nameof(queryHandler));
+            _commandHandler = commandHandler ?? throw new ArgumentNullException(nameof(commandHandler));
         }
 
         [HttpGet]
-        public async Task<List<Order>> GetOrdersAsync()
+        public IEnumerable<Order> GetOrders()
         {
-            List<Order> orders = await _context.Orders
-                .Include(o => o.Goods)
-                .Include(o => o.Payment)
-                .ToListAsync();
-
-            return orders;
+            return _queryHandler.Handle(new OrderQuery());
         }
 
         [HttpPost("{id}")]
-        public async Task MarkShipped(long id)
+        public void MarkShipped([FromQuery] OrderIdQuery query)
         {
-            Order order = await _context.Orders.FindAsync(id);
-            if (order != null)
-            {
-                order.Shipped = true;
-                await _context.SaveChangesAsync();
-            }
+            _queryHandler.Handle(query);
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult CreateOrder([FromBody] Order order)
+        public ActionResult CreateOrder([FromBody] CreateOrderCommand command)
         {
             if (ModelState.IsValid)
             {
-                order.OrderId = 0;
-                order.Shipped = false;
-                //не доверяем информации о сумме заказа, присланного с клиента
-                order.Payment.Total = GetPrice(order.Goods);
-                ProcessPayment(order.Payment);
-                if (order.Payment.AuthCode != null)
+                var payment = _commandHandler.Handle(command);
+                if (payment != null)
                 {
-                    _context.Add(order);
-                    _context.SaveChanges();
-
-                    return Ok(new
-                    {
-                        orderId = order.OrderId,
-                        authCode = order.Payment.AuthCode,
-                        amount = order.Payment.Total
-                    });
+                    return Ok(payment);
                 }
-                else
-                {
-                    return BadRequest("Платёж отклонён");
-                }
+                return BadRequest("Платёж отклонён");
             }
             return BadRequest(ModelState);
-        }
-
-        private decimal GetPrice(List<OrderLine> lines)
-        {
-            //получить id всех книг в заказе
-            IEnumerable<long> ids = lines.Select(l => l.ProductId);
-
-            return _context.Books
-                .Where(b => ids.Contains(b.Id))
-                .Select(b => lines.First(l => l.ProductId == b.Id).Quantity * b.Price)
-            .Sum();
-        }
-
-        private void ProcessPayment(Payment payment)
-        {
-            payment.AuthCode = "12345";
         }
     }
 }

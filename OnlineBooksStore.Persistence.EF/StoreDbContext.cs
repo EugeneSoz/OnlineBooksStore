@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OnlineBooksStore.Domain.Contracts.Entities;
 using OnlineBooksStore.Persistence.Entities;
 
 namespace OnlineBooksStore.Persistence.EF
@@ -32,6 +31,6 @@ namespace OnlineBooksStore.Persistence.EF
         public DbSet<PublisherEntity> Publishers { get; set; }
 
         //таблица заказов в бд
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderEntity> Orders { get; set; }
     }
 }

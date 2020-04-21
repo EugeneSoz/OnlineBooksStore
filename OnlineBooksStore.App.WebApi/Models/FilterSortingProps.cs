@@ -47,7 +47,7 @@ namespace OnlineBooksStore.App.WebApi.Models
                 new FilterSortingProps(nameof(BookResponse.CategoryName), "Категория"),
                 new FilterSortingProps(nameof(BookResponse.SubcategoryName), "Подкатегория"),
                 new FilterSortingProps(nameof(BookResponse.PublisherName), "Издательство"),
-                new FilterSortingProps(nameof(BookResponse.Price), "Цена")
+                new FilterSortingProps(nameof(BookResponse.RetailPrice), "Цена")
             };
         }
     }
@@ -82,7 +82,7 @@ namespace OnlineBooksStore.App.WebApi.Models
                 new FilterSortingProps(nameof(BookResponse.CategoryName), "Категория"),
                 new FilterSortingProps(nameof(BookResponse.SubcategoryName), "Подкатегория"),
                 new FilterSortingProps(nameof(BookResponse.PublisherName), "Издательство"),
-                new FilterSortingProps(nameof(BookResponse.Price), "Цена")
+                new FilterSortingProps(nameof(BookResponse.RetailPrice), "Цена")
             };
         }
     }

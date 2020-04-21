@@ -7,6 +7,7 @@ using OnlineBooksStore.Domain.Contracts.Models;
 using OnlineBooksStore.Domain.Contracts.Models.Books;
 using OnlineBooksStore.Domain.Contracts.Models.Categories;
 using OnlineBooksStore.Domain.Contracts.Models.Publishers;
+using OnlineBooksStore.Persistence.EF;
 
 namespace OnlineBooksStore.App.WebApi.Models.Database
 {
@@ -132,13 +133,13 @@ namespace OnlineBooksStore.App.WebApi.Models.Database
                     PageCount = 800 + i,
                     Description = $"Book description",
                     Year = 2018,
-                    Price = randomPrice.Next(790, 3800),
+                    RetailPrice = randomPrice.Next(790, 3800),
                     Publisher = publishers[publisherIndex],
                     Category = subcategories[subcategoryIndex]
                 });
             }
 
-            context.Books.AddRange(books);
+            //context.Books.AddRange(books);
         }
     }
 }

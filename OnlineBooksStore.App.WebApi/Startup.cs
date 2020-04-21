@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnlineBooksStore.App.WebApi.Data;
 using OnlineBooksStore.App.WebApi.Models.Database;
-using OnlineBooksStore.App.WebApi.Models.Repo;
+using OnlineBooksStore.Persistence.EF;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace OnlineBooksStore.App.WebApi
@@ -36,9 +36,6 @@ namespace OnlineBooksStore.App.WebApi
             //    configuration.RootPath = "ClientApp/dist/ClientApp";
             //});
 
-            services.AddTransient<IPublisherRepo, PublisherRepo>();
-            services.AddTransient<ICategoryRepo, CategoryRepo>();
-            services.AddTransient<IBookRepo, BookRepo>();
             services.AddTransient<MigrationsManager>();
 
             services.AddDbContext<IdentityDataContext>(options =>

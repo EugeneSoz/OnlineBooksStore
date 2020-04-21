@@ -49,7 +49,7 @@ namespace OnlineBooksStore.Domain.Contracts.Models.Pages
         {
             ParameterExpression pe = Expression.Parameter(typeof(T), "x");
             Expression source = pe;
-            foreach (string member in propertyName.Split("."))
+            foreach (string member in propertyName.Split('.'))
             {
                 source = Expression.Property(source, member);
             }
@@ -84,7 +84,7 @@ namespace OnlineBooksStore.Domain.Contracts.Models.Pages
         {
             ParameterExpression pe = Expression.Parameter(typeof(T), "x");
             Expression source = pe;
-            foreach (string member in propertyName.Split("."))
+            foreach (string member in propertyName.Split('.'))
             {
                 source = Expression.Property(source, member);
             }
@@ -100,7 +100,7 @@ namespace OnlineBooksStore.Domain.Contracts.Models.Pages
         {
             ParameterExpression pe = Expression.Parameter(typeof(T), "x");
             Expression source = pe;
-            foreach (string member in propertyName.Split("."))
+            foreach (string member in propertyName.Split('.'))
             {
                 source = Expression.Property(source, member);
             }

@@ -3,6 +3,8 @@ using System.IO;
 using System.Text;
 using Newtonsoft.Json;
 using OnlineBooksStore.App.WebApi.Data;
+using OnlineBooksStore.Domain.Contracts.Models.Categories;
+using OnlineBooksStore.Persistence.EF;
 
 namespace OnlineBooksStore.App.WebApi.Models.Database
 {
@@ -32,17 +34,17 @@ namespace OnlineBooksStore.App.WebApi.Models.Database
             {
                 long oldId = p.Id;
                 p.Id = 0;
-                dataContext.Categories.Add(p);
+                //dataContext.Categories.Add(p);
                 dataContext.SaveChanges();
                 parentIds.Add(oldId, p.Id);
             });
 
             data.Categories.ForEach(c =>
             {
-                c.ParentCategoryID = parentIds[c.ParentCategoryID.Value];
+                c.ParentId = parentIds[c.ParentId.Value];
                 oldCategoriesIds.Add(c.Id);
                 c.Id = 0;
-                dataContext.Categories.Add(c);
+                //dataContext.Categories.Add(c);
             });
 
             dataContext.SaveChanges();
@@ -55,7 +57,7 @@ namespace OnlineBooksStore.App.WebApi.Models.Database
             {
                 oldPublishersIds.Add(p.Id);
                 p.Id = 0;
-                dataContext.Publishers.Add(p);
+                //dataContext.Publishers.Add(p);
             });
 
             dataContext.SaveChanges();
@@ -66,11 +68,11 @@ namespace OnlineBooksStore.App.WebApi.Models.Database
 
             data.Books.ForEach(b =>
             {
-                b.CategoryID = categoriesIds[b.CategoryID.Value];
-                b.PublisherID = publishersIds[b.PublisherID.Value];
+                //b.CategoryID = categoriesIds[b.CategoryID.Value];
+                //b.PublisherID = publishersIds[b.PublisherID.Value];
             });
 
-            dataContext.Books.AddRange(data.Books);
+            //dataContext.Books.AddRange(data.Books);
         }
 
         private string GetDataFromJson(string fileName)
