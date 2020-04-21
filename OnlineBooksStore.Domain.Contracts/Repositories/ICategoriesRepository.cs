@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using OnlineBooksStore.Domain.Contracts.Entities;
+﻿using System.Collections.Generic;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
+using OnlineBooksStore.Persistence.Entities;
 
 namespace OnlineBooksStore.Domain.Contracts.Repositories
 {
     public interface ICategoriesRepository
     {
-        IEnumerable<Category> Categories { get; }
-        PagedList<Category> GetCategories(QueryOptions options);
-        void AddCategory(Category category);
-        void UpdateCategory(Category category);
-        void DeleteCategory(Category category);
+        PagedList<CategoryEntity> GetCategories(QueryOptions options);
+        CategoryEntity GetCategory(long id);
+        List<CategoryEntity> GetStoreCategories();
+        List<CategoryEntity> GetParentCategories();
+        CategoryEntity AddCategory(CategoryEntity category);
+        bool UpdateCategory(CategoryEntity category);
+        bool DeleteChildrenCategories(long parentId);
+        bool DeleteCategory(CategoryEntity category);
     }
 }

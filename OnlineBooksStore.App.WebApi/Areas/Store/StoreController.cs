@@ -1,42 +1,41 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OnlineBooksStore.App.WebApi.Data.DTO;
-using OnlineBooksStore.App.WebApi.Infrastructure;
-using OnlineBooksStore.App.WebApi.Models;
-using OnlineBooksStore.App.WebApi.Models.Repo;
+using OnlineBooksStore.App.Contracts.Query;
+using OnlineBooksStore.App.Handlers.Query;
+using OnlineBooksStore.Domain.Contracts.Models.Books;
+using OnlineBooksStore.Domain.Contracts.Models.Categories;
+using OnlineBooksStore.Domain.Contracts.Models.Pages;
 
 namespace OnlineBooksStore.App.WebApi.Areas.Store
 {
     [Route("api/[controller]")]
     public class StoreController : Controller
     {
-        private readonly IBookRepo _bookRepo;
-        private readonly ICategoryRepo _categoryRepo;
+        private readonly BookQueryHandler _bookQueryHandler;
+        private readonly CategoryQueryHandler _categoryQueryHandler;
 
-        public StoreController(IBookRepo bookRepo, ICategoryRepo categoryRepo)
+        public StoreController(BookQueryHandler bookQueryHandler, CategoryQueryHandler categoryQueryHandler)
         {
-            _bookRepo = bookRepo;
-            _categoryRepo = categoryRepo;
+            _bookQueryHandler = bookQueryHandler;
+            _categoryQueryHandler = categoryQueryHandler;
         }
+
         [HttpGet("book/{id}")]
-        public async Task<BookResponse> GetBookAsync(long id)
+        public BookResponse GetBook([FromQuery] BookIdQuery query)
         {
-            return await _bookRepo.GetBookAsync(id);
+            return _bookQueryHandler.Handle(query);
         }
 
         [HttpPost("books")]
-        public async Task<PagedResponse<BookResponse>> GetBooksAsync([FromBody] QueryOptions options)
+        public PagedResponse<BookResponse> GetBooks([FromBody] PageFilterQuery query)
         {
-            PagedList<BookResponse> books = await _bookRepo.GetBooksAsync(options);
-
-            return books.MapPagedResponse();
+            return _bookQueryHandler.Handle(query);
         }
 
         [HttpGet("categories")]
-        public async Task<List<StoreCategoryResponse>> GetStoreCategoriesAsync()
+        public List<StoreCategoryResponse> GetStoreCategories([FromQuery] StoreCategoryQuery query)
         {
-            return await _categoryRepo.GetStoreCategoriesAsync();
+            return _categoryQueryHandler.Handle(query);
         }
     }
 }

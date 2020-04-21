@@ -1,83 +1,84 @@
-﻿using OnlineBooksStore.Domain.Contracts.Entities;
-using OnlineBooksStore.Domain.Contracts.Repositories;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using OnlineBooksStore.Domain.Contracts.Models.Categories;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
+using OnlineBooksStore.Domain.Contracts.Models.Publishers;
+using OnlineBooksStore.Domain.Contracts.Repositories;
+using OnlineBooksStore.Persistence.Entities;
 
 namespace OnlineBooksStore.Persistence.EF
 {
-    public class BooksRepository : IBooksRepository
+    public class BooksRepository : BaseRepo<BookEntity>, IBooksRepository
     {
-        private readonly DataContext _context;
-
-        public BooksRepository(DataContext context)
+        public BooksRepository(StoreDbContext ctx) : base(ctx) { }
+        
+        public PagedList<BookEntity> GetBooks(QueryOptions options)
         {
-            _context = context;
-        }
+            QueryProcessing<BookEntity> processing = new QueryProcessing<BookEntity>(options);
 
-        public IEnumerable<Book> Books => _context.Books
-            .Include(b => b.Category)
-            .Include(b => b.Publisher);
+            IQueryable<BookEntity> query = GetEntities()
+                .Include(p => p.Publisher)
+                .Include(c => c.Category)
+                .ThenInclude(c => c.ParentCategory);
 
-        public PagedList<Book> GetBooks(QueryOptions options, long category = 0)
-        {
-            IQueryable<Book> query = _context.Books
-                .Include(b => b.Category)
-                .Include(b => b.Publisher);
-            if (category != 0)
+            IQueryable<BookEntity> processedBooks;
+
+            if (options.SortPropertyName == $"{nameof(Publisher)}.{nameof(Publisher.Name)}" ||
+                options.SortPropertyName == $"{nameof(Category)}.{nameof(Category.Name)}" ||
+                options.SortPropertyName == 
+                $"{nameof(Category)}.{nameof(Category.ParentCategory)}.{nameof(Category.Name)}")
             {
-                query = query.Where(b => b.CategoryId == category);
+                processedBooks = options.DescendingOrder
+                    ? processing.ProcessQuery(query.OrderByDescending(b => b.Title))
+                    : processing.ProcessQuery(query.OrderBy(b => b.Title));
             }
-            return new PagedList<Book>(query, options);
-        }
-        public Book GetBook(long key)
-        {
-            return _context.Books.Include(b => b.Category)
-                .Include(b => b.Publisher).First(b => b.Id == key);
-        }
-
-        public void AddBook(Book book)
-        {
-            _context.Books.Add(book);
-            _context.SaveChanges();
-        }
-
-        public void UpdateBook(Book book)
-        {
-            var savedBook = _context.Books.Find(book.Id);
-            savedBook.Title = book.Title;
-            savedBook.CategoryId = book.CategoryId;
-            savedBook.PublisherId = book.PublisherId;
-            savedBook.PurchasePrice = book.PurchasePrice;
-            savedBook.RetailPrice = book.RetailPrice;
-
-            _context.SaveChanges();
-        }
-
-        public void UpdateAll(Book[] books)
-        {
-            var data = books.ToDictionary(b => b.Id);
-            var baseline = _context.Books.Where(b => data.Keys.Contains(b.Id));
-
-            foreach (var databaseBook in baseline)
+            else
             {
-                var requestBook = data[databaseBook.Id];
-                databaseBook.Title = requestBook.Title;
-                databaseBook.Category = requestBook.Category;
-                databaseBook.Publisher = requestBook.Publisher;
-                databaseBook.PurchasePrice = requestBook.PurchasePrice;
-                databaseBook.RetailPrice = requestBook.RetailPrice;
+                processedBooks = processing.ProcessQuery(query);
             }
 
-            _context.SaveChanges();
+            var booksPagedList = new PagedList<BookEntity>(processedBooks, options);
+
+            return booksPagedList;
+
+           
         }
 
-        public void Delete(Book book)
+        public IEnumerable<BookEntity> GetSomeBooks(IEnumerable<long> booksIds)
         {
-            _context.Books.Remove(book);
+            var books = GetEntities().Where(b => booksIds.Contains(b.Id));
 
-            _context.SaveChanges();
+            return books.AsEnumerable();
+        }
+
+        public BookEntity GetBook(long key)
+        {
+            IQueryable<BookEntity> entities = GetEntities();
+
+            IQueryable<BookEntity> book = entities
+                .Include(p => p.Publisher)
+                .Include(c => c.Category)
+                .ThenInclude(c => c.ParentCategory);
+
+            BookEntity result = book.SingleOrDefault(b => b.Id == key);
+
+            return result;
+        }
+
+        public BookEntity AddBook(BookEntity book)
+        {
+            return Add(book);
+        }
+
+        public bool UpdateBook(BookEntity book)
+        {
+            return Update(book);
+        }
+
+        public bool DeleteBook(BookEntity book)
+        {
+            return Delete(book);
         }
     }
 }

@@ -1,56 +1,127 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OnlineBooksStore.App.WebApi.Controllers;
-using OnlineBooksStore.App.WebApi.Data;
-using OnlineBooksStore.App.WebApi.Data.DTO;
-using OnlineBooksStore.App.WebApi.Infrastructure;
-using OnlineBooksStore.App.WebApi.Models;
-using OnlineBooksStore.App.WebApi.Models.Repo;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using OnlineBooksStore.App.Contracts.Command;
+using OnlineBooksStore.App.Contracts.Query;
+using OnlineBooksStore.App.Handlers.Command;
+using OnlineBooksStore.App.Handlers.Query;
+using OnlineBooksStore.Domain.Contracts.Models.Books;
+using OnlineBooksStore.Domain.Contracts.Models.Pages;
+using OnlineBooksStore.Persistence.Entities;
 
 namespace OnlineBooksStore.App.WebApi.Areas.Admin
 {
     [Authorize(Roles = "Administrator")]
+    [Route("api/[controller]")]
+    [Produces("application/json")]
     [AutoValidateAntiforgeryToken]
-    public class BookController : BaseController
+    public class BookController : Controller
     {
-        private readonly IBookRepo _repo;
+        private readonly BookQueryHandler _queryHandler;
+        private readonly BookCommandHandler _commandHandler;
 
-        public BookController(IBookRepo repo) => _repo = repo;
+        public BookController(BookQueryHandler queryHandler, BookCommandHandler commandHandler)
+        {
+            _queryHandler = queryHandler ?? throw new ArgumentNullException(nameof(queryHandler));
+            _commandHandler = commandHandler ?? throw new ArgumentNullException(nameof(commandHandler));
+        }
 
         [HttpGet("book/{id}")]
-        public async Task<BookResponse> GetBookAsync(long id)
+        public BookResponse GetBook([FromQuery] BookIdQuery query)
         {
-            return await _repo.GetBookAsync(id);
+            return _queryHandler.Handle(query);
         }
 
         [HttpPost("books")]
-        public async Task<PagedResponse<BookResponse>> GetBooksAsync([FromBody] QueryOptions options)
+        public PagedResponse<BookResponse> GetBooks([FromBody] PageFilterQuery query)
         {
-            PagedList<BookResponse> books = await _repo.GetBooksAsync(options);
-
-            return books.MapPagedResponse();
+            return _queryHandler.Handle(query);
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult> CreateBookAsync([FromBody] BookDTO bookDTO)
+        public ActionResult CreateBook([FromBody] CreateBookCommand command)
         {
-            Book book = bookDTO.MapBook();
-            return await CreateAsync(book, _repo.AddAsync);
+            if (!ModelState.IsValid)
+            {
+                return Ok(GetServerErrors(ModelState));
+            }
+
+            BookEntity book;
+            try
+            {
+                book = _commandHandler.Handle(command);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $@"Невозможно создать запись: {ex.Message}");
+                return BadRequest(GetServerErrors(ModelState));
+            }
+
+            return Created("", book);
         }
 
         [HttpPut("update")]
-        public async Task<ActionResult> UpdateBookAsync([FromBody] BookDTO bookDTO)
+        public ActionResult UpdateBook([FromBody] UpdateBookCommand command)
         {
-            Book book = bookDTO.MapBook();
-            return await UpdateAsync(book, _repo.UpdateAsync);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(GetServerErrors(ModelState));
+            }
+
+            bool isOk;
+            try
+            {
+                isOk = _commandHandler.Handle(command);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $@"Невозможно сохранить запись: {ex.Message}");
+                return BadRequest(GetServerErrors(ModelState));
+            }
+
+            if (!isOk)
+            {
+                return NotFound();
+            }
+            return Ok();
         }
 
         [HttpDelete("delete")]
-        public async Task<ActionResult> DeleteTaskAsync([FromBody] BookDTO bookDTO)
+        public ActionResult DeleteBook([FromBody] DeleteBookCommand command)
         {
-            Book book = bookDTO.MapBook();
-            return await DeleteAsync(book, _repo.DeleteAsync);
+            bool isOk;
+
+            try
+            {
+                isOk = _commandHandler.Handle(command);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $@"Невозможно удалить запись: {ex.Message}");
+                return BadRequest(GetServerErrors(ModelState));
+            }
+
+            if (!isOk)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
+
+        private List<string> GetServerErrors(ModelStateDictionary modelstate)
+        {
+            List<string> errors = new List<string>();
+            foreach (ModelStateEntry error in modelstate.Values)
+            {
+                foreach (ModelError e in error.Errors)
+                {
+                    errors.Add(e.ErrorMessage);
+                }
+            }
+
+            return errors;
         }
     }
 }

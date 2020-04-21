@@ -1,97 +1,152 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OnlineBooksStore.App.WebApi.Controllers;
-using OnlineBooksStore.App.WebApi.Data;
-using OnlineBooksStore.App.WebApi.Data.DTO;
-using OnlineBooksStore.App.WebApi.Infrastructure;
-using OnlineBooksStore.App.WebApi.Models;
-using OnlineBooksStore.App.WebApi.Models.Repo;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using OnlineBooksStore.App.Contracts.Command;
+using OnlineBooksStore.App.Contracts.Query;
+using OnlineBooksStore.App.Handlers.Command;
+using OnlineBooksStore.App.Handlers.Query;
+using OnlineBooksStore.Domain.Contracts.Models.Categories;
+using OnlineBooksStore.Domain.Contracts.Models.Pages;
+using OnlineBooksStore.Persistence.Entities;
 
 namespace OnlineBooksStore.App.WebApi.Areas.Admin
 {
     [Authorize(Roles = "Administrator")]
+    [Route("api/[controller]")]
+    [Produces("application/json")]
     [AutoValidateAntiforgeryToken]
-    public class CategoryController : BaseController
+    public class CategoryController : Controller
     {
-        private readonly ICategoryRepo _repo;
+        private readonly CategoryQueryHandler _queryHandler;
+        private readonly CategoryCommandHandler _commandHandler;
 
-        public CategoryController(ICategoryRepo repo) => _repo = repo;
+        public CategoryController(CategoryQueryHandler queryHandler, CategoryCommandHandler commandHandler)
+        {
+            _queryHandler = queryHandler ?? throw new ArgumentNullException(nameof(queryHandler));
+            _commandHandler = commandHandler ?? throw new ArgumentNullException(nameof(commandHandler));
+        }
 
         [HttpGet("category/{id}")]
-        public async Task<Category> GetCategoryAsync(long id)
+        public Category GetCategory([FromRoute] EntityIdQuery query)
         {
-            return await _repo.GetCategoryAsync(id);
+            return _queryHandler.Handle(query);
         }
-
+        
         [HttpPost("categories")]
-        public async Task<PagedResponse<CategoryResponse>> GetCategoriesAsync(
-            [FromBody] QueryOptions options)
+        public PagedResponse<CategoryResponse> GetCategories([FromBody] PageFilterQuery query)
         {
-            PagedList<CategoryResponse> categories = await _repo.GetCategoriesAsync(options);
-
-            return categories.MapPagedResponse();
-        }
-
-        [HttpGet("storecategories")]
-        public async Task<List<StoreCategoryResponse>> GetStoreCategoriesAsync()
-        {
-            return await _repo.GetStoreCategoriesAsync();
+            return _queryHandler.Handle(query);
         }
 
         [HttpGet("parentcategories")]
-        public async Task<List<Category>> GetParentCategoriesAsync()
+        public List<Category> GetParentCategories(ParentCategoryCategoryQuery query)
         {
-            return await _repo.GetParentCategoriesAsync();
+            return _queryHandler.Handle(query);
         }
 
         [HttpPost("categoriesforselection")]
-        public async Task<List<CategoryResponse>> GetCategoriesForSelectionAsync([FromBody] SearchTerm term)
+        public List<CategoryResponse> GetCategoriesForSelection([FromBody] SearchTermQuery query)
         {
-            QueryOptions options = new QueryOptions
-            {
-                SearchTerm = term.Value,
-                SearchPropertyNames = new string[] { nameof(Publisher.Name) },
-                SortPropertyName = nameof(Publisher.Name),
-                PageSize = 10
-            };
-
-            PagedList<CategoryResponse> pagedCategories = await _repo.GetCategoriesAsync(options);
-
-            return pagedCategories.Entities;
+            return _queryHandler.Handle(query);
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult> CreateCategoryAsync([FromBody] CategoryDTO categoryDTO)
+        public ActionResult CreateCategory([FromBody] CreateCategoryCommand command)
         {
-            Category category = categoryDTO.MapCategory();
-            return await CreateAsync(category, _repo.AddAsync);
+            if (!ModelState.IsValid)
+            {
+                return Ok(GetServerErrors(ModelState));
+            }
+
+            CategoryEntity category;
+            try
+            {
+                category = _commandHandler.Handle(command);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $@"Невозможно создать запись: {ex.Message}");
+                return BadRequest(GetServerErrors(ModelState));
+            }
+
+            return Created("", category);
         }
 
         [HttpPut("update")]
-        public async Task<ActionResult> UpdateCategoryAsync([FromBody] CategoryDTO categoryDTO)
+        public ActionResult UpdateCategory([FromBody] UpdateCategoryCommand command)
         {
-            Category category = categoryDTO.MapCategory();
-            return await UpdateAsync(category, _repo.UpdateAsync);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(GetServerErrors(ModelState));
+            }
+
+            bool isOk;
+            try
+            {
+                isOk = _commandHandler.Handle(command);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $@"Невозможно сохранить запись: {ex.Message}");
+                return BadRequest(GetServerErrors(ModelState));
+            }
+
+            if (!isOk)
+            {
+                return NotFound();
+            }
+            return Ok();
         }
 
         [HttpDelete("delete")]
-        public async Task<ActionResult> DeleteCategoryAsync([FromBody] CategoryDTO categoryDTO)
+        public ActionResult DeleteCategory([FromBody] DeleteCategoryCommand command)
         {
-            Category category = categoryDTO.MapCategory();
             //если у категории есть дочерние, тогда удалить их
-            if (category.ParentCategoryID == null)
+            bool isOk = _commandHandler.Handle(command);
+            //в случае успеха - удалить саму родительскую категорию
+            if (isOk)
             {
-                bool isOk = await _repo.DeleteAsync(category.Id);
-                //в случае успеха - удалить саму родительскую категорию
-                if (isOk)
-                {
-                    return await DeleteAsync(category, _repo.DeleteAsync);
-                }
+                return Delete(command, _commandHandler.Handle);
             }
             //удалить любую категорию, у которой нет дочерних
-            return await DeleteAsync(category, _repo.DeleteAsync);
+            return Delete(command, _commandHandler.Handle);
+        }
+
+        private ActionResult Delete(DeleteCategoryCommand command, Func<DeleteCategoryCommand, bool> commandHandler)
+        {
+            bool isOk;
+
+            try
+            {
+                isOk = commandHandler.Invoke(command);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $@"Невозможно удалить запись: {ex.Message}");
+                return BadRequest(GetServerErrors(ModelState));
+            }
+
+            if (!isOk)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
+
+        private List<string> GetServerErrors(ModelStateDictionary modelstate)
+        {
+            List<string> errors = new List<string>();
+            foreach (ModelStateEntry error in modelstate.Values)
+            {
+                foreach (ModelError e in error.Errors)
+                {
+                    errors.Add(e.ErrorMessage);
+                }
+            }
+
+            return errors;
         }
     }
 }

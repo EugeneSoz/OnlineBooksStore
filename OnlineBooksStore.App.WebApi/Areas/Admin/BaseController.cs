@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -8,7 +9,7 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
-    //[Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
     public class BaseController : ControllerBase
     {
         public async Task<ActionResult> CreateAsync<T>(T entity, Func<T, Task> addMethod)

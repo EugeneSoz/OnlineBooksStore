@@ -8,9 +8,8 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OnlineBooksStore.App.WebApi.Data;
 using OnlineBooksStore.App.WebApi.Models.Database;
-using OnlineBooksStore.App.WebApi.Models.Repo;
+using OnlineBooksStore.Persistence.EF;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace OnlineBooksStore.App.WebApi
@@ -36,13 +35,11 @@ namespace OnlineBooksStore.App.WebApi
             //    configuration.RootPath = "ClientApp/dist/ClientApp";
             //});
 
-            services.AddTransient<IPublisherRepo, PublisherRepo>();
-            services.AddTransient<ICategoryRepo, CategoryRepo>();
-            services.AddTransient<IBookRepo, BookRepo>();
             services.AddTransient<MigrationsManager>();
 
             services.AddDbContext<IdentityDataContext>(options =>
-                options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnection"]));
+                options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnection"], b =>
+                    b.MigrationsAssembly("OnlineBooksStore.App.WebApi")));
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityDataContext>()
@@ -50,7 +47,8 @@ namespace OnlineBooksStore.App.WebApi
 
             services.AddDbContext<StoreDbContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]);
+                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"], b =>
+                    b.MigrationsAssembly("OnlineBooksStore.App.WebApi"));
             });
 
             services.AddDistributedSqlServerCache(options =>

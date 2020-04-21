@@ -1,44 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
-using OnlineBooksStore.Domain.Contracts.Entities;
 using OnlineBooksStore.Domain.Contracts.Repositories;
+using OnlineBooksStore.Persistence.Entities;
 
 namespace OnlineBooksStore.Persistence.EF
 {
-    public class OrdersRepository : IOrdersRepository
+    public class OrdersRepository : BaseRepo<OrderEntity>, IOrdersRepository
     {
-        private readonly DataContext _context;
+        public OrdersRepository(StoreDbContext ctx) : base(ctx) { }
 
-        public OrdersRepository(DataContext context)
+        public IEnumerable<OrderEntity> GetOrders()
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            var query = GetEntities();
+            var orders = query
+                .Include(o => o.Lines)
+                .Include(o => o.Payment);
+
+            return orders.AsEnumerable();
         }
 
-        public IEnumerable<Order> Orders => _context.Orders
-            .Include(o => o.Lines).ThenInclude(b => b.Book);
-
-        public Order GetOrder(long key) => _context.Orders
-            .Include(o => o.Lines).First(o => o.Id == key);
-
-        public void AddOrder(Order order)
+        public OrderEntity GetOrder(long key)
         {
-            _context.Orders.Add(order);
-            _context.SaveChanges();
+            var query = GetEntities();
+            var order = query.Include(o => o.Lines).FirstOrDefault(o => o.Id == key);
+
+            return order;
         }
 
-        public void UpdateOrder(Order order)
+        public OrderEntity AddOrder(OrderEntity order)
         {
-            _context.Orders.Update(order);
-            _context.SaveChanges();
+            return Add(order);
         }
 
-        public void DeleteOrder(Order order)
+        public bool UpdateOrder(OrderEntity order)
         {
-            _context.Orders.Remove(order);
-            _context.SaveChanges();
+            return Update(order);
+        }
+
+        public bool DeleteOrder(OrderEntity order)
+        {
+            return Delete(order);
         }
     }
 }

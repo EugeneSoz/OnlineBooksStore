@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
 using OnlineBooksStore.App.WebApi.Data;
 using OnlineBooksStore.App.WebApi.Data.DTO;
+using OnlineBooksStore.Domain.Contracts.Models;
+using OnlineBooksStore.Domain.Contracts.Models.Books;
+using OnlineBooksStore.Domain.Contracts.Models.Categories;
+using OnlineBooksStore.Domain.Contracts.Models.Publishers;
 
 namespace OnlineBooksStore.App.WebApi.Models
 {
@@ -43,7 +47,7 @@ namespace OnlineBooksStore.App.WebApi.Models
                 new FilterSortingProps(nameof(BookResponse.CategoryName), "Категория"),
                 new FilterSortingProps(nameof(BookResponse.SubcategoryName), "Подкатегория"),
                 new FilterSortingProps(nameof(BookResponse.PublisherName), "Издательство"),
-                new FilterSortingProps(nameof(BookResponse.Price), "Цена")
+                new FilterSortingProps(nameof(BookResponse.RetailPrice), "Цена")
             };
         }
     }
@@ -78,7 +82,7 @@ namespace OnlineBooksStore.App.WebApi.Models
                 new FilterSortingProps(nameof(BookResponse.CategoryName), "Категория"),
                 new FilterSortingProps(nameof(BookResponse.SubcategoryName), "Подкатегория"),
                 new FilterSortingProps(nameof(BookResponse.PublisherName), "Издательство"),
-                new FilterSortingProps(nameof(BookResponse.Price), "Цена")
+                new FilterSortingProps(nameof(BookResponse.RetailPrice), "Цена")
             };
         }
     }

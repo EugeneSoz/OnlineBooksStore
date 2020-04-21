@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using OnlineBooksStore.Domain.Contracts.Models;
+using OnlineBooksStore.Domain.Contracts.Models.Books;
 
 namespace OnlineBooksStore.App.WebApi.Data.DTO
 {
@@ -28,8 +30,8 @@ namespace OnlineBooksStore.App.WebApi.Data.DTO
             new ListItem("", "Сортировать по", false),
             new ListItem(nameof(BookResponse.Title), "Названию: А - Я"),
             new ListItem(nameof(BookResponse.Title), "Названию: Я - А", true),
-            new ListItem(nameof(BookResponse.Price), "Цене: мин. - макс."),
-            new ListItem(nameof(BookResponse.Price), "Цене: макс. - мин.", true)
+            new ListItem(nameof(BookResponse.RetailPrice), "Цене: мин. - макс."),
+            new ListItem(nameof(BookResponse.RetailPrice), "Цене: макс. - мин.", true)
         };
         public List<ListItem> GridSizeProperties => new List<ListItem>
         {

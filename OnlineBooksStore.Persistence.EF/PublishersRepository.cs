@@ -1,43 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using OnlineBooksStore.Domain.Contracts.Entities;
+﻿using System.Linq;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
 using OnlineBooksStore.Domain.Contracts.Repositories;
+using OnlineBooksStore.Persistence.Entities;
 
 namespace OnlineBooksStore.Persistence.EF
 {
-    public class PublishersRepository : IPublishersRepository
+    public class PublishersRepository : BaseRepo<PublisherEntity>, IPublishersRepository
     {
-        private readonly DataContext _context;
+        public PublishersRepository(StoreDbContext ctx) : base(ctx) { }
 
-        public PublishersRepository(DataContext context)
+        public PagedList<PublisherEntity> GetPublishers(QueryOptions options)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            var processing = new QueryProcessing<PublisherEntity>(options);
+
+            IQueryable<PublisherEntity> query = GetEntities();
+            IQueryable<PublisherEntity> publishers = processing.ProcessQuery(query);
+
+            return new PagedList<PublisherEntity>(publishers, options);
         }
 
-        public IEnumerable<Publisher> Publishers => _context.Publishers;
-
-        public PagedList<Publisher> GetPublishers(QueryOptions options)
+        public PublisherEntity GetPublisher(long id)
         {
-            return new PagedList<Publisher>(_context.Publishers, options);
+            IQueryable<PublisherEntity> publishers = GetEntities();
+            var books = Context.Books
+                .Where(b => b.PublisherId == id)
+                .OrderBy(b => b.Title)
+                .Select(b => new BookEntity
+                {
+                    Id = b.Id,
+                    Authors = b.Authors,
+                    Title = b.Title,
+                    PurchasePrice = b.PurchasePrice,
+                    RetailPrice = b.RetailPrice
+
+                });
+
+            var publisher = publishers.SingleOrDefault(p => p.Id == id);
+            if (publisher != null)
+            {
+                publisher.Books = books.ToList();
+            }
+
+            return publisher;
         }
 
-        public void AddPublisher(Publisher publisher)
+        public PublisherEntity AddPublisher(PublisherEntity publisher)
         {
-            _context.Publishers.Add(publisher);
-            _context.SaveChanges();
+            return Add(publisher);
         }
 
-        public void UpdatePublisher(Publisher publisher)
+        public bool UpdatePublisher(PublisherEntity publisher)
         {
-            _context.Publishers.Update(publisher);
-            _context.SaveChanges();
+            return Update(publisher);
         }
 
-        public void DeletePublisher(Publisher publisher)
+        public bool DeletePublisher(PublisherEntity publisher)
         {
-            _context.Publishers.Remove(publisher);
-            _context.SaveChanges();
+            return Delete(publisher);
         }
     }
 }

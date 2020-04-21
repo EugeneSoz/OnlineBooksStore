@@ -2,11 +2,13 @@
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OnlineBooksStore.App.WebApi.Data;
 using OnlineBooksStore.App.WebApi.Data.DTO;
 using OnlineBooksStore.App.WebApi.Models;
 using OnlineBooksStore.App.WebApi.Models.Database;
-using OnlineBooksStore.App.WebApi.Models.Repo;
+using OnlineBooksStore.Domain.Contracts.Models.Books;
+using OnlineBooksStore.Domain.Contracts.Models.Categories;
+using OnlineBooksStore.Domain.Contracts.Models.Publishers;
+using OnlineBooksStore.Domain.Contracts.Repositories;
 
 namespace OnlineBooksStore.App.WebApi.Areas.Admin
 {
@@ -18,14 +20,14 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
     public class DataOptionsController : ControllerBase
     {
         private readonly MigrationsManager _manager;
-        private readonly IBookRepo _bookRepo;
-        private readonly ICategoryRepo _categoryRepo;
-        private readonly IPublisherRepo _publisherRepo;
+        private readonly IBooksRepository _bookRepo;
+        private readonly ICategoriesRepository _categoryRepo;
+        private readonly IPublishersRepository _publisherRepo;
 
         public DataOptionsController(MigrationsManager manager,
-            IBookRepo bookRepo,
-            ICategoryRepo categoryRepo,
-            IPublisherRepo publisherRepo)
+            IBooksRepository bookRepo,
+            ICategoriesRepository categoryRepo,
+            IPublishersRepository publisherRepo)
         {
             _manager = manager;
             _bookRepo = bookRepo;
@@ -67,9 +69,9 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
         private MigrationsOptions GetMigrationsOptions(string contextName = null,
             string infoMessage = null)
         {
-            int books = (_bookRepo.GetEntities())?.Count() ?? 0;
-            int categories = (_categoryRepo.GetEntities())?.Count() ?? 0;
-            int publishers = (_publisherRepo.GetEntities())?.Count() ?? 0;
+            int books = 0;// (_bookRepo.GetEntities())?.Count() ?? 0;
+            int categories = 0;// (_categoryRepo.GetEntities())?.Count() ?? 0;
+            int publishers = 0;//(_publisherRepo.GetEntities())?.Count() ?? 0;
 
             if (!string.IsNullOrEmpty(contextName))
             {
@@ -81,46 +83,46 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
         [HttpGet("save")]
         public string SaveDataToJson()
         {
-            IQueryable<Book> dbbooks = _bookRepo.GetEntities().OrderBy(b => b.Id);
+            //IQueryable<Book> dbbooks = _bookRepo.GetEntities().OrderBy(b => b.Id);
 
-            IQueryable<Category> dbparents = _categoryRepo.GetEntities()
-                .Where(p => p.ParentCategoryID == null).OrderBy(p => p.Id);
+            //IQueryable<Category> dbparents = _categoryRepo.GetEntities()
+            //    .Where(p => p.ParentCategoryID == null).OrderBy(p => p.Id);
 
-            IQueryable<Category> dbcategories = _categoryRepo.GetEntities()
-                .Where(c => c.ParentCategoryID != null).OrderBy(c => c.Id);
+            //IQueryable<Category> dbcategories = _categoryRepo.GetEntities()
+            //    .Where(c => c.ParentCategoryID != null).OrderBy(c => c.Id);
 
-            IQueryable<Publisher> dbpublishers = _publisherRepo.GetEntities().OrderBy(p => p.Id);
+            //IQueryable<Publisher> dbpublishers = _publisherRepo.GetEntities().OrderBy(p => p.Id);
 
-            StoreSavedData storeSavedData = new StoreSavedData
-            {
-                Books = dbbooks.ToList(),
-                ParentCategories = dbparents.ToList(),
-                Categories = dbcategories.ToList(),
-                Publishers = dbpublishers.ToList()
-            };
+            //StoreSavedData storeSavedData = new StoreSavedData
+            //{
+            //    Books = dbbooks.ToList(),
+            //    ParentCategories = dbparents.ToList(),
+            //    Categories = dbcategories.ToList(),
+            //    Publishers = dbpublishers.ToList()
+            //};
 
-            storeSavedData.Books.ForEach(b => 
-            {
-                b.Id = 0; b.Category = null; b.Publisher = null;
-            });
-            storeSavedData.ParentCategories.ForEach(p =>
-            {
-                p.Books = null;
-                p.ChildrenCategories = null;
-            });
-            storeSavedData.Categories.ForEach(c =>
-            {
-                c.ParentCategory = null;
-                c.ChildrenCategories = null;
-                c.Books = null;
-            });
-            storeSavedData.Publishers.ForEach(p => p.Books = null);
-            DataRW dataRW = new DataRW();
+            //storeSavedData.Books.ForEach(b => 
+            //{
+            //    b.Id = 0; b.Category = null; b.Publisher = null;
+            //});
+            //storeSavedData.ParentCategories.ForEach(p =>
+            //{
+            //    p.Books = null;
+            //    p.ChildrenCategories = null;
+            //});
+            //storeSavedData.Categories.ForEach(c =>
+            //{
+            //    c.ParentCategory = null;
+            //    c.ChildrenCategories = null;
+            //    c.Books = null;
+            //});
+            //storeSavedData.Publishers.ForEach(p => p.Books = null);
+            //DataRW dataRW = new DataRW();
 
             string msg = string.Empty;
             try
             {
-                dataRW.CreateJsonData(storeSavedData, "savedData");
+                //dataRW.CreateJsonData(storeSavedData, "savedData");
 
                 msg = "Данные сохранены в файл";
             }

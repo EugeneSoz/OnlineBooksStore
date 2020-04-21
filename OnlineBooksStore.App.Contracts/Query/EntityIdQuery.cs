@@ -25,4 +25,8 @@
     /// The publisher identifier query.
     /// </summary>
     public sealed class PublisherIdQuery : EntityIdQuery { }
+    /// <summary>
+    /// The order identifier query.
+    /// </summary>
+    public sealed class OrderIdQuery : EntityIdQuery { }
 }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using OnlineBooksStore.App.Contracts.Command;
-using OnlineBooksStore.Domain.Contracts.Entities;
+using OnlineBooksStore.Domain.Contracts.Models.Publishers;
 
 namespace OnlineBooksStore.App.Handlers.Mapping
 {
