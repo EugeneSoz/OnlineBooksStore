@@ -1,90 +1,46 @@
-﻿using System;
-using Microsoft.AspNetCore.Antiforgery;
+﻿using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OnlineBooksStore.App.Handlers.Command;
-using OnlineBooksStore.App.Handlers.Query;
+using OnlineBooksStore.App.WebApi.Infrastructure;
 using OnlineBooksStore.App.WebApi.Models.Database;
-using OnlineBooksStore.Domain.Contracts.Repositories;
-using OnlineBooksStore.Domain.Contracts.Services;
-using OnlineBooksStore.Domain.Services;
 using OnlineBooksStore.Persistence.EF;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace OnlineBooksStore.App.WebApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        private readonly IConfiguration _configuration;
+        private readonly IHostingEnvironment _environment;
 
-        public IConfiguration Configuration { get; }
+        public Startup(IConfiguration configuration, IHostingEnvironment environment)
+        {
+            _configuration = configuration;
+            _environment = environment;
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddSwaggerGen(options =>
-                options.SwaggerDoc("v1", new Info { Title = "BooksStore API", Version = "v1" }));
+            services.AddSwagger(_environment);
 
-            services.AddTransient<MigrationsManager>();
+            services.AddEntityFrameworkIdentity(_configuration);
+            services.AddEntityFramework(_configuration);
 
-            services.AddDbContext<IdentityDataContext>(options =>
-                options.UseSqlServer(Configuration["ConnectionStrings:IdentityConnection"], b =>
-                    b.MigrationsAssembly("OnlineBooksStore.App.WebApi")));
-
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<IdentityDataContext>()
-                .AddDefaultTokenProviders();
-
-            services.AddDbContext<StoreDbContext>(options =>
-            {
-                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"], b =>
-                    b.MigrationsAssembly("OnlineBooksStore.App.WebApi"));
-            });
-
-            services.AddDistributedSqlServerCache(options =>
-            {
-                options.ConnectionString = Configuration["ConnectionStrings:DefaultConnection"];
-                options.SchemaName = "dbo";
-                options.TableName = "SessionData";
-            });
-
-            services.AddSession(options =>
-            {
-                options.Cookie.Name = "BooksStore.Session";
-                options.IdleTimeout = TimeSpan.FromHours(24);
-                options.Cookie.HttpOnly = false;
-            });
-
+            services.AddSession();
             services.AddAntiforgery(options => {
                 options.HeaderName = "X-XSRF-TOKEN";
             });
 
-            services.AddTransient<IBooksRepository, BooksRepository>();
-            services.AddTransient<ICategoriesRepository, CategoriesRepository>();
-            services.AddTransient<IPublishersRepository, PublishersRepository>();
-            services.AddTransient<IOrdersRepository, OrdersRepository>();
+            services.AddRepositories();
 
-            services.AddTransient<BookQueryHandler>();
-            services.AddTransient<CategoryQueryHandler>();
-            services.AddTransient<PublisherQueryHandler>();
-            services.AddTransient<OrderQueryHandler>();
+            services.AddCommandsAndQueries();
 
-            services.AddTransient<BookCommandHandler>();
-            services.AddTransient<CategoryCommandHandler>();
-            services.AddTransient<PublisherCommandHandler>();
-            services.AddTransient<OrderCommandHandler>();
-            services.AddTransient<TablesCommandHandlers>();
-            services.AddTransient<IDbDataService, DbDataService>();
+            services.AddServices();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, 
@@ -124,24 +80,9 @@ namespace OnlineBooksStore.App.WebApi
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.UseSwagger();
+            app.UseSwaggerWithUi();
 
-            app.UseSwaggerUI(options =>
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "OnlineBooksStore API v1"));
-
-            app.UseSpa(spa =>
-            {
-                var strategy = Configuration.GetValue<string>("DevTools:ConnectionStrategy");
-                if (strategy == "proxy")
-                {
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
-                }
-                else if (strategy == "managed")
-                {
-                    spa.Options.SourcePath = "../angular-client";
-                    spa.UseAngularCliServer("start");
-                }
-            });
+            app.UseSpa(_configuration);
 
             IdentitySeedData.SeedDatabase(identityContext, userManager, roleManager).GetAwaiter().GetResult();
         }
