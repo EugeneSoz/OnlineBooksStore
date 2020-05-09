@@ -29,7 +29,7 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
         }
 
         [HttpGet("category/{id}")]
-        public Category GetCategory([FromRoute] EntityIdQuery query)
+        public Category GetCategory([FromRoute] CategoryIdQuery query)
         {
             return _queryHandler.Handle(query);
         }

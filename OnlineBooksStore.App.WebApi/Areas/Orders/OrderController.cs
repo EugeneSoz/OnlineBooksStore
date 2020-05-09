@@ -10,7 +10,7 @@ using OnlineBooksStore.Domain.Contracts.Models.Orders;
 
 namespace OnlineBooksStore.App.WebApi.Areas.Orders
 {
-    [Route("api/orders")]
+    [Route("api/[controller]")]
     [Produces("application/json")]
     [Authorize(Roles = "Administrator")]
     [AutoValidateAntiforgeryToken]
@@ -31,7 +31,7 @@ namespace OnlineBooksStore.App.WebApi.Areas.Orders
             return _queryHandler.Handle(new OrderQuery());
         }
 
-        [HttpPost("{id}")]
+        [HttpGet("{id}")]
         public void MarkShipped([FromQuery] OrderIdQuery query)
         {
             _queryHandler.Handle(query);

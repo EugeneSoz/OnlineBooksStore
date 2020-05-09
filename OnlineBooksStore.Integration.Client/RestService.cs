@@ -7,11 +7,11 @@ using Newtonsoft.Json;
 
 namespace OnlineBooksStore.Integration.Client
 {
-    public class RestService
+    public abstract class RestService
     {
         private readonly HttpClient _httpClient;
 
-        public RestService(HttpClient httpClient)
+        protected RestService(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
@@ -23,7 +23,7 @@ namespace OnlineBooksStore.Integration.Client
         /// <typeparam name="T">A type into which the response body can be JSON-deserialized.</typeparam>
         /// <param name="requestUri">The URI that the request will be sent to.</param>
         /// <returns>The response parsed as an object of the generic type.</returns>
-        public async Task<T> GetJsonAsync<T>(string requestUri)
+        protected async Task<T> GetJsonAsync<T>(string requestUri)
         {
             var stringContent = await _httpClient.GetStringAsync(requestUri);
             return JsonConvert.DeserializeObject<T>(stringContent);
@@ -37,7 +37,7 @@ namespace OnlineBooksStore.Integration.Client
         /// <param name="requestUri">The URI that the request will be sent to.</param>
         /// <param name="content">Content for the request body. This will be JSON-encoded and sent as a string.</param>
         /// <returns>The response parsed as an object of the generic type.</returns>
-        public Task<T> PostJsonAsync<T>(string requestUri, object content)
+        protected Task<T> PostJsonAsync<T>(string requestUri, object content)
             => SendJsonAsync<T>(HttpMethod.Post, requestUri, content);
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace OnlineBooksStore.Integration.Client
         /// <param name="requestUri">The URI that the request will be sent to.</param>
         /// <param name="content">Content for the request body. This will be JSON-encoded and sent as a string.</param>
         /// <returns>The response parsed as an object of the generic type.</returns>
-        public Task<T> PutJsonAsync<T>(string requestUri, object content)
+        protected Task<T> PutJsonAsync<T>(string requestUri, object content)
             => SendJsonAsync<T>(HttpMethod.Put, requestUri, content);
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace OnlineBooksStore.Integration.Client
         /// <param name="requestUri">The URI that the request will be sent to.</param>
         /// <param name="content">Content for the request body. This will be JSON-encoded and sent as a string.</param>
         /// <returns>The response parsed as an object of the generic type.</returns>
-        public async Task<T> SendJsonAsync<T>(HttpMethod method, string requestUri, object content)
+        private async Task<T> SendJsonAsync<T>(HttpMethod method, string requestUri, object content)
         {
             var requestJson = JsonConvert.SerializeObject(content);
             var response = await _httpClient.SendAsync(new HttpRequestMessage(method, requestUri)

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -9,14 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OnlineBooksStore.App.Contracts\OnlineBooksStore.App.Contracts.csproj" />
-    <ProjectReference Include="..\OnlineBooksStore.Domain.Contracts\OnlineBooksStore.Domain.Contracts.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Admin\" />
-    <Folder Include="Store\" />
-    <Folder Include="Orders\" />
+    <ProjectReference Include="..\OnlineBooksStore.Integration.Contracts\OnlineBooksStore.Integration.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

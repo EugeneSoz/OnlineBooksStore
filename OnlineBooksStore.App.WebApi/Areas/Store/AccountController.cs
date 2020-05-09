@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineBooksStore.App.WebApi.Models;
+using OnlineBooksStore.Domain.Contracts.Models;
 
 namespace OnlineBooksStore.App.WebApi.Areas.Store
 {

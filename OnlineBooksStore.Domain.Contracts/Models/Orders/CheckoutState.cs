@@ -1,4 +1,4 @@
-﻿namespace OnlineBooksStore.App.WebApi.Data.DTO
+﻿namespace OnlineBooksStore.Domain.Contracts.Models.Orders
 {
     public class CheckoutState
     {

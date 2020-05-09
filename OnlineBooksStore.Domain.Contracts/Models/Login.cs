@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OnlineBooksStore.App.WebApi.Models
+namespace OnlineBooksStore.Domain.Contracts.Models
 {
     public class Login
     {
