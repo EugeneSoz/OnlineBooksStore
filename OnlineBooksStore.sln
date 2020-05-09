@@ -42,7 +42,13 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "angular-client", "angular-c
 		SlnRelativePath = "angular-client\"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineBooksStore.Domain.Services", "OnlineBooksStore.Domain.Services\OnlineBooksStore.Domain.Services.csproj", "{043150BB-D8EC-4253-80F4-756AC6E302FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineBooksStore.Domain.Services", "OnlineBooksStore.Domain.Services\OnlineBooksStore.Domain.Services.csproj", "{043150BB-D8EC-4253-80F4-756AC6E302FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineBooksStore.App.Blazor.Server", "OnlineBooksStore.App.Blazor.Server\OnlineBooksStore.App.Blazor.Server.csproj", "{3FB6C5C3-5A16-4E5D-99C5-266F8ED7A2B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{780DE0AF-357D-4F10-B74C-BC1B7FA47B30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineBooksStore.Integration.Client", "OnlineBooksStore.Integration.Client\OnlineBooksStore.Integration.Client.csproj", "{77281BB0-37B1-4B13-B1B9-F270A715EAFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,6 +88,14 @@ Global
 		{043150BB-D8EC-4253-80F4-756AC6E302FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{043150BB-D8EC-4253-80F4-756AC6E302FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{043150BB-D8EC-4253-80F4-756AC6E302FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FB6C5C3-5A16-4E5D-99C5-266F8ED7A2B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FB6C5C3-5A16-4E5D-99C5-266F8ED7A2B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FB6C5C3-5A16-4E5D-99C5-266F8ED7A2B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FB6C5C3-5A16-4E5D-99C5-266F8ED7A2B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77281BB0-37B1-4B13-B1B9-F270A715EAFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77281BB0-37B1-4B13-B1B9-F270A715EAFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77281BB0-37B1-4B13-B1B9-F270A715EAFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77281BB0-37B1-4B13-B1B9-F270A715EAFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,6 +109,8 @@ Global
 		{22BB9F44-62A2-4F25-BA83-A7B56051AF3E} = {D10105BB-7CB0-489D-9FA3-FA8457CAFB81}
 		{65A280E7-F89A-4BE7-B6BE-54FE55D7AEB1} = {D10105BB-7CB0-489D-9FA3-FA8457CAFB81}
 		{043150BB-D8EC-4253-80F4-756AC6E302FC} = {F5EE45EC-4EC4-4CE3-AB96-82CD6B89D995}
+		{3FB6C5C3-5A16-4E5D-99C5-266F8ED7A2B3} = {D10105BB-7CB0-489D-9FA3-FA8457CAFB81}
+		{77281BB0-37B1-4B13-B1B9-F270A715EAFA} = {780DE0AF-357D-4F10-B74C-BC1B7FA47B30}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D41D3A1B-D237-46BA-85B0-86E3A689D936}

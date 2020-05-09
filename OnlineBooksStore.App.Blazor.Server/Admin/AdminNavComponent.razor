@@ -1,0 +1,21 @@
+﻿<ul class="nav flex-column">
+    @foreach (var navLink in _navLinks)
+    {
+        if (navLink.link == AppNavLink.Home)
+        {
+            <li class="sidebar-item">
+                <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                    @navLink.name
+                </NavLink>
+            </li>
+        }
+        else
+        {
+            <li class="sidebar-item">
+                <NavLink class="nav-link" href="@navLink.link">
+                    @navLink.name
+                </NavLink>
+            </li>
+        }
+    }
+</ul>

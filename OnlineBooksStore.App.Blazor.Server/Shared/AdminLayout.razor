@@ -1,0 +1,14 @@
+﻿@inherits LayoutComponentBase
+
+<div class="container-fluid px-0">
+    <div class="row no-gutters">
+        <div id="admin-sidebar" class="col-lg-auto">
+            <AdminNavComponent />
+        </div>
+        <div id="admin-main-content" class="col-lg">
+            <div id="admin-scrollable-content">
+                @Body
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+﻿<div class="d-flex justify-content-between">
+    <span>{{property.displayName}}</span>
+    <ng-container *ngIf="isActive">
+        <button *ngIf="!descendingOrder" class="btn btn-sm btn-success" tooltip="Отсортировано по возрастанию"
+                (click)="onSort()">
+            <i class="fas fa-caret-up fa-lg"></i>
+        </button>
+        <button *ngIf="descendingOrder" class="btn btn-sm btn-success" tooltip="Отсортировано по убыванию"
+                (click)="onSort()">
+            <i class="fas fa-caret-down fa-lg"></i>
+        </button>
+    </ng-container>
+    <ng-container *ngIf="!isActive">
+        <button class="btn btn-sm btn-primary" tooltip="Сортировать по возрастанию" (click)="onSort()">
+            <i class="fas fa-caret-up fa-lg"></i>
+        </button>
+    </ng-container>
+</div>

@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineBooksStore.App.Contracts\OnlineBooksStore.App.Contracts.csproj" />
+    <ProjectReference Include="..\OnlineBooksStore.Domain.Contracts\OnlineBooksStore.Domain.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Admin\" />
+    <Folder Include="Store\" />
+    <Folder Include="Orders\" />
+  </ItemGroup>
+
+</Project>
