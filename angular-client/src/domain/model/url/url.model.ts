@@ -40,7 +40,7 @@ export class Url {
     static cart_session = `${Url.baseSessionUrl}/cart`;
     static checkout_session = `${Url.baseSessionUrl}/checkout`;
 
-    private static baseOrderUrl = `/api/orders`;
+    private static baseOrderUrl = `/api/order`;
     static orders = `${Url.baseOrderUrl}`;
 
     private static baseAccountUrl = `/api/account`;

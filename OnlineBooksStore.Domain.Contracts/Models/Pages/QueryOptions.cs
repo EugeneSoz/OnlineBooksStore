@@ -8,7 +8,7 @@ namespace OnlineBooksStore.Domain.Contracts.Models.Pages
     {
         private string _sortPropertyName = string.Empty;
         private string _filterPropertyName = string.Empty;
-        private string[] _searchPropertyNames = null;
+        private string[] _searchPropertyNames;
 
         public int CurrentPage { get; set; } = 1;
         public int PageSize { get; set; } = 12;

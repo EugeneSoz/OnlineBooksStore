@@ -12,12 +12,10 @@ namespace OnlineBooksStore.App.Handlers.Command
         ICommandHandler<UpdatePublisherCommand, bool>,
         ICommandHandler<DeletePublisherCommand, bool>
     {
-        private readonly IMapper _mapper;
         private readonly IPublishersRepository _repository;
 
-        public PublisherCommandHandler(IMapper mapper, IPublishersRepository repository)
+        public PublisherCommandHandler(IPublishersRepository repository)
         {
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 

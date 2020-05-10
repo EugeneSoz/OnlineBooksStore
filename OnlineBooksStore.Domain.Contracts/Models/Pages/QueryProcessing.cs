@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 
 namespace OnlineBooksStore.Domain.Contracts.Models.Pages
 {
@@ -11,6 +13,45 @@ namespace OnlineBooksStore.Domain.Contracts.Models.Pages
         public QueryProcessing(QueryOptions options)
         {
             _options = options;
+        }
+
+        public string GetQueryConditions()
+        {
+            var conditions = GenerateQueryConditions();
+            var orderProperties = GenerateQueryOrderProperties();
+            var whereCondition = conditions.Count > 0 ? string.Empty : "WHERE " + string.Join(" AND ", conditions);
+            var orderCondition =
+                orderProperties.Length > 0 ? string.Empty : "ORDER " + orderProperties;
+
+            return $"{whereCondition}\\n{orderCondition}\\n" +
+                   $"OFFSET {(_options.CurrentPage - 1) * _options.PageSize} ROWS FETCH NEXT {_options.PageSize} ROWS ONLY";
+        }
+
+        private List<string> GenerateQueryConditions()
+        {
+            var conditions = new List<string>();
+            if (_options.SearchPropertyNames?.Length == 1 && !string.IsNullOrEmpty(_options.SearchTerm))
+            {
+                conditions.Add(Search(_options.SearchPropertyNames, _options.SearchTerm));
+            }
+
+            if (!string.IsNullOrEmpty(_options.FilterPropertyName) && _options.FilterPropertyValue != 0)
+            {
+                conditions.Add(Filter(_options.SortPropertyName, _options.FilterPropertyValue));
+            }
+
+            return conditions;
+        }
+
+        private string GenerateQueryOrderProperties()
+        {
+            if (!string.IsNullOrEmpty(_options.SortPropertyName))
+            {
+                var order = _options.DescendingOrder ? "DESC" : "ASC";
+                return $"{_options.SortPropertyName} {order}";
+            }
+
+            return string.Empty;
         }
 
         public IQueryable<T> ProcessQuery(IQueryable<T> query)
@@ -61,6 +102,27 @@ namespace OnlineBooksStore.Domain.Contracts.Models.Pages
             return query.Where(lambda);
         }
 
+        private string Search(string[] propertyNames, string searchTerm)
+        {
+            var condition = new StringBuilder();
+            foreach (var propertyName in propertyNames)
+            {
+                if (condition.Length > 0)
+                {
+                    condition.Append("OR");
+                }
+
+                if (string.IsNullOrEmpty(propertyName))
+                {
+                    continue;
+                }
+
+                condition.Append($"{propertyName} LIKE '%{searchTerm}%'");
+            }
+
+            return condition.ToString();
+        }
+
         private IQueryable<T> SearchByTwoProperties(IQueryable<T> query, string[] propertyName, string searchTerm)
         {
             ParameterExpression pe = Expression.Parameter(typeof(T), "x");
@@ -78,6 +140,11 @@ namespace OnlineBooksStore.Domain.Contracts.Models.Pages
             Expression<Func<T, bool>> lambda = Expression.Lambda<Func<T, bool>>(predicateBody, pe);
 
             return query.Where(lambda);
+        }
+
+        public string Filter(string propertyName, long value)
+        {
+            return $"{propertyName} = {value}";
         }
 
         private IQueryable<T> Filter(IQueryable<T> query, string propertyName, long value)

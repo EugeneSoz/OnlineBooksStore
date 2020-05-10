@@ -16,6 +16,7 @@
     <ProjectReference Include="..\OnlineBooksStore.App.Handlers\OnlineBooksStore.App.Handlers.csproj" />
     <ProjectReference Include="..\OnlineBooksStore.Domain.Contracts\OnlineBooksStore.Domain.Contracts.csproj" />
     <ProjectReference Include="..\OnlineBooksStore.Domain.Services\OnlineBooksStore.Domain.Services.csproj" />
+    <ProjectReference Include="..\OnlineBooksStore.Persistence.Dapper\OnlineBooksStore.Persistence.Dapper.csproj" />
     <ProjectReference Include="..\OnlineBooksStore.Persistence.EF\OnlineBooksStore.Persistence.EF.csproj" />
     <ProjectReference Include="..\OnlineBooksStore.Persistence.Entities\OnlineBooksStore.Persistence.Entities.csproj" />
   </ItemGroup>

@@ -36,7 +36,7 @@ namespace OnlineBooksStore.App.WebApi
                 options.HeaderName = "X-XSRF-TOKEN";
             });
 
-            services.AddRepositories();
+            services.AddRepositories(_configuration);
 
             services.AddCommandsAndQueries();
 

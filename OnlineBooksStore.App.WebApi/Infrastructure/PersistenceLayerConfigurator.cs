@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnlineBooksStore.Domain.Contracts.Repositories;
+using OnlineBooksStore.Persistence.Dapper.Providers;
 using OnlineBooksStore.Persistence.EF;
 
 namespace OnlineBooksStore.App.WebApi.Infrastructure
@@ -62,11 +63,13 @@ namespace OnlineBooksStore.App.WebApi.Infrastructure
             return services;
         }
 
-        internal static IServiceCollection AddRepositories(this IServiceCollection services)
+        internal static IServiceCollection AddRepositories(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IBooksRepository, BooksRepository>();
-            services.AddTransient<ICategoriesRepository, CategoriesRepository>();
-            services.AddTransient<IPublishersRepository, PublishersRepository>();
+            services.AddSingleton(provider => new ConnectionProvider(configuration["ConnectionStrings:StoreConnection"]));
+
+            services.AddTransient<IBooksRepository, Persistence.Dapper.BooksRepository>();
+            services.AddTransient<ICategoriesRepository, Persistence.Dapper.CategoriesRepository>();
+            services.AddTransient<IPublishersRepository, Persistence.Dapper.PublishersRepository>();
             services.AddTransient<IOrdersRepository, OrdersRepository>();
 
             return services;

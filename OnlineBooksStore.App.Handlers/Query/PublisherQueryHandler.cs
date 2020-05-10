@@ -16,12 +16,10 @@ namespace OnlineBooksStore.App.Handlers.Query
         IQueryHandler<SearchTermQuery, List<PublisherResponse>>,
         IQueryHandler<EntityIdQuery, Publisher>
     {
-        private readonly IMapper _mapper;
         private readonly IPublishersRepository _repository;
 
-        public PublisherQueryHandler(IMapper mapper, IPublishersRepository repository)
+        public PublisherQueryHandler(IPublishersRepository repository)
         {
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 

@@ -13,10 +13,10 @@ using OnlineBooksStore.Persistence.Entities;
 
 namespace OnlineBooksStore.App.WebApi.Areas.Admin
 {
-    [Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Administrator")]
     [Route("api/[controller]")]
     [Produces("application/json")]
-    [ValidateAntiForgeryToken]
+    //[ValidateAntiForgeryToken]
     public class PublisherController : Controller
     {
         private readonly PublisherCommandHandler _commandHandler;
@@ -29,9 +29,16 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
         }
 
         [HttpGet("publisher/{id}")]
-        public Publisher GetPublisher([FromRoute] EntityIdQuery query)
+        public Publisher GetPublisher([FromRoute] PublisherIdQuery query)
         {
-            return _queryHandler.Handle(query);
+            try
+            {
+                return _queryHandler.Handle(query);
+            }
+            catch (Exception exception)
+            {
+                throw;
+            }
         }
 
         [HttpPost("publishers")]

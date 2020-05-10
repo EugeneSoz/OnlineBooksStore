@@ -52,6 +52,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineBooksStore.Integratio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineBooksStore.Integration.Contracts", "OnlineBooksStore.Integration.Contracts\OnlineBooksStore.Integration.Contracts.csproj", "{05C18075-F26B-41AA-A350-F72049553803}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineBooksStore.Persistence.Dapper", "OnlineBooksStore.Persistence.Dapper\OnlineBooksStore.Persistence.Dapper.csproj", "{38ADF4ED-BDA4-4237-A0AC-6CE51B2DD87B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,6 +104,10 @@ Global
 		{05C18075-F26B-41AA-A350-F72049553803}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05C18075-F26B-41AA-A350-F72049553803}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05C18075-F26B-41AA-A350-F72049553803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38ADF4ED-BDA4-4237-A0AC-6CE51B2DD87B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38ADF4ED-BDA4-4237-A0AC-6CE51B2DD87B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38ADF4ED-BDA4-4237-A0AC-6CE51B2DD87B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38ADF4ED-BDA4-4237-A0AC-6CE51B2DD87B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -118,6 +124,7 @@ Global
 		{3FB6C5C3-5A16-4E5D-99C5-266F8ED7A2B3} = {D10105BB-7CB0-489D-9FA3-FA8457CAFB81}
 		{77281BB0-37B1-4B13-B1B9-F270A715EAFA} = {780DE0AF-357D-4F10-B74C-BC1B7FA47B30}
 		{05C18075-F26B-41AA-A350-F72049553803} = {780DE0AF-357D-4F10-B74C-BC1B7FA47B30}
+		{38ADF4ED-BDA4-4237-A0AC-6CE51B2DD87B} = {DFB959DD-D753-4F21-AFDA-690E6A99B0EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D41D3A1B-D237-46BA-85B0-86E3A689D936}
