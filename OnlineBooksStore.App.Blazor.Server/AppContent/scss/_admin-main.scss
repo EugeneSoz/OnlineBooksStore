@@ -1,0 +1,26 @@
+﻿@import '_customsVars';
+@import '_shared';
+
+#admin-main-content {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #ecf0f5;
+    @extend %marging-padding-reset;
+}
+
+/*верхняя панель*/
+#admin-toolbar {
+    background-color: #3a0647;
+}
+
+#admin-scrollable-content {
+    overflow-y: auto;
+    height: 100vh;
+
+    .category {
+        background-color: #d1ecf1;
+        color: #0c5460;
+    }
+}

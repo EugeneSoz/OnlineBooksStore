@@ -19,12 +19,12 @@ namespace OnlineBooksStore.Domain.Contracts.Models.Pages
         {
             var conditions = GenerateQueryConditions();
             var orderProperties = GenerateQueryOrderProperties();
-            var whereCondition = conditions.Count > 0 ? string.Empty : "WHERE " + string.Join(" AND ", conditions);
+            var whereCondition = conditions.Count == 0 ? string.Empty : "WHERE " + string.Join(" AND ", conditions);
             var orderCondition =
-                orderProperties.Length > 0 ? string.Empty : "ORDER " + orderProperties;
+                orderProperties.Length == 0 ? string.Empty : "ORDER BY " + orderProperties;
 
-            return $"{whereCondition}\\n{orderCondition}\\n" +
-                   $"OFFSET {(_options.CurrentPage - 1) * _options.PageSize} ROWS FETCH NEXT {_options.PageSize} ROWS ONLY";
+            return $"{whereCondition} {orderCondition}" +
+                   $" OFFSET {(_options.CurrentPage - 1) * _options.PageSize} ROWS FETCH NEXT {_options.PageSize} ROWS ONLY";
         }
 
         private List<string> GenerateQueryConditions()

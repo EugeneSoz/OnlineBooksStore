@@ -1,26 +1,13 @@
-﻿using System.Collections.Generic;
-using OnlineBooksStore.App.WebApi.Data;
-using OnlineBooksStore.App.WebApi.Data.DTO;
-using OnlineBooksStore.Domain.Contracts.Models;
+﻿using OnlineBooksStore.Domain.Contracts.Models;
 using OnlineBooksStore.Domain.Contracts.Models.Books;
 using OnlineBooksStore.Domain.Contracts.Models.Categories;
 using OnlineBooksStore.Domain.Contracts.Models.Publishers;
+using System.Collections.Generic;
+using OnlineBooksStore.Domain.Contracts.Services;
 
-namespace OnlineBooksStore.App.WebApi.Models
+namespace OnlineBooksStore.Domain.Services
 {
-    public class FilterSortingProps
-    {
-        public FilterSortingProps(string propertyName, string displayName)
-        {
-            PropertyName = propertyName;
-            DisplayName = displayName;
-        }
-
-        public string PropertyName { get; }
-        public string DisplayName { get; }
-    }
-
-    public class FilterProperties
+    public class PropertiesService : IPropertiesService
     {
         public List<FilterSortingProps> GetPublisherFilterProps()
         {
@@ -50,10 +37,7 @@ namespace OnlineBooksStore.App.WebApi.Models
                 new FilterSortingProps(nameof(BookResponse.RetailPrice), "Цена")
             };
         }
-    }
 
-    public class SortingProperties
-    {
         public List<FilterSortingProps> GetPublisherSortingProps()
         {
             return new List<FilterSortingProps>

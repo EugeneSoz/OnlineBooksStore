@@ -64,7 +64,7 @@ namespace OnlineBooksStore.Persistence.Dapper
                         publisherEntry.Books.Add(book);
 
                         return publisherEntry;
-                    }, splitOn: nameof(BookEntity.Id), param: parameter).SingleOrDefault();
+                    }, splitOn: nameof(BookEntity.Id), param: parameter).FirstOrDefault();
 
                 return result;
             }

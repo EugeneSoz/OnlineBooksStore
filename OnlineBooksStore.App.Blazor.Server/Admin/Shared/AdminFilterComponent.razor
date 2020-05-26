@@ -4,7 +4,7 @@
             <label class="col-sm-2 col-form-label font-weight-bold">Поиск по</label>
             <div class="col-sm-10">
                 <select type="text" class="form-control w-50" (change)="onSelectProperty($event.target.value)">
-                    <option *ngFor="let prop of properties" [value]="prop.propertyName">{{prop.displayName}}</option>
+                    <option *ngFor="let prop of properties" [value]="prop.propertyName">{{prop.displayedName}}</option>
                 </select>
             </div>
         </div>

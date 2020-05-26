@@ -1,14 +1,14 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OnlineBooksStore.Domain.Contracts.Services;
+using OnlineBooksStore.Domain.Services;
+using OnlineBooksStore.Integration.Client.Admin;
+using OnlineBooksStore.Integration.Contracts.Admin;
 
 namespace OnlineBooksStore.App.Blazor.Server
 {
@@ -27,6 +27,15 @@ namespace OnlineBooksStore.App.Blazor.Server
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+
+            services.AddScoped<IPublisherClientService, PublisherClientService>(sp =>
+            {
+                var httpClient = new HttpClient {BaseAddress = new Uri("https://localhost:44393/")};
+                return new PublisherClientService(httpClient);
+            });
+
+            services.AddTransient<IPropertiesService, PropertiesService>();
+            services.AddTransient<IPublishersService, PublishersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

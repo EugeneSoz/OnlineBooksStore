@@ -14,7 +14,7 @@ namespace OnlineBooksStore.App.Handlers.Query
     public class PublisherQueryHandler : 
         IQueryHandler<PageFilterQuery, PagedResponse<PublisherResponse>>,
         IQueryHandler<SearchTermQuery, List<PublisherResponse>>,
-        IQueryHandler<EntityIdQuery, Publisher>
+        IQueryHandler<PublisherIdQuery, Publisher>
     {
         private readonly IPublishersRepository _repository;
 
@@ -52,7 +52,7 @@ namespace OnlineBooksStore.App.Handlers.Query
             return publishers;
         }
 
-        public Publisher Handle(EntityIdQuery query)
+        public Publisher Handle(PublisherIdQuery query)
         {
             var publisherEntity = _repository.GetPublisher(query.Id);
             var publisher = publisherEntity.MapPublisher();

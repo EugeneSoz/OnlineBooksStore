@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.Logging;
 using OnlineBooksStore.App.Contracts.Command;
 using OnlineBooksStore.App.Contracts.Query;
 using OnlineBooksStore.App.Handlers.Command;
@@ -21,11 +21,16 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
     {
         private readonly PublisherCommandHandler _commandHandler;
         private readonly PublisherQueryHandler _queryHandler;
+        private readonly ILogger<PublisherController> _logger;
 
-        public PublisherController(PublisherCommandHandler commandHandler, PublisherQueryHandler queryHandler)
+        public PublisherController(
+            PublisherCommandHandler commandHandler, 
+            PublisherQueryHandler queryHandler, 
+            ILogger<PublisherController> logger)
         {
             _commandHandler = commandHandler;
             _queryHandler = queryHandler;
+            _logger = logger;
         }
 
         [HttpGet("publisher/{id}")]
@@ -33,10 +38,14 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
         {
             try
             {
-                return _queryHandler.Handle(query);
+                var publiser = _queryHandler.Handle(query);
+                _logger.LogInformation("publisher received");
+
+                return publiser;
             }
             catch (Exception exception)
             {
+                _logger.LogError(exception.Message);
                 throw;
             }
         }
@@ -44,7 +53,15 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
         [HttpPost("publishers")]
         public PagedResponse<PublisherResponse> GetPublishers([FromBody] PageFilterQuery query)
         {
-            return _queryHandler.Handle(query);
+            try
+            {
+                return _queryHandler.Handle(query);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
         }
 
         [HttpPost("publishersforselection")]

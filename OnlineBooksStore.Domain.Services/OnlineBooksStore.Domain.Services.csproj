@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OnlineBooksStore.Domain.Contracts\OnlineBooksStore.Domain.Contracts.csproj" />
+    <ProjectReference Include="..\OnlineBooksStore.Integration.Client\OnlineBooksStore.Integration.Client.csproj" />
+    <ProjectReference Include="..\OnlineBooksStore.Integration.Contracts\OnlineBooksStore.Integration.Contracts.csproj" />
     <ProjectReference Include="..\OnlineBooksStore.Persistence.EF\OnlineBooksStore.Persistence.EF.csproj" />
     <ProjectReference Include="..\OnlineBooksStore.Persistence.Entities\OnlineBooksStore.Persistence.Entities.csproj" />
   </ItemGroup>
