@@ -28,14 +28,12 @@ namespace OnlineBooksStore.App.Blazor.Server
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            services.AddScoped<IPublisherClientService, PublisherClientService>(sp =>
-            {
-                var httpClient = new HttpClient {BaseAddress = new Uri("https://localhost:44393/")};
-                return new PublisherClientService(httpClient);
-            });
+            services.AddHttpClient("default", client => client.BaseAddress = new Uri("https://localhost:44393/"));
 
+            services.AddTransient<IPublisherClientService, PublisherClientService>();
+            services.AddTransient<ICategoryClientService, CategoryClientService>();
+            services.AddTransient<IBookClientService, BookClientService>();
             services.AddTransient<IPropertiesService, PropertiesService>();
-            services.AddTransient<IPublishersService, PublishersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -11,7 +11,7 @@ namespace OnlineBooksStore.Integration.Contracts.Admin
 {
     public interface IPublisherClientService
     {
-        Task<Publisher> GetPublisherAsync(EntityIdQuery query);
+        Task<Publisher> GetPublisherAsync(PublisherIdQuery query);
         Task<PagedResponse<PublisherResponse>> GetPublishersAsync(PageFilterQuery query);
         Task<List<PublisherResponse>> GetPublishersForSelectionAsync(SearchTermQuery query);
         Task CreatePublisherAsync(CreatePublisherCommand command);

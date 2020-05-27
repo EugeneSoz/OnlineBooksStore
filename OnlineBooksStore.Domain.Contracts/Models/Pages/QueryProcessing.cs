@@ -15,10 +15,10 @@ namespace OnlineBooksStore.Domain.Contracts.Models.Pages
             _options = options;
         }
 
-        public string GetQueryConditions()
+        public string GetQueryConditions(string alias = null)
         {
             var conditions = GenerateQueryConditions();
-            var orderProperties = GenerateQueryOrderProperties();
+            var orderProperties = GenerateQueryOrderProperties(alias);
             var whereCondition = conditions.Count == 0 ? string.Empty : "WHERE " + string.Join(" AND ", conditions);
             var orderCondition =
                 orderProperties.Length == 0 ? string.Empty : "ORDER BY " + orderProperties;
@@ -43,12 +43,13 @@ namespace OnlineBooksStore.Domain.Contracts.Models.Pages
             return conditions;
         }
 
-        private string GenerateQueryOrderProperties()
+        private string GenerateQueryOrderProperties(string alias)
         {
             if (!string.IsNullOrEmpty(_options.SortPropertyName))
             {
+                var prefix = !string.IsNullOrEmpty(alias) ? alias + "." : string.Empty;
                 var order = _options.DescendingOrder ? "DESC" : "ASC";
-                return $"{_options.SortPropertyName} {order}";
+                return $"{prefix}{_options.SortPropertyName} {order}";
             }
 
             return string.Empty;

@@ -1,0 +1,11 @@
+﻿<div class="bg-danger text-white p-2 mb-2">
+    Сервер вернул следующие ошибки
+    <ul>
+        @foreach (var error in Errors)
+        {
+            <li>
+                @error
+            </li>
+        }
+    </ul>
+</div>

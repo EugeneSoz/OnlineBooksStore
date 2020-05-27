@@ -15,8 +15,6 @@ namespace OnlineBooksStore.App.WebApi.Areas.Admin
     [Route("api/options")]
     [ApiController]
     [Produces("application/json")]
-    [Authorize(Roles = "Administrator")]
-    [AutoValidateAntiforgeryToken]
     public class DataOptionsController : ControllerBase
     {
         private readonly MigrationsManager _manager;

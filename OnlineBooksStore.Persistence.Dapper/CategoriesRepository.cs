@@ -34,8 +34,8 @@ namespace OnlineBooksStore.Persistence.Dapper
             var queryProcessing = new QueryProcessing<QueryOptions>(options);
             var sql = $@"SELECT *
                           FROM Categories AS P
-                                   LEFT JOIN Categories AS C ON P.Id = C.ParentId
-                         {queryProcessing.GetQueryConditions()} AND P.ParentId IS NULL";
+                                   LEFT JOIN Categories AS C ON P.Id = C.ParentId AND P.ParentId IS NULL
+                         {queryProcessing.GetQueryConditions("P")}";
             using (var connection = _connectionProvider.OpenConnection())
             {
                 var categoryDictionary = new Dictionary<long, CategoryEntity>();
@@ -49,7 +49,7 @@ namespace OnlineBooksStore.Persistence.Dapper
                             categoryEntry = parent;
                             categoryEntry.ParentAndChildName = child.ParentId == null
                                 ? child.Name
-                                : child.ParentCategory.Name + " <=> " + child.Name;
+                                : parent.Name + " <=> " + child.Name;
                             categoryDictionary.Add(categoryEntry.Id, categoryEntry);
                         }
 

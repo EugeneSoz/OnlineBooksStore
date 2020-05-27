@@ -11,7 +11,7 @@ namespace OnlineBooksStore.Integration.Client.Orders
     public class OrderClientService : RestService, IOrderClientService
     {
         private const string Controller = "api/Order";
-        public OrderClientService(HttpClient httpClient) : base(httpClient) { }
+        public OrderClientService(IHttpClientFactory httpClientFactory) : base(httpClientFactory) { }
 
         public async Task<IEnumerable<Order>> GetOrdersAsync()
         {

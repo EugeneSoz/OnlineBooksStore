@@ -12,11 +12,12 @@ namespace OnlineBooksStore.Integration.Client.Admin
     public class PublisherClientService : RestService, IPublisherClientService
     {
         private const string Controller = "api/Publisher";
-        public PublisherClientService(HttpClient httpClient) : base(httpClient) { }
 
-        public async Task<Publisher> GetPublisherAsync(EntityIdQuery query)
+        public PublisherClientService(IHttpClientFactory httpClientFactory) : base(httpClientFactory) { }
+
+        public async Task<Publisher> GetPublisherAsync(PublisherIdQuery query)
         {
-            return await GetJsonAsync<Publisher>($"{Controller}/{query.Id}");
+            return await GetJsonAsync<Publisher>($"{Controller}/publisher/{query.Id}");
         }
 
         public async Task<PagedResponse<PublisherResponse>> GetPublishersAsync(PageFilterQuery query)

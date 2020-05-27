@@ -9,7 +9,7 @@ namespace OnlineBooksStore.Integration.Client.Orders
     public class SessionClientService : RestService, ISessionClientService
     {
         private const string Controller = "api/Session";
-        public SessionClientService(HttpClient httpClient) : base(httpClient) { }
+        public SessionClientService(IHttpClientFactory httpClientFactory) : base(httpClientFactory) { }
 
         public async Task<string> GetCartAsync()
         {

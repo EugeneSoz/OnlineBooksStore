@@ -3,33 +3,33 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using OnlineBooksStore.App.Contracts.Query;
 using OnlineBooksStore.Domain.Contracts.Models;
+using OnlineBooksStore.Domain.Contracts.Models.Categories;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
-using OnlineBooksStore.Domain.Contracts.Models.Publishers;
 using OnlineBooksStore.Domain.Contracts.Services;
 using OnlineBooksStore.Integration.Contracts.Admin;
 
-namespace OnlineBooksStore.App.Blazor.Server.Admin.PublishersSection
+namespace OnlineBooksStore.App.Blazor.Server.Admin.CategoriesSection
 {
-    [Route(AppNavLink.Publishers)]
-    public partial class PublishersComponent
+    [Route(AppNavLink.Categories)]
+    public partial class CategoriesComponent
     {
         private List<FilterSortingProps> _sortingProperties = new List<FilterSortingProps>();
         private List<FilterSortingProps> _filterProperties;
-        private List<PublisherResponse> _publishers;
+        private List<CategoryResponse> _categories;
         private List<int> _pageNumbers;
         private Pagination _pagination;
 
         [Inject] private IPropertiesService PropertiesService { get; set; }
-        [Inject] private IPublisherClientService PublishersClientService { get; set; }
+        [Inject] private ICategoryClientService CategoriesClientService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             var query = new PageFilterQuery();
-            var response = await PublishersClientService.GetPublishersAsync(query);
+            var response = await CategoriesClientService.GetCategoriesAsync(query);
 
-            _publishers = response?.Entities ?? new List<PublisherResponse>();
-            _sortingProperties = PropertiesService.GetPublisherSortingProps();
-            _filterProperties = PropertiesService.GetPublisherFilterProps();
+            _categories = response?.Entities ?? new List<CategoryResponse>();
+            _sortingProperties = PropertiesService.GetCategorySortingProps();
+            _filterProperties = PropertiesService.GetCategoryFilterProps();
             _pageNumbers = response?.PageNumbers ?? new List<int>();
             _pagination = response?.Pagination;
         }

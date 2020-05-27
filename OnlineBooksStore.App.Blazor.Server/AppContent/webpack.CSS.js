@@ -1,5 +1,4 @@
 ﻿const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
@@ -10,11 +9,6 @@ module.exports = {
     entry: './scss/styles.scss',
     devtool: false,
     plugins: [
-        //new CleanWebpackPlugin(['dist/css/*.*'],
-        //    {
-        //        root: __dirname + '/../wwwroot',
-        //        verbose: true
-        //    }),
         new MiniCssExtractPlugin({
             filename: "app-bundle.css",
             chunkFilename: "[id].css"
@@ -26,7 +20,7 @@ module.exports = {
                 test: /\.(scss)$/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    'css-loader', // translates CSS into CommonJS modules {
+                    'css-loader', // translates CSS into CommonJS modules,
                     {
                         loader: 'postcss-loader', // Run postcss actions
                         options: {

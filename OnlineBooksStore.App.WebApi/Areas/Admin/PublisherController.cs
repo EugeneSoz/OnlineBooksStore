@@ -13,10 +13,8 @@ using OnlineBooksStore.Persistence.Entities;
 
 namespace OnlineBooksStore.App.WebApi.Areas.Admin
 {
-    //[Authorize(Roles = "Administrator")]
     [Route("api/[controller]")]
     [Produces("application/json")]
-    //[ValidateAntiForgeryToken]
     public class PublisherController : Controller
     {
         private readonly PublisherCommandHandler _commandHandler;

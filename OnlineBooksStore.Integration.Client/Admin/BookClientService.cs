@@ -11,7 +11,7 @@ namespace OnlineBooksStore.Integration.Client.Admin
     public class BookClientService : RestService, IBookClientService
     {
         private const string Controller = "api/Book";
-        public BookClientService(HttpClient httpClient) : base(httpClient) { }
+        public BookClientService(IHttpClientFactory httpClientFactory) : base(httpClientFactory) { }
 
         public async Task<BookResponse> GetBookAsync(BookIdQuery query)
         {

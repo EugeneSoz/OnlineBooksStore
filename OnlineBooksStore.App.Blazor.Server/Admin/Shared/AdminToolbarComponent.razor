@@ -1,18 +1,21 @@
 ﻿<nav id="admin-toolbar" class="navbar navbar-expand-lg navbar-dark">
-    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
-            [attr.aria-expanded]="!isCollapsed"
-            aria-controls="navbarSupportedContent">
+    <a class="navbar-brand" href="#">Administrator</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse row" id="navbarSupportedContent" 
-         [collapse]="isCollapsed">
-        <div class="col-lg d-flex flex-row">
-            <span class="text-white"><b>Пользователь: </b>{{userName}}</span>
-            <button class="btn btn-sm btn-warning ml-2" (click)="logout()">Выйти</button>
-        </div>
-        <div *ngIf="isButtonsVisible" class="col-lg-auto d-flex flex-row">
-            <button class="btn btn-primary" [routerLink]="[link, 'create']">Новая</button>
-        </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Выйти <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        @if (IsButtonsVisible)
+        {
+            <div class="col-lg-auto d-flex flex-row">
+                <button class="btn btn-primary">Новая</button>
+                <a class="btn btn-secondary" href="@Link">form</a>
+            </div>
+        }
     </div>
 </nav>

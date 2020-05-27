@@ -12,7 +12,7 @@ namespace OnlineBooksStore.Integration.Client.Store
     public class StoreClientService : RestService, IStoreClientService
     {
         private const string Controller = "api/Store";
-        public StoreClientService(HttpClient httpClient) : base(httpClient) { }
+        public StoreClientService(IHttpClientFactory httpClientFactory) : base(httpClientFactory) { }
 
         public async Task<BookResponse> GetBookAsync(BookIdQuery query)
         {

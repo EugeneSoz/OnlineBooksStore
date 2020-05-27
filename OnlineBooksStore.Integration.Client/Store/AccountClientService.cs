@@ -8,7 +8,7 @@ namespace OnlineBooksStore.Integration.Client.Store
     public class AccountClientService : RestService, IAccountClientService
     {
         private const string Controller = "api/Account";
-        public AccountClientService(HttpClient httpClient) : base(httpClient) { }
+        public AccountClientService(IHttpClientFactory httpClientFactory) : base(httpClientFactory) { }
 
         public async Task LoginAsync(Login creds)
         {

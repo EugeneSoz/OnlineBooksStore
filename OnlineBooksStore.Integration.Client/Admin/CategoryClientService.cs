@@ -12,7 +12,7 @@ namespace OnlineBooksStore.Integration.Client.Admin
     public class CategoryClientService : RestService, ICategoryClientService
     {
         private const string Controller = "api/Category";
-        public CategoryClientService(HttpClient httpClient) : base(httpClient) { }
+        public CategoryClientService(IHttpClientFactory httpClientFactory) : base(httpClientFactory) { }
 
         public async Task<Category> GetCategoryAsync(CategoryIdQuery query)
         {

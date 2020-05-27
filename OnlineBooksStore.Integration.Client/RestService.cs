@@ -11,9 +11,9 @@ namespace OnlineBooksStore.Integration.Client
     {
         private readonly HttpClient _httpClient;
 
-        protected RestService(HttpClient httpClient)
+        protected RestService(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("default");
         }
 
         /// <summary>

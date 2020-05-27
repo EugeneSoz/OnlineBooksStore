@@ -14,11 +14,6 @@ module.exports = {
         contentBase: "./src"
     },
     plugins: [
-        //new CleanWebpackPlugin(['dist/js/*.*'],
-        //    {
-        //        root: __dirname + '/../wwwroot',
-        //        verbose: true
-        //    }),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery'

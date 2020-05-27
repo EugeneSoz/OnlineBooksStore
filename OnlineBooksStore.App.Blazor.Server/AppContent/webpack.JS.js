@@ -1,5 +1,4 @@
 ﻿const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -10,11 +9,6 @@ module.exports = {
     entry: "./configs/vendors.js",
     devtool: false,
     plugins: [
-        //new CleanWebpackPlugin(['dist/js/*.*'],
-        //    {
-        //        root: __dirname + '/../wwwroot',
-        //        verbose: true
-        //    }),
     ],
     module: {
         rules: [
