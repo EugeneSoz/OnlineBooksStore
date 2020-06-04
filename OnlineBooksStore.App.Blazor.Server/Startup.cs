@@ -29,6 +29,7 @@ namespace OnlineBooksStore.App.Blazor.Server
             services.AddServerSideBlazor();
 
             services.AddHttpClient("default", client => client.BaseAddress = new Uri("https://localhost:44393/"));
+            //services.AddHttpClient("default", client => client.BaseAddress = new Uri("https://localhost:444/"));
 
             services.AddTransient<IPublisherClientService, PublisherClientService>();
             services.AddTransient<ICategoryClientService, CategoryClientService>();

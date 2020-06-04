@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Store\" />
+    <Folder Include="Admin\UsersSection\" />
   </ItemGroup>
 
   <ItemGroup>

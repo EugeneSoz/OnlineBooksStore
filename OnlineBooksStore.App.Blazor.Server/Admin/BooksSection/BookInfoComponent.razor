@@ -1,0 +1,43 @@
+﻿@if (BookResponse == null || BookResponse.Id == 0)
+{
+    <h5>Информация о книге отсутствует</h5>
+}
+
+
+@if (BookResponse != null && BookResponse.Id > 0)
+{
+    <h3>@BookResponse.Title</h3>
+    <table class="table">
+        <tbody>
+        <tr>
+            <td>Автор(ы)</td>
+            <td>@BookResponse.Authors</td>
+        </tr>
+        <tr>
+            <td>Количество страниц</td>
+            <td>@BookResponse.PageCount</td>
+        </tr>
+        <tr>
+            <td>Год выпуска</td>
+            <td>@BookResponse.Year</td>
+        </tr>
+        <tr>
+            <td>Категория</td>
+            <td>@BookResponse.CategoryId</td>
+        </tr>
+
+        <tr>
+            <td>Издательство</td>
+            <td>@BookResponse.PublisherId</td>
+        </tr>
+        <tr>
+            <td>Язык издания</td>
+            <td>@BookResponse.Language</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="mt-lg-5">
+        @BookResponse.Description
+    </div>
+}

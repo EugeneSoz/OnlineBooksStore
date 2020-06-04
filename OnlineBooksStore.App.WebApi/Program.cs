@@ -29,6 +29,8 @@ namespace OnlineBooksStore.App.WebApi
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .CaptureStartupErrors(true)
+                .UseSetting("detailedErrors", "true")
                 .UseStartup<Startup>()
                 .ConfigureLogging(logging =>
                 {

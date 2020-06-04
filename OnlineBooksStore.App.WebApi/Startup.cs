@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnlineBooksStore.App.WebApi.Infrastructure;
@@ -84,7 +85,7 @@ namespace OnlineBooksStore.App.WebApi
 
             app.UseSpa(_configuration);
 
-            IdentitySeedData.SeedDatabase(identityContext, userManager, roleManager).GetAwaiter().GetResult();
+            //IdentitySeedData.SeedDatabase(identityContext, userManager, roleManager).GetAwaiter().GetResult();
         }
     }
 }
