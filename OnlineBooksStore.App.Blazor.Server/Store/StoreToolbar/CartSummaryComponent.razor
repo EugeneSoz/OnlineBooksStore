@@ -1,0 +1,15 @@
+﻿@if (_itemsCount == 0)
+{
+    <small *ngSwitchCase="0" class="text-white">
+        (Корзина: пусто)
+    </small>
+}
+else
+{
+    <small *ngSwitchDefault class="text-white">
+        Корзина: 5 книг(и) на 3 450 р.
+    </small>
+    <a href="@AppNavLink.Cart" class="text-white btn btn-sm ml-1">
+        <i class="fa fa-shopping-cart fa-lg"></i>
+    </a>
+}

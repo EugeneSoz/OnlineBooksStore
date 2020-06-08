@@ -1,1 +1,10 @@
-﻿<h3>StoreComponent</h3>
+﻿@layout StoreLayout
+
+<div class="row no-gutters">
+    <div id="store-sidebar" class="col-lg-auto">
+        @*<bs-store-sidebar></bs-store-sidebar>*@
+    </div>
+    <div id="store-main-content" class="col-lg">
+        <BooksGridComponent />
+    </div>
+</div>

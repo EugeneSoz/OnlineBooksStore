@@ -1,1 +1,41 @@
-﻿<h3>CheckoutSummaryComponent</h3>
+﻿@layout StoreLayout
+
+<div id="store-content">
+    <EmptyStoreToolbarComponent />
+    <div id="store-scrollable-content">
+        <div class="card m-2">
+            <div class="card-body">
+                <h2 class="text-center">Детали заказа</h2>
+
+                <table class="table m-2">
+                    <tr>
+                        <th>Ваше имя</th>
+                        <td>{{order.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Адрес доставки</th>
+                        <td>{{order.address}}</td>
+                    </tr>
+                    <tr>
+                        <th>Заказываемые товары</th>
+                        <td>{{cart.itemCount}}</td>
+                    </tr>
+                    <tr>
+                        <th>Общая стоимость</th>
+                        <td>{{cart.totalPrice |currency:"RUB":"symbol":"2.2-2":"ru"}}</td>
+                    </tr>
+                </table>
+
+                <div class="text-center mt-2">
+                    <a href="@AppNavLink.Payment" class="btn btn-outline-primary">
+                        Назад
+                    </a>
+                    <a href="@AppNavLink.Order" class="btn btn-success ml-2">
+                        Разместить заказ
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

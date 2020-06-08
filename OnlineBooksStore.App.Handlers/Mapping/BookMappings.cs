@@ -2,7 +2,6 @@
 using OnlineBooksStore.App.Contracts.Command;
 using OnlineBooksStore.Domain.Contracts.Models.Books;
 using OnlineBooksStore.Domain.Contracts.Models.Pages;
-using OnlineBooksStore.Domain.Contracts.Models.Publishers;
 using OnlineBooksStore.Persistence.Entities;
 
 namespace OnlineBooksStore.App.Handlers.Mapping

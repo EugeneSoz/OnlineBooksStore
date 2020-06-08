@@ -69,5 +69,28 @@ namespace OnlineBooksStore.Domain.Services
                 new FilterSortingProps(nameof(BookResponse.RetailPrice), "Цена")
             };
         }
+
+        public List<ListItem> GetSortingProperties()
+        {
+            return new List<ListItem>
+            {
+                new ListItem("", "Сортировать по", false),
+                new ListItem(nameof(BookResponse.Title), "Названию: А - Я"),
+                new ListItem(nameof(BookResponse.Title), "Названию: Я - А", true),
+                new ListItem(nameof(BookResponse.RetailPrice), "Цене: мин. - макс."),
+                new ListItem(nameof(BookResponse.RetailPrice), "Цене: макс. - мин.", true)
+            };
+        }
+
+        public List<ListItem> GetGridSizeProperties()
+        {
+            return new List<ListItem>
+            {
+                new ListItem("", "Отобразить", false),
+                new ListItem("sixByTwo", "6 x 2 (строка x столбец)"),
+                new ListItem("fourByThree", "4 x 3 (строка x столбец)"),
+                new ListItem("threeByFour", "3 x 4 (строка x столбец)")
+            };
+        }
     }
 }

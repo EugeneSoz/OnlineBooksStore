@@ -1,0 +1,24 @@
+﻿<ul class="navbar-nav mr-auto">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="gridSize" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @_gridSizeProperties[0].Name
+        </a>
+        <div class="dropdown-menu" aria-labelledby="gridSize">
+            @foreach (var listItem in _gridSizeProperties)
+            {
+                <a class="dropdown-item" href="#">@listItem.Name</a>
+            }
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="sorting" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @_sortingProperties[0].Name
+        </a>
+        <div class="dropdown-menu" aria-labelledby="sorting">
+            @foreach (var listItem in _sortingProperties)
+            {
+                <a class="dropdown-item" href="#">@listItem.Name</a>
+            }
+        </div>
+    </li>
+</ul>

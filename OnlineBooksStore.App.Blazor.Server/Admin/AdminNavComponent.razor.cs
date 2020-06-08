@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using OnlineBooksStore.Domain.Contracts.Models;
 
 namespace OnlineBooksStore.App.Blazor.Server.Admin
@@ -15,7 +16,8 @@ namespace OnlineBooksStore.App.Blazor.Server.Admin
                 (name: "Книги", link: AppNavLink.Books),
                 (name: "Категории", link: AppNavLink.Categories),
                 (name: "Издательства", link: AppNavLink.Publishers),
-                (name: "Заказы", link: AppNavLink.Orders)
+                (name: "Заказы", link: AppNavLink.Orders),
+                (name: "Магазин", link: AppNavLink.Store)
             };
         }
     }

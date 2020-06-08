@@ -1,1 +1,36 @@
-﻿<h3>LoginFormComponent</h3>
+﻿@layout StoreLayout
+
+<div id="store-content">
+    <div id="store-scrollable-content">
+        <div class="card m-2">
+            <div class="card-body">
+                <h4 class="p-2 bg-danger text-white">
+                    Неверные имя пользователя или пароль
+                </h4>
+                <form>
+                    <div class="form-group">
+                        <label>Логин:</label>
+                        <input name="name" class="form-control" required />
+                        <div class="text-danger">
+                            Пожалуйста, укажите ваше имя
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль:</label>
+                        <input type="password" name="password" class="form-control" required />
+                        <div class="text-danger">
+                            Пожалуйста, укажите пароль
+                        </div>
+                    </div>
+                    <div class="text-center pt-2">
+                        <button class="btn btn-primary">
+                            Войти
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,1 +1,36 @@
-﻿<h3>BooksGridComponent</h3>
+﻿<StoreToolbarComponent IsToolbarActionsVisible="true" IsSearchToolbarVisible="true" />
+
+@if (_books != null)
+{
+<div id="store-scrollable-content" class="pl-3">
+    @foreach (var row in _rows)
+    {
+    <div class="row no-gutters">
+        @foreach (var col in _cols)
+        {
+            @if (IsColEmpty(row, col) == false)
+            {
+                <div class="col">
+                    <BookCardComponent Book="@_books[GetBookIndex(row, col)]" />
+                </div>
+            }
+            else
+            {
+                <div class="col"></div>
+            }
+
+        }
+
+    </div>
+    }
+</div>
+}
+
+
+@if (_books != null)
+{
+    <div class="px-3 py-2 bg-light">
+        <PaginationComponent Pagination="@_pagination" PageNumbers="@_pageNumbers" />
+    </div>
+}
+

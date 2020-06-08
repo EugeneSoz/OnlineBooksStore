@@ -11,5 +11,7 @@ namespace OnlineBooksStore.Domain.Contracts.Services
         List<FilterSortingProps> GetPublisherSortingProps();
         List<FilterSortingProps> GetCategorySortingProps();
         List<FilterSortingProps> GetBooksSortingProps();
+        List<ListItem> GetSortingProperties();
+        List<ListItem> GetGridSizeProperties();
     }
 }
