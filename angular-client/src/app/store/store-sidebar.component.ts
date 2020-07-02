@@ -30,7 +30,7 @@ export class StoreSidebarComponent implements OnInit {
 
     private getCategories(): void {
         this._storeService.getCategories()
-            .subscribe(result => this.categories = result)
+            .subscribe(result => this.categories = result);
     }
 
     onFilter(category: StoreCategoryResponse = null): void {

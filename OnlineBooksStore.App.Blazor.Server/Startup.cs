@@ -8,7 +8,9 @@ using Microsoft.Extensions.Hosting;
 using OnlineBooksStore.Domain.Contracts.Services;
 using OnlineBooksStore.Domain.Services;
 using OnlineBooksStore.Integration.Client.Admin;
+using OnlineBooksStore.Integration.Client.Store;
 using OnlineBooksStore.Integration.Contracts.Admin;
+using OnlineBooksStore.Integration.Contracts.Store;
 
 namespace OnlineBooksStore.App.Blazor.Server
 {
@@ -34,6 +36,7 @@ namespace OnlineBooksStore.App.Blazor.Server
             services.AddTransient<IPublisherClientService, PublisherClientService>();
             services.AddTransient<ICategoryClientService, CategoryClientService>();
             services.AddTransient<IBookClientService, BookClientService>();
+            services.AddTransient<IStoreClientService, StoreClientService>();
             services.AddTransient<IPropertiesService, PropertiesService>();
         }
 
